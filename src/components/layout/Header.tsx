@@ -143,7 +143,7 @@ const Header = () => {
             </div>
           </div>
 
-          <UserProgress></UserProgress>
+          <UserProgress />
         </div>
       </div>
 
