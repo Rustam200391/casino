@@ -1,8 +1,16 @@
-import Image from 'next/image';
 import { Manrope } from 'next/font/google';
+import { Button } from '@/components/ui/button';
+import MainLayout from '@/components/layout/MainLayout';
 
 const manrope = Manrope({ subsets: ['latin', 'cyrillic'] });
 
 export default function Home() {
-  return <main className={` flex min-h-screen flex-col items-center justify-between p-24 ${manrope.className}`}>home</main>;
+  return (
+    <MainLayout>
+      <main className={`${manrope.className}`}>
+        home
+        <Button className="">home</Button>
+      </main>
+    </MainLayout>
+  );
 }
