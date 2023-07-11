@@ -1,4 +1,5 @@
 import config from '@/lib/config';
+import { noRefetch } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import ky from 'ky-universal';
 
@@ -17,5 +18,6 @@ export const useLoadData = () => {
   return useQuery({
     queryKey: ['load_data'],
     queryFn: fetchLoadData,
+    ...noRefetch,
   });
 };
