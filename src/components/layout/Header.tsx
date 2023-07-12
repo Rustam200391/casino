@@ -38,6 +38,8 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { useSignInModal } from '@/components/auth/sign-in-modal';
+import { useQuery } from '@tanstack/react-query';
+import { fetchLoadData, useLoadData } from '@/hooks/api/load-data';
 
 const headerNav = [
   {
@@ -61,6 +63,7 @@ const headerNav = [
 ];
 
 function UserProgress({ sheetView }: { sheetView?: boolean }) {
+  const { data } = useLoadData();
   return (
     <div
       className={cn(
@@ -73,21 +76,22 @@ function UserProgress({ sheetView }: { sheetView?: boolean }) {
       <div className="flex items-center mr-2 space-x-2 border-none cursor-default">
         <div className="p-1.5 border rounded-full border-neutral-500">
           <Avatar className="">
-            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarImage src={data?.data.avatar} />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         </div>
         <div>
           <div className="flex items-center space-x-2">
-            <p className="font-bold">Slote_01</p>
+            <p className="font-bold">{data?.data.name}</p>
             <div className="flex">
-              <p className="flex rounded-lg bg-lime-900 text-[16px] font-bold text-lime-300 px-1.5">20</p>
+              <p className="flex rounded-lg bg-lime-900 text-[16px] font-bold text-lime-300 px-1.5">{data?.data.level}</p>
             </div>
           </div>
           <Progress value={60} className={cn('mt-1.5 w-[150px]', !sheetView && 'hidden 2xl:block')} />
         </div>
         <div className="hidden mt-2 text-right 2xl:block">
-          <p className="text-sm font-semibold">1744 XP</p>
+          {/* TODO: Добавить счет до нового уровня, сейчас текущее количество опыта */}
+          <p className="text-sm font-semibold">{data?.data.experience} XP</p>
           <p className="text-xs font-light text-neutral-500">до нового уровня</p>
         </div>
       </div>
@@ -99,8 +103,9 @@ function UserProgress({ sheetView }: { sheetView?: boolean }) {
 
 const Header = () => {
   const { route } = useRouter();
-  const [signedIn, setSignedIn] = useState(false);
   const [, setShowSignIn] = useSignInModal();
+  const { data } = useLoadData();
+  const signedIn = data?.auth;
 
   return (
     <>
