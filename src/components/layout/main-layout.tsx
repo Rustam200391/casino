@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { Manrope } from 'next/font/google';
 import React, { PropsWithChildren } from 'react';
 import Head from 'next/head';
+import SignInModal from '@/components/auth/sign-in-modal';
 
 const manrope = Manrope({ subsets: ['latin', 'cyrillic'] });
 
@@ -27,6 +28,8 @@ const MainLayout = ({ children }: PropsWithChildren) => {
         </div>
         <Footer />
       </div>
+
+      <SignInModal />
     </>
   );
 };

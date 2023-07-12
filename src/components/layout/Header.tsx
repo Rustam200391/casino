@@ -13,6 +13,7 @@ import {
   Gamepad,
   Gamepad2,
   Gem,
+  Globe,
   Home,
   Joystick,
   Menu,
@@ -24,7 +25,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Sheet,
@@ -36,6 +37,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { useSignInModal } from '@/components/auth/sign-in-modal';
 
 const headerNav = [
   {
@@ -97,6 +99,8 @@ function UserProgress({ sheetView }: { sheetView?: boolean }) {
 
 const Header = () => {
   const { route } = useRouter();
+  const [signedIn, setSignedIn] = useState(false);
+  const [, setShowSignIn] = useSignInModal();
 
   return (
     <>
@@ -124,7 +128,7 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="flex items-center space-x-6">
+        <div className={cn('flex items-center space-x-6', !signedIn && 'hidden')}>
           <div className="flex items-center space-x-4">
             <Button
               className="hidden sm:flex"
@@ -150,6 +154,23 @@ const Header = () => {
           </div>
 
           <UserProgress />
+        </div>
+
+        <div className={cn('flex items-center space-x-4', signedIn && 'hidden')}>
+          <Button
+            variant="accent"
+            size="lg"
+            style={{
+              boxShadow: '0 0 32px #22c55e',
+            }}
+          >
+            <Globe className="w-5 h-5 mr-2" />
+            Регистрация
+          </Button>
+          <Button variant="outline" size="lg" onClick={() => setShowSignIn(true)}>
+            <User className="w-5 h-5 mr-2" />
+            Вход
+          </Button>
         </div>
       </div>
 
