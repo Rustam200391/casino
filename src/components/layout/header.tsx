@@ -151,7 +151,7 @@ const Header = () => {
               <div className="absolute group-hover:w-full transition-all -inset-px w-[30%] bg-gradient-to-r from-green-600 via-transparent to-transparent rounded-full"></div>
               <button className="relative flex items-center h-10 px-4 leading-none transition bg-black border rounded-full group-hover:bg-neutral-900/70 border-neutral-800">
                 <Gem className="w-5 h-5 mr-2 text-green-600" />
-                {0.00002}
+                {data?.data.balance}
                 <p className="mx-2 text-neutral-500">RUBN</p>
                 <ChevronDown className="w-5 h-5" />
               </button>
