@@ -44,10 +44,12 @@ const headerNav = [
   },
   {
     title: 'Бонусы и активность',
+    titleShort: 'Бонусы',
     href: '/bonuses',
   },
   {
     title: 'Реферальная система',
+    titleShort: 'Рефералы',
     href: '/referral',
   },
   {
@@ -66,7 +68,7 @@ function UserProgress({ sheetView }: { sheetView?: boolean }) {
     >
       <div className="absolute border-none top-0 w-full h-10 pointer-events-none from-transparent to-transparent bg-gradient-to-r from-10% to-90% via-white/10"></div>
 
-      <div className="flex items-center mr-2 space-x-2 border-none">
+      <div className="flex items-center mr-2 space-x-2 border-none cursor-default">
         <div className="p-1.5 border rounded-full border-neutral-500">
           <Avatar className="">
             <AvatarImage src="https://github.com/shadcn.png" />
@@ -99,13 +101,17 @@ const Header = () => {
   return (
     <>
       <div className="flex items-center justify-between px-8 py-4 space-x-4 border-b border-neutral-800">
-        <div className="flex items-center space-x-4 md:space-x-6 xl:space-x-10">
+        <div className="flex items-center space-x-4 text-center md:space-x-6 xl:space-x-10">
           <Image src="/img/syndicate-logo.svg" alt="logo" width={87} height={57} />
-          <div className="items-center hidden space-x-4 xl:flex md:space-x-6 xl:space-x-10">
+          <div className="items-center hidden grid-flow-col grid-rows-1 xl:gap-6 xl:grid 2xl:gap-10">
             {headerNav.map(i => (
-              <div className="relative" key={i.title}>
-                <Link href={i.href} className={cn('transition-colors hover:text-white', route === i.href ? 'text-white' : 'text-gray-500')}>
-                  {i.title}
+              <div className="relative flex items-center justify-center h-full" key={i.title}>
+                <Link
+                  href={i.href}
+                  className={cn('transition-colors hover:text-white whitespace-nowrap', route === i.href ? 'text-white' : 'text-gray-500')}
+                >
+                  <span className="hidden 2xl:block">{i.title}</span>
+                  <span className="block 2xl:hidden">{i.titleShort ?? i.title}</span>
                 </Link>
                 <div
                   className={cn(
@@ -133,8 +139,8 @@ const Header = () => {
             </Button>
 
             <div className="relative group">
-              <div className="absolute -inset-px w-[30%] bg-gradient-to-r from-green-600 via-transparent to-transparent rounded-full"></div>
-              <button className="relative flex items-center h-10 px-4 leading-none bg-black border rounded-full border-neutral-800">
+              <div className="absolute group-hover:w-full transition-all -inset-px w-[30%] bg-gradient-to-r from-green-600 via-transparent to-transparent rounded-full"></div>
+              <button className="relative flex items-center h-10 px-4 leading-none transition bg-black border rounded-full group-hover:bg-neutral-900/70 border-neutral-800">
                 <Gem className="w-5 h-5 mr-2 text-green-600" />
                 {0.00002}
                 <p className="mx-2 text-neutral-500">RUBN</p>
@@ -148,7 +154,7 @@ const Header = () => {
       </div>
 
       {/* Bottom nav */}
-      <div className="fixed bottom-0 left-0 flex w-full h-24 justify-evenly md:hidden">
+      <div className="fixed bottom-0 left-0 z-10 flex w-full h-24 bg-background justify-evenly md:hidden">
         <Link href="/games" className={cn(buttonVariants({ variant: 'ghost' }), 'flex-col space-y-1 rounded-md h-14')}>
           <Gamepad2 className="w-5 h-5" />
           Игры

@@ -1,21 +1,21 @@
 import { Manrope } from 'next/font/google';
 import { Button } from '@/components/ui/button';
-import MainLayout from '@/components/layout/MainLayout';
+import MainLayout from '@/components/layout/main-layout';
 import { GetServerSideProps } from 'next';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { fetchLoadData, useLoadData } from '@/hooks/api/load-data';
-
-const manrope = Manrope({ subsets: ['latin', 'cyrillic'] });
+import ActivitiesCarousel from '@/components/pages/home/activities-carousel';
+import GamesGrid from '@/components/pages/home/games-grid';
+import RecentGamesTable from '@/components/pages/home/recent-games-table';
 
 export default function Home() {
   const initialData = useLoadData();
 
   return (
     <MainLayout>
-      <main className={`${manrope.className}`}>
-        home
-        <Button className="">home</Button>
-      </main>
+      <ActivitiesCarousel />
+      <GamesGrid />
+      <RecentGamesTable />
     </MainLayout>
   );
 }

@@ -1,4 +1,4 @@
-import MainLayout from '@/components/layout/MainLayout';
+import MainLayout from '@/components/layout/main-layout';
 import React from 'react';
 
 const ReferralPage = () => {
