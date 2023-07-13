@@ -81,7 +81,7 @@ const BetSelector = () => {
           <Label htmlFor="airplane-mode">Авто-игра</Label>
         </div>
 
-        <Button variant="accent" size="lg" className="w-full mt-6">
+        <Button glow="accent" variant="accent" size="lg" className="w-full mt-6">
           Играть
         </Button>
       </div>

@@ -135,14 +135,7 @@ const Header = () => {
 
         <div className={cn('flex items-center space-x-6', !signedIn && 'hidden')}>
           <div className="flex items-center space-x-4">
-            <Button
-              className="hidden sm:flex"
-              variant="accent"
-              size="lg"
-              style={{
-                boxShadow: '0 0 32px #22c55e',
-              }}
-            >
+            <Button className="hidden sm:flex" variant="accent" size="lg" glow="accent">
               <Gem className="w-5 h-5 mr-2" />
               Пополнить
             </Button>
@@ -162,13 +155,7 @@ const Header = () => {
         </div>
 
         <div className={cn('flex items-center space-x-4', signedIn && 'hidden')}>
-          <Button
-            variant="accent"
-            size="lg"
-            style={{
-              boxShadow: '0 0 32px #22c55e',
-            }}
-          >
+          <Button variant="accent" size="lg" glow="accent">
             <Globe className="w-5 h-5 mr-2" />
             Регистрация
           </Button>
@@ -218,13 +205,7 @@ const MobileSheet = () => {
           }}
         >
           <UserProgress sheetView />
-          <Button
-            variant="accent"
-            size="lg"
-            style={{
-              boxShadow: '0 0 32px #22c55e',
-            }}
-          >
+          <Button variant="accent" size="lg" glow="accent">
             <Gem className="w-5 h-5 mr-2" />
             Пополнить
           </Button>

@@ -89,3 +89,7 @@
   scrollbar-width: none;
   /* Firefox */
 }
+
+.glow-accent {
+  box-shadow: 0 0 22px #22c55e;
+}

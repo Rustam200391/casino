@@ -33,14 +33,7 @@ const SignInModal = () => {
               <Input type="email" id="email" placeholder="Email" className="px-6 rounded-full h-14 placeholder:text-base" />
             </div>
 
-            <Button
-              className="w-full text-lg mt-14 h-14"
-              variant="accent"
-              size="lg"
-              style={{
-                boxShadow: '0 0 32px #22c55e',
-              }}
-            >
+            <Button className="w-full text-lg mt-14 h-14" variant="accent" glow="accent" size="lg">
               Далее
             </Button>
           </DialogDescription>

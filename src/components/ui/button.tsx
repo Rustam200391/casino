@@ -25,6 +25,9 @@ const buttonVariants = cva(
         lg: 'h-10 px-8',
         icon: 'h-9 w-9',
       },
+      glow: {
+        accent: 'glow-accent',
+      },
     },
     defaultVariants: {
       variant: 'default',
@@ -37,9 +40,9 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   asChild?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ className, variant, size, asChild = false, ...props }, ref) => {
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ className, variant, size, glow, asChild = false, ...props }, ref) => {
   const Comp = asChild ? Slot : 'button';
-  return <Comp className={cn(buttonVariants({ size, variant, className }))} ref={ref} {...props} />;
+  return <Comp className={cn(buttonVariants({ size, variant, className, glow }))} ref={ref} {...props} />;
 });
 Button.displayName = 'Button';
 
