@@ -17,25 +17,25 @@ const GamesGrid = () => {
         />
         <GameCard
           title="Mines"
-          href="/games/jackpot"
+          href="/games/mines"
           background={<Image src="/img/register.jpg" alt="background" fill className="object-cover" />}
           className="xl:col-span-3"
         />
         <GameCard
           title="Crash"
-          href="/games/jackpot"
+          href="/games/crash"
           background={<Image src="/img/register.jpg" alt="background" fill className="object-cover" />}
           className="xl:col-span-3"
         />
         <GameCard
           title="Jackpot Dice"
-          href="/games/jackpot"
+          href="/games/jackpot-dice"
           background={<Image src="/img/register.jpg" alt="background" fill className="object-cover" />}
           className="xl:col-span-3"
         />
         <GameCard
           title="Dices"
-          href="/games/jackpot"
+          href="/games/dices"
           background={<Image src="/img/register.jpg" alt="background" fill className="object-cover" />}
           className="xl:col-span-3"
         />

@@ -1,16 +1,12 @@
-import { Manrope } from 'next/font/google';
-import { Button } from '@/components/ui/button';
 import MainLayout from '@/components/layout/main-layout';
 import { GetServerSideProps } from 'next';
-import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
-import { fetchLoadData, useLoadData } from '@/hooks/api/load-data';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
+import { fetchLoadData } from '@/hooks/api/load-data';
 import ActivitiesCarousel from '@/components/pages/home/activities-carousel';
 import GamesGrid from '@/components/pages/home/games-grid';
 import RecentGamesTable from '@/components/pages/home/recent-games-table';
 
 export default function Home() {
-  const initialData = useLoadData();
-
   return (
     <MainLayout>
       <ActivitiesCarousel />
