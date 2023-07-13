@@ -109,7 +109,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex items-center justify-between px-8 py-4 space-x-4 border-b border-neutral-800">
+      <div className="flex items-center justify-between px-8 py-4 border-b md:space-x-4 border-neutral-800">
         <div className="flex items-center space-x-4 text-center md:space-x-6 xl:space-x-10">
           <Image src="/img/syndicate-logo.svg" alt="logo" width={87} height={57} />
           <div className="items-center hidden grid-flow-col grid-rows-1 xl:gap-6 xl:grid 2xl:gap-10">
@@ -154,7 +154,7 @@ const Header = () => {
           <UserProgress />
         </div>
 
-        <div className={cn('flex items-center space-x-4', signedIn && 'hidden')}>
+        <div className={cn('flex items-center space-x-2 md:space-x-4', signedIn && 'hidden')}>
           <Button variant="accent" size="lg" glow="accent">
             <Globe className="w-5 h-5 mr-2" />
             Регистрация

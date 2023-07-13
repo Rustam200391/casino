@@ -4,7 +4,7 @@ import React from 'react';
 
 const MinesCard = () => {
   return (
-    <div className="relative col-span-3 p-2 bg-white/5 rounded-2xl">
+    <div className="relative col-span-5 p-2 md:col-span-3 bg-white/5 rounded-2xl">
       <div className="relative px-3 py-4 border border-stone-200 rounded-2xl">
         <Image className="object-cover" fill src="/img/mines-gradient.svg" alt="background" />
         <div className="relative">

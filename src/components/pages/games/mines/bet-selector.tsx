@@ -11,7 +11,7 @@ const BetSelector = () => {
   const [mines, setMines] = useState(14);
 
   return (
-    <div className="flex flex-col justify-between col-span-2 p-5 bg-white/5 rounded-2xl">
+    <div className="flex flex-col justify-between col-span-5 p-5 md:col-span-2 bg-white/5 rounded-2xl">
       <div>
         <p className="text-xl font-semibold">Сумма ставки</p>
         <div className="relative">

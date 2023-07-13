@@ -21,7 +21,7 @@ const MainLayout = ({ children }: PropsWithChildren) => {
       </Head>
       <div className={cn('pb-24 md:pb-0 ', manrope.className)}>
         <Header />
-        <div className="grid grid-cols-11  gap-4 my-4 grid-rows-1 min-h-[75vh] container max-w-screen-2xl">
+        <div className="grid grid-cols-11  gap-4 my-4 grid-rows-1 min-h-[75vh] px-4 md:px-6 container max-w-screen-2xl">
           <Sidebar />
           <main className="col-span-11 lg:col-span-6">{children}</main>
           <Chat />
