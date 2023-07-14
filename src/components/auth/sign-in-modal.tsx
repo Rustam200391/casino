@@ -10,6 +10,11 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { useAuthRegistrationSubmit } from '@/hooks/api/auth/register';
 import { useAuthSignInSubmit } from '@/hooks/api/auth/sign-in';
 
+/**
+ * Здесь происходит регистрация и вход пользователя.
+ * Для восстановления пароля лучше сделать другую модалку
+ */
+
 const getAuthType = (data?: AuthEmailSubmitResponseResult) => {
   if (!data) return 'email';
   if (!data?.needed_authorisation) return 'registration';
