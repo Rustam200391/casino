@@ -5,12 +5,13 @@ import ky from 'ky-universal';
 
 export const fetchLoadData = async () => {
   const data = await ky
-    .post(`${config.baseUrl}/load_data`, {
+    .post(`${config.baseUrl}/ajax/load_data`, {
       headers: {
         'X-CSRF-TOKEN': 'qwerty',
       },
     })
     .json<LoadDataResponse>();
+
   return data;
 };
 

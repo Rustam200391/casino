@@ -28,6 +28,12 @@ const buttonVariants = cva(
       glow: {
         accent: 'glow-accent',
       },
+      loading: {
+        true: 'animate-pulse duration-2000 cursor-wait',
+      },
+      disabled: {
+        true: 'opacity-50 cursor-not-allowed',
+      },
     },
     defaultVariants: {
       variant: 'default',
@@ -38,12 +44,15 @@ const buttonVariants = cva(
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  disabled?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ className, variant, size, glow, asChild = false, ...props }, ref) => {
-  const Comp = asChild ? Slot : 'button';
-  return <Comp className={cn(buttonVariants({ size, variant, className, glow }))} ref={ref} {...props} />;
-});
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, disabled, loading, glow, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button';
+    return <Comp className={cn(buttonVariants({ size, variant, disabled, className, glow, loading }))} ref={ref} {...props} />;
+  }
+);
 Button.displayName = 'Button';
 
 export { Button, buttonVariants };
