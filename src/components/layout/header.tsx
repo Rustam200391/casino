@@ -111,7 +111,9 @@ const Header = () => {
     <>
       <div className="flex items-center justify-between px-8 py-4 border-b md:space-x-4 border-neutral-800">
         <div className="flex items-center space-x-4 text-center md:space-x-6 xl:space-x-10">
-          <Image src="/img/syndicate-logo.svg" alt="logo" width={87} height={57} />
+          <Link href="/">
+            <Image src="/img/syndicate-logo.svg" alt="logo" width={87} height={57} />
+          </Link>
           <div className="items-center hidden grid-flow-col grid-rows-1 xl:gap-6 xl:grid 2xl:gap-10">
             {headerNav.map(i => (
               <div className="relative flex items-center justify-center h-full" key={i.title}>
