@@ -8,6 +8,7 @@ import { Manrope } from 'next/font/google';
 import React, { PropsWithChildren } from 'react';
 import Head from 'next/head';
 import SignInModal from '@/components/auth/sign-in-modal';
+import BalanceModal from '@/components/account/balance-modal';
 
 const manrope = Manrope({ subsets: ['latin', 'cyrillic'] });
 
@@ -16,7 +17,10 @@ const MainLayout = ({ children }: PropsWithChildren) => {
     <>
       <Head>
         <title>Syndicate Casino</title>
-        <meta name="description" content="Online casino Syndicate. Play Jackpot, Crash, Mines." />
+        <meta
+          name="description"
+          content="Online casino Syndicate. Play Jackpot, Crash, Mines."
+        />
         {/* <meta name='og:image' /> */}
       </Head>
       <div className={cn('pb-24 md:pb-0 ', manrope.className)}>
@@ -30,6 +34,7 @@ const MainLayout = ({ children }: PropsWithChildren) => {
       </div>
 
       <SignInModal />
+      <BalanceModal />
     </>
   );
 };

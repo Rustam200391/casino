@@ -93,3 +93,16 @@
 .glow-accent {
   box-shadow: 0 0 22px #22c55e;
 }
+
+:root {
+  cursor: url('/img/cursor.svg'), auto;
+
+}
+
+a:hover, button:hover {
+  cursor: url('/img/cursor-hover.svg'), auto;
+}
+
+:disabled {
+  cursor: url('/img/cursor-loading.svg'), auto;
+}
