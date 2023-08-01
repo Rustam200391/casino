@@ -15,7 +15,7 @@ import { Button } from '@/components/ui/button';
 export const BalanceDropdown = ({ trigger }: { trigger: React.ReactNode }) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>{trigger}</DropdownMenuTrigger>
+      <DropdownMenuTrigger className="outline-0">{trigger}</DropdownMenuTrigger>
       <DropdownMenuContent className="w-[217px] border-neutral-800 bg-zinc-950 rounded-2xl">
         <DropdownMenuLabel className="text-center font-normal">
           <p className="font-light text-xs text-gray-400">Общий счёт активов</p>
