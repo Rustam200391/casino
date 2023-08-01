@@ -5,8 +5,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { CreditCardIcon } from 'lucide-react';
+import { TypographyH2 } from '@/components/ui/typography';
+import { Input } from '@/components/ui/input';
 
-const balanceModalAtom = atom(true);
+const balanceModalAtom = atom(false);
 export const useBalanceModalAtom = () => useAtom(balanceModalAtom);
 
 const BalanceModal = () => {
@@ -28,7 +30,7 @@ const BalanceModal = () => {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="topup" className="flex justify-between">
-            <div className="flex flex-col w-[35%] text-left">
+            <div className="flex flex-col w-[35%] text-left gap-6">
               <div className="flex gap-1">
                 <span className="text-green-500 font-light text-sm whitespace-nowrap">
                   Шаг 1
@@ -38,7 +40,7 @@ const BalanceModal = () => {
                 </span>
               </div>
               <div>
-                <p>Карты</p>
+                <p className="font-semibold text-neutral-500">Карты</p>
                 <div className="flex flex-col gap-2 mt-1">
                   <Button
                     variant="ghost"
@@ -59,7 +61,7 @@ const BalanceModal = () => {
                 </div>
               </div>
               <div>
-                <p>Карты</p>
+                <p className="font-semibold text-neutral-500">Кошельки</p>
                 <div className="flex flex-col gap-2 mt-1">
                   <Button
                     variant="ghost"
@@ -88,10 +90,38 @@ const BalanceModal = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-[65%]">
-              <div>Step 2 title</div>
-              <div>Step 2 input</div>
-              <div className="text-center">Step 2 submit</div>
+            <div className="flex flex-col justify-between w-[65%]">
+              <div>
+                <TypographyH2>Пополнение баланса</TypographyH2>
+                <p className="flex items-center gap-2 text-neutral-500 ml-1">
+                  <CreditCardIcon height={30} width={30} />
+                  Банковская карта
+                </p>
+              </div>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2">
+                  <span className="text-green-500 font-light text-sm whitespace-nowrap">
+                    Шаг 2
+                  </span>
+                  <span className="font-light">Введите сумму пополнения</span>
+                  <span className="text-neutral-500">(минимум 100 Р)</span>
+                </div>
+                <Input
+                  className="rounded-3xl border-neutral-800"
+                  placeholder="100"
+                />
+                <p>Комиссия: 3%</p>
+                <p>Будет начислено: 70 RUBN</p>
+                <p>Примерное время начисления: от 1 дня до 3 дней</p>
+              </div>
+              <div className="flex flex-col text-center">
+                <Button variant="link" className="font-light underline">
+                  Чат поддержки
+                </Button>
+                <Button className="text-white text-lg bg-green-500">
+                  Перейти к оплате
+                </Button>
+              </div>
             </div>
           </TabsContent>
           <TabsContent value="withdraw">2</TabsContent>
