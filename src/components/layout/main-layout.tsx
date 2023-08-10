@@ -28,6 +28,30 @@ const MainLayout = ({ children }: PropsWithChildren) => {
     centrifuge.on('message', (data) => {
       console.log('message', { data });
     });
+
+    centrifuge.subscribe('public', function (message) {
+      if (message.data != null) {
+        const data = message.data.params;
+        console.log(data);
+      }
+    });
+
+    const USER_ID = 1;
+    centrifuge.subscribe('$private:user:' + USER_ID, function (message) {
+      if (message.data != null) {
+        const data = message.data.params;
+        if (message.data.module == 'user') {
+          console.log(data);
+        }
+      }
+    });
+
+    centrifuge.subscribe('chat', function (message) {
+      if (message.data != null) {
+        const data = message.data.params;
+        console.log(data);
+      }
+    });
   }, []);
 
   return (
