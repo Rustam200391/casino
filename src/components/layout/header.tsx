@@ -22,7 +22,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useSignInModal } from '@/components/auth/sign-in-modal';
@@ -30,6 +30,7 @@ import { useLoadData } from '@/hooks/api/load-data';
 import { useBalanceModalAtom } from '@/components/account/balance-modal';
 import BalanceDropdown from '@/components/account/balance-dropdown';
 import AccountDropdown from '@/components/account/account-dropdown';
+import { useToast } from '@/hooks/use-toast';
 
 const headerNav = [
   {
@@ -53,7 +54,19 @@ const headerNav = [
 ];
 
 function UserProgress({ sheetView }: { sheetView?: boolean }) {
-  const { data } = useLoadData();
+  const { toast } = useToast();
+  const { data, error } = useLoadData();
+
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: 'Ошибка',
+        // @ts-expect-error this is fine
+        description: 'Произошла ошибка при загрузке данных: ' + error.message,
+      });
+    }
+  }, [error]);
+
   return (
     <div
       className={cn(

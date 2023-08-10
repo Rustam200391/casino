@@ -5,14 +5,31 @@ import Sidebar from '@/components/layout/sidebar';
 
 import { cn } from '@/lib/utils';
 import { Manrope } from 'next/font/google';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import Head from 'next/head';
 import SignInModal from '@/components/auth/sign-in-modal';
 import BalanceModal from '@/components/account/balance-modal';
+import config from '@/lib/config';
+import Centrifuge from 'centrifuge';
 
 const manrope = Manrope({ subsets: ['latin', 'cyrillic'] });
 
 const MainLayout = ({ children }: PropsWithChildren) => {
+  useEffect(() => {
+    const centrifuge = new Centrifuge(`${config.wsUrl}/websocket`, {
+      refreshEndpoint: `${config.baseUrl}/ajax/wss/refresh`,
+      subscribeEndpoint: `${config.baseUrl}/ajax/wss/subscribe`,
+    });
+
+    centrifuge.connect();
+    centrifuge.on('connected', () => {
+      console.log('connected');
+    });
+    centrifuge.on('message', (data) => {
+      console.log('message', { data });
+    });
+  }, []);
+
   return (
     <>
       <Head>
