@@ -10,7 +10,7 @@ const CrashGame = () => {
     <MainLayout>
       <div className="flex items-baseline space-x-2">
         <p className={`text-3xl font-bold`}>Mines</p>
-        <p className="text-sm text-gray-500">#123321</p>
+        <p className="text-sm text-gray-500">#123322</p>
       </div>
 
       <div className="grid grid-cols-5 gap-2 mt-8">
