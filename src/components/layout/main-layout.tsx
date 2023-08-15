@@ -16,6 +16,8 @@ const manrope = Manrope({ subsets: ['latin', 'cyrillic'] });
 
 const MainLayout = ({ children }: PropsWithChildren) => {
   useEffect(() => {
+    console.log('useEffect');
+
     const centrifuge = new Centrifuge(`${config.wsUrl}/websocket`, {
       refreshEndpoint: `${config.baseUrl}/ajax/wss/refresh`,
       subscribeEndpoint: `${config.baseUrl}/ajax/wss/subscribe`,
