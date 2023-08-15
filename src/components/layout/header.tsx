@@ -247,7 +247,7 @@ const Header = () => {
           Кошелек
         </Link>
         <Link
-          href="/profile"
+          href="/profile/[[...slug]]"
           className={cn(
             buttonVariants({ variant: 'ghost' }),
             'flex-col space-y-1 rounded-md h-14',
@@ -298,7 +298,7 @@ const MobileSheet = () => {
           </Button>
 
           <Link
-            href="/profile"
+            href="/profile/[[...slug]]"
             className={cn(
               buttonVariants({ variant: 'ghost' }),
               'justify-start',
@@ -308,7 +308,7 @@ const MobileSheet = () => {
             Главная
           </Link>
           <Link
-            href="/profile"
+            href="/profile/[[...slug]]"
             className={cn(
               buttonVariants({ variant: 'ghost' }),
               'justify-start',
@@ -318,7 +318,7 @@ const MobileSheet = () => {
             Jackpot
           </Link>
           <Link
-            href="/profile"
+            href="/profile/[[...slug]]"
             className={cn(
               buttonVariants({ variant: 'ghost' }),
               'justify-start',
@@ -328,7 +328,7 @@ const MobileSheet = () => {
             Dice
           </Link>
           <Link
-            href="/profile"
+            href="/profile/[[...slug]]"
             className={cn(
               buttonVariants({ variant: 'ghost' }),
               'justify-start',
@@ -338,7 +338,7 @@ const MobileSheet = () => {
             Crash
           </Link>
           <Link
-            href="/profile"
+            href="/profile/[[...slug]]"
             className={cn(
               buttonVariants({ variant: 'ghost' }),
               'justify-start',

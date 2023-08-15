@@ -1,7 +1,12 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FlagIcon, SettingsIcon, VolumeIcon, BellIcon } from 'lucide-react';
+import {
+  SettingsIcon,
+  Volume2Icon,
+  BellIcon,
+  LanguagesIcon,
+} from 'lucide-react';
 
 const Sidebar = () => {
   return (
@@ -37,20 +42,12 @@ const Sidebar = () => {
           </div>
         </Link>
       </div>
-      <p>Прокачка уровня</p>
-      <div className="flex flex-col mt-1">
-        <Link href="/games/clicker-xp/">
-          <div className="btn p-4 text-left text-neutral-500 w-full rounded-2xl hover:bg-neutral-900">
-            Кликер XP
-          </div>
-        </Link>
-      </div>
       <div className="flex justify-between">
         <Button variant="ghost">
-          <FlagIcon />
+          <LanguagesIcon />
         </Button>
         <Button variant="ghost">
-          <VolumeIcon />
+          <Volume2Icon />
         </Button>
         <Button variant="ghost">
           <SettingsIcon />

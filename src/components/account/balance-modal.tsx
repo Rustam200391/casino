@@ -29,7 +29,7 @@ const BalanceModal = () => {
               Перевести
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="topup" className="flex justify-between">
+          <TabsContent value="topup" className="flex justify-between gap-6">
             <div className="flex flex-col w-[35%] text-left gap-6">
               <div className="flex gap-1">
                 <span className="text-green-500 font-light text-sm whitespace-nowrap">
@@ -110,9 +110,17 @@ const BalanceModal = () => {
                   className="rounded-3xl border-neutral-800"
                   placeholder="100"
                 />
-                <p>Комиссия: 3%</p>
-                <p>Будет начислено: 70 RUBN</p>
-                <p>Примерное время начисления: от 1 дня до 3 дней</p>
+                <p>
+                  Комиссия: <span className="text-neutral-500">3%</span>
+                </p>
+                <p>
+                  Будет начислено: 70{' '}
+                  <span className="text-neutral-500">RUBN</span>
+                </p>
+                <p>
+                  Примерное время начисления:{' '}
+                  <span className="text-neutral-500">от 1 дня до 3 дней</span>
+                </p>
               </div>
               <div className="flex flex-col text-center">
                 <Button variant="link" className="font-light underline">
