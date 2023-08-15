@@ -9,21 +9,13 @@ import React, { PropsWithChildren, useEffect } from 'react';
 import Head from 'next/head';
 import SignInModal from '@/components/auth/sign-in-modal';
 import BalanceModal from '@/components/account/balance-modal';
-import config from '@/lib/config';
-import Centrifuge from 'centrifuge';
+import centrifuge from '@/lib/ws';
 
 const manrope = Manrope({ subsets: ['latin', 'cyrillic'] });
 
 const MainLayout = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     console.log('useEffect');
-
-    const centrifuge = new Centrifuge(`${config.wsUrl}/websocket`, {
-      refreshEndpoint: `${config.baseUrl}/ajax/wss/refresh`,
-      subscribeEndpoint: `${config.baseUrl}/ajax/wss/subscribe`,
-    });
-
-    centrifuge.connect();
     centrifuge.on('connected', () => {
       console.log('connected');
     });
@@ -45,13 +37,6 @@ const MainLayout = ({ children }: PropsWithChildren) => {
         if (message.data.module == 'user') {
           console.log(data);
         }
-      }
-    });
-
-    centrifuge.subscribe('chat', function (message) {
-      if (message.data != null) {
-        const data = message.data.params;
-        console.log(data);
       }
     });
   }, []);

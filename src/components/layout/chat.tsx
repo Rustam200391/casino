@@ -1,15 +1,30 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useChatHistory, useChatSendMessage } from '@/hooks/api/chat';
+import centrifuge from '@/lib/ws';
 import { useQuery } from '@tanstack/react-query';
 import { sortBy } from 'lodash';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Chat = () => {
   const [text, setText] = useState('');
 
   const historyQuery = useChatHistory();
   const chatMutation = useChatSendMessage();
+
+  useEffect(() => {
+    const sub = centrifuge.subscribe('chat', function (message) {
+      if (message.data != null) {
+        const data = message.data.params;
+        historyQuery.refetch();
+        console.log(data);
+      }
+    });
+
+    return () => {
+      sub.unsubscribe();
+    };
+  }, []);
 
   return (
     <div className="col-span-2 p-4 border h-fit border-neutral-800 rounded-3xl lg:flex lg:flex-col">
