@@ -1,11 +1,22 @@
 import config from '@/lib/config';
 import Centrifuge from 'centrifuge';
+import { atom } from 'jotai';
+import { useEffect } from 'react';
 
 const centrifuge = new Centrifuge(`${config.wsUrl}/websocket`, {
   refreshEndpoint: `${config.baseUrl}/ajax/wss/refresh`,
   subscribeEndpoint: `${config.baseUrl}/ajax/wss/subscribe`,
 });
 
-centrifuge.connect();
+const useCentrifuge = () => {
+  useEffect(() => {
+    centrifuge.connect();
+    return () => {
+      centrifuge.disconnect();
+    };
+  }, []);
 
-export default centrifuge;
+  return centrifuge;
+};
+
+export default useCentrifuge;

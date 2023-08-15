@@ -9,11 +9,13 @@ import React, { PropsWithChildren, useEffect } from 'react';
 import Head from 'next/head';
 import SignInModal from '@/components/auth/sign-in-modal';
 import BalanceModal from '@/components/account/balance-modal';
-import centrifuge from '@/lib/ws';
+import useCentrifuge from '@/lib/ws';
 
 const manrope = Manrope({ subsets: ['latin', 'cyrillic'] });
 
 const MainLayout = ({ children }: PropsWithChildren) => {
+  const centrifuge = useCentrifuge();
+
   useEffect(() => {
     console.log('useEffect');
     centrifuge.on('connected', () => {
