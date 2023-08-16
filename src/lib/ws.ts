@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 const isBrowser = () =>
   typeof window !== 'undefined' && typeof window.document !== 'undefined';
 const isSecureProtocol =
-  isBrowser && document.location.protocol.includes('https');
+  isBrowser() && document.location.protocol.includes('https');
 
 const centrifuge = new Centrifuge(
   `${isSecureProtocol ? 'wss' : 'ws'}://${config.wsUrl}/websocket`,
