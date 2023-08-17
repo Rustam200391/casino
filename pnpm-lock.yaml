@@ -83,6 +83,9 @@ dependencies:
   jotai:
     specifier: ^2.2.2
     version: 2.2.2(react@18.2.0)
+  js-cookie:
+    specifier: ^3.0.5
+    version: 3.0.5
   ky-universal:
     specifier: ^0.11.0
     version: 0.11.0(ky@0.33.3)
@@ -133,6 +136,9 @@ devDependencies:
   '@types/date-fns':
     specifier: ^2.6.0
     version: 2.6.0
+  '@types/js-cookie':
+    specifier: ^3.0.3
+    version: 3.0.3
   '@types/lodash':
     specifier: ^4.14.197
     version: 4.14.197
@@ -1329,6 +1335,10 @@ packages:
     deprecated: This is a stub types definition for date-fns (https://github.com/date-fns/date-fns). date-fns provides its own type definitions, so you don't need @types/date-fns installed!
     dependencies:
       date-fns: 2.30.0
+    dev: true
+
+  /@types/js-cookie@3.0.3:
+    resolution: {integrity: sha512-Xe7IImK09HP1sv2M/aI+48a20VX+TdRJucfq4vfRVy6nWN8PYPOEnlMRSgxJAgYQIXJVL8dZ4/ilAM7dWNaOww==}
     dev: true
 
   /@types/json5@0.0.29:
@@ -2809,6 +2819,11 @@ packages:
         optional: true
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /js-cookie@3.0.5:
+    resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
+    engines: {node: '>=14'}
     dev: false
 
   /js-tokens@4.0.0:

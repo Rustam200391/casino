@@ -41,7 +41,7 @@ const MainLayout = ({ children }: PropsWithChildren) => {
         }
       }
     });
-  }, []);
+  }, [centrifuge]);
 
   return (
     <>

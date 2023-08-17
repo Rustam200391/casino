@@ -10,6 +10,7 @@ const centrifuge = new Centrifuge(`${config.wsUrl}/websocket`, {
   subscribeEndpoint: `${config.baseUrl}/ajax/wss/subscribe`,
   subscribeHeaders: { 'X-CSRF-TOKEN': csrfToken() },
   refreshHeaders: { 'X-CSRF-TOKEN': csrfToken() },
+  maxRetry: 0,
 });
 
 const useCentrifuge = () => {
