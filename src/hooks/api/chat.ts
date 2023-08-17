@@ -17,6 +17,7 @@ export const useChatHistory = () => {
   return useQuery({
     queryKey: ['chat_history'],
     queryFn: chatHistory,
+    retry: false,
   });
 };
 

@@ -1,30 +1,16 @@
 import { noRefetch } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import api from '@/lib/api';
+import Cookies from 'js-cookie';
 
 export const fetchLoadData = async () => {
   if (typeof window == 'undefined') {
     return;
   }
 
-  const csrfToken = window.sessionStorage.getItem('csrf') || undefined;
+  const data = await api.post('ajax/load_data').json<LoadDataResponse>();
 
-  const data = await api
-    .post('ajax/load_data', {
-      headers: {
-        'X-CSRF-TOKEN': csrfToken,
-      },
-      hooks: {
-        afterResponse: [
-          async (request, options, response) => {
-            console.log(response);
-          },
-        ],
-      },
-    })
-    .json<LoadDataResponse>();
-
-  window.sessionStorage.setItem('csrf', data.token);
+  Cookies.set('X-CSRF-TOKEN', data.token);
 
   return data;
 };
