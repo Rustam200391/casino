@@ -7,16 +7,14 @@ const api = ky.extend({
   hooks: {
     beforeRequest: [
       (request) => {
-        const csrfToken = Cookies.get('X-CSRF-TOKEN');
+        const token = Cookies.get('XSRF-TOKEN');
 
-        if (!csrfToken) {
+        if (!token) {
           return;
         }
 
-        request.headers.set('Set-Cookie', `XSRF-TOKEN=:${csrfToken}`);
-        request.headers.set('X-CSRF-TOKEN', csrfToken);
-
-        console.log(request);
+        request.headers.set('X-CSRF-TOKEN', token);
+        request.headers.set('X-XSRF-TOKEN', token);
       },
     ],
     beforeRetry: [
@@ -25,7 +23,7 @@ const api = ky.extend({
           `${config.baseUrl}/ajax/refresh_csrf`,
         ).json();
 
-        Cookies.set('X-CSRF-TOKEN', kyResponse.token);
+        Cookies.set('XSRF-TOKEN', kyResponse.token);
       },
     ],
   },

@@ -10,7 +10,7 @@ export const fetchLoadData = async () => {
 
   const data = await api.post('ajax/load_data').json<LoadDataResponse>();
 
-  Cookies.set('X-CSRF-TOKEN', data.token);
+  Cookies.set('XSRF-TOKEN', data.token);
 
   return data;
 };
