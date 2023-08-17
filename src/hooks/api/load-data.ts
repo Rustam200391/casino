@@ -1,17 +1,30 @@
-import { useToast } from '@/hooks/use-toast';
-import config from '@/lib/config';
 import { noRefetch } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
-import ky from 'ky-universal';
+import api from '@/lib/api';
 
 export const fetchLoadData = async () => {
-  const data = await ky
-    .post(`${config.baseUrl}/ajax/load_data`, {
+  if (typeof window == 'undefined') {
+    return;
+  }
+
+  const csrfToken = window.sessionStorage.getItem('csrf') || undefined;
+
+  const data = await api
+    .post('ajax/load_data', {
       headers: {
-        'X-CSRF-TOKEN': 'qwerty',
+        'X-CSRF-TOKEN': csrfToken,
+      },
+      hooks: {
+        afterResponse: [
+          async (request, options, response) => {
+            console.log(response);
+          },
+        ],
       },
     })
     .json<LoadDataResponse>();
+
+  window.sessionStorage.setItem('csrf', data.token);
 
   return data;
 };

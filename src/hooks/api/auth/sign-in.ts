@@ -1,7 +1,5 @@
-import { useToast } from '@/hooks/use-toast';
-import config from '@/lib/config';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import ky from 'ky-universal';
+import api from '@/lib/api';
 
 const fetchAuthSignIn = async ({
   email,
@@ -12,11 +10,8 @@ const fetchAuthSignIn = async ({
   password?: string;
   twofa_code?: string;
 }) => {
-  const data = await ky
-    .post(`${config.baseUrl}/auth/authorization`, {
-      headers: {
-        'X-CSRF-TOKEN': 'qwerty',
-      },
+  const data = await api
+    .post('auth/registration', {
       json: {
         email,
         password,
@@ -43,15 +38,9 @@ export const useAuthSignInSubmit = () => {
 };
 
 const fetchAuthSignOut = async () => {
-  const data = await ky
-    .get(`${config.baseUrl}/logout`, {
-      headers: {
-        'X-CSRF-TOKEN': 'qwerty',
-      },
-    })
-    .json<{
-      success: boolean;
-    }>();
+  const data = await api.get('logout').json<{
+    success: boolean;
+  }>();
 
   if (!data.success) throw new Error('Данные неверны');
 
