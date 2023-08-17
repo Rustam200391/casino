@@ -1,13 +1,15 @@
-import config from '@/lib/config';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import ky from 'ky-universal';
+import api from '@/lib/api';
 
-const fetchAuthRegistration = async ({ email, password }: { email: string; password: string }) => {
-  const data = await ky
-    .post(`${config.baseUrl}/auth/registration`, {
-      headers: {
-        'X-CSRF-TOKEN': 'qwerty',
-      },
+const fetchAuthRegistration = async ({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) => {
+  const data = await api
+    .post('auth/registration', {
       json: {
         email,
         password,

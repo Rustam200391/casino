@@ -1,14 +1,9 @@
-import { useToast } from '@/hooks/use-toast';
-import config from '@/lib/config';
 import { useMutation } from '@tanstack/react-query';
-import ky from 'ky-universal';
+import api from '@/lib/api';
 
 export const fetchAuthHandle = async (email: string) => {
-  const data = await ky
-    .post(`${config.baseUrl}/auth/handle`, {
-      headers: {
-        'X-CSRF-TOKEN': 'qwerty',
-      },
+  const data = await api
+    .post('auth/registration', {
       json: {
         email,
       },

@@ -1,27 +1,22 @@
 import { useLoadData } from '@/hooks/api/load-data';
-import config from '@/lib/config';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import ky from 'ky-universal';
+import api from '@/lib/api';
 
-export const fetchLoadData = async () => {
+export const chatHistory = async () => {
   const fd = new FormData();
   fd.append('channel', 'ru');
-  const data = await ky
-    .post(`${config.baseUrl}/ajax/chat/history`, {
-      headers: {
-        'X-CSRF-TOKEN': 'qwerty',
-      },
+
+  return await api
+    .post('ajax/chat/history', {
       body: fd,
     })
     .json<ChatHistoryResponse>();
-
-  return data;
 };
 
 export const useChatHistory = () => {
   return useQuery({
     queryKey: ['chat_history'],
-    queryFn: fetchLoadData,
+    queryFn: chatHistory,
   });
 };
 
@@ -64,8 +59,8 @@ export const useChatSendMessage = () => {
       fd.append('channel', 'ru');
       fd.append('text', text);
 
-      const data = await ky
-        .post(`${config.baseUrl}/ajax/chat/send_message`, {
+      const data = await api
+        .post('ajax/chat/send_message', {
           body: fd,
         })
         .json<any>();
