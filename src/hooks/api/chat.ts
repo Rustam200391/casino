@@ -14,10 +14,12 @@ export const chatHistory = async () => {
 };
 
 export const useChatHistory = () => {
+  const data = useLoadData();
+
   return useQuery({
     queryKey: ['chat_history'],
     queryFn: chatHistory,
-    retry: false,
+    enabled: Boolean(data?.data?.token),
   });
 };
 
