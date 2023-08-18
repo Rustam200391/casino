@@ -1,11 +1,20 @@
 import { atom, useAtom } from 'jotai';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import React, { useEffect, useState } from 'react';
 import { Progress } from '@/components/ui/progress';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { AuthEmailSubmitResponseResult, useAuthEmailSubmit } from '@/hooks/api/auth/submit-email';
+import {
+  AuthEmailSubmitResponseResult,
+  useAuthEmailSubmit,
+} from '@/hooks/api/auth/submit-email';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useAuthRegistrationSubmit } from '@/hooks/api/auth/register';
 import { useAuthSignInSubmit } from '@/hooks/api/auth/sign-in';
@@ -16,10 +25,27 @@ import { useAuthSignInSubmit } from '@/hooks/api/auth/sign-in';
  */
 
 const getAuthType = (data?: AuthEmailSubmitResponseResult) => {
-  if (!data) return 'email';
-  if (!data?.needed_authorisation) return 'registration';
-  if (data?.needed_authorisation && data?.authorisation_data.needed_password) return 'password';
-  if (data?.needed_authorisation && !data?.authorisation_data.needed_twofa_code) return '2fa';
+  console.log(data);
+
+  if (!data) {
+    return 'email';
+  }
+
+  if (!data?.needed_authorization) {
+    return 'registration';
+  }
+
+  if (data?.needed_authorization && data?.authorization_data?.needed_password) {
+    return 'password';
+  }
+
+  if (
+    data?.needed_authorization &&
+    !data?.authorization_data.needed_twofa_code
+  ) {
+    return '2fa';
+  }
+
   return 'email';
 };
 
@@ -78,7 +104,8 @@ const SignInModal = () => {
   };
 
   useEffect(() => {
-    if (submitRegistration.data?.success || submitSignIn.data?.success) setOpen(false);
+    if (submitRegistration.data?.success || submitSignIn.data?.success)
+      setOpen(false);
   }, [submitRegistration, submitSignIn, setOpen]);
 
   return (
@@ -93,9 +120,15 @@ const SignInModal = () => {
             <div className="absolute left-0 w-full h-px -bottom-4 bg-neutral-800"></div>
           </DialogTitle>
           <DialogDescription className="pt-12">
-            {type === 'email' && <EmailStep email={email} setEmail={setEmail} />}
-            {type === 'password' && <PasswordStep password={password} setPassword={setPassword} />}
-            {type === '2fa' && <TwoFAStep password={password} setPassword={setPassword} />}
+            {type === 'email' && (
+              <EmailStep email={email} setEmail={setEmail} />
+            )}
+            {type === 'password' && (
+              <PasswordStep password={password} setPassword={setPassword} />
+            )}
+            {type === '2fa' && (
+              <TwoFAStep password={password} setPassword={setPassword} />
+            )}
             {type === 'registration' && (
               <RegistrationStep
                 acceptTerms={acceptTerms}
@@ -143,7 +176,14 @@ const SignInModal = () => {
               <Button
                 disabled={email.trim().length === 0}
                 loading={submitEmail.isLoading}
-                onClick={() => submitSignIn.mutate({ email, ...(type === '2fa' ? { twofa_code: password } : { password }) })}
+                onClick={() =>
+                  submitSignIn.mutate({
+                    email,
+                    ...(type === '2fa'
+                      ? { twofa_code: password }
+                      : { password }),
+                  })
+                }
                 className="w-full text-lg mt-14 h-14"
                 variant="accent"
                 glow="accent"
@@ -161,7 +201,13 @@ const SignInModal = () => {
 
 export default SignInModal;
 
-const EmailStep = ({ email, setEmail }: { email: string; setEmail: (email: string) => void }) => {
+const EmailStep = ({
+  email,
+  setEmail,
+}: {
+  email: string;
+  setEmail: (email: string) => void;
+}) => {
   return (
     <>
       <p className="text-2xl font-bold text-white">Вход в Синдикат</p>
@@ -172,7 +218,7 @@ const EmailStep = ({ email, setEmail }: { email: string; setEmail: (email: strin
         </Label>
         <Input
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           type="email"
           id="email"
           placeholder="Email"
@@ -208,7 +254,7 @@ const RegistrationStep = ({
         </Label>
         <Input
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           type="password"
           id="password"
           placeholder="Не менее 8 символов"
@@ -222,7 +268,7 @@ const RegistrationStep = ({
         </Label>
         <Input
           value={confirmPassword}
-          onChange={e => setConfirmPassword(e.target.value)}
+          onChange={(e) => setConfirmPassword(e.target.value)}
           type="password"
           id="confirmPassword"
           placeholder="Пароль"
@@ -231,8 +277,15 @@ const RegistrationStep = ({
       </div>
 
       <div className="flex items-center mt-6 space-x-2">
-        <Checkbox checked={acceptTerms} onCheckedChange={e => setAcceptTerms(!acceptTerms)} id="terms" />
-        <label htmlFor="terms" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+        <Checkbox
+          checked={acceptTerms}
+          onCheckedChange={(e) => setAcceptTerms(!acceptTerms)}
+          id="terms"
+        />
+        <label
+          htmlFor="terms"
+          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+        >
           Согласен на обработку персональных данных
         </label>
       </div>
@@ -240,7 +293,13 @@ const RegistrationStep = ({
   );
 };
 
-const PasswordStep = ({ password, setPassword }: { password: string; setPassword: (password: string) => void }) => {
+const PasswordStep = ({
+  password,
+  setPassword,
+}: {
+  password: string;
+  setPassword: (password: string) => void;
+}) => {
   return (
     <>
       <p className="text-2xl font-bold text-white">Вход в Синдикат</p>
@@ -251,7 +310,7 @@ const PasswordStep = ({ password, setPassword }: { password: string; setPassword
         </Label>
         <Input
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           type="password"
           id="password"
           placeholder="Пароль"
@@ -262,7 +321,13 @@ const PasswordStep = ({ password, setPassword }: { password: string; setPassword
   );
 };
 
-const TwoFAStep = ({ password, setPassword }: { password: string; setPassword: (password: string) => void }) => {
+const TwoFAStep = ({
+  password,
+  setPassword,
+}: {
+  password: string;
+  setPassword: (password: string) => void;
+}) => {
   return (
     <>
       <p className="text-2xl font-bold text-white">Вход в Синдикат</p>
@@ -273,7 +338,7 @@ const TwoFAStep = ({ password, setPassword }: { password: string; setPassword: (
         </Label>
         <Input
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           type="text"
           id="twofa_code"
           placeholder="Пароль"

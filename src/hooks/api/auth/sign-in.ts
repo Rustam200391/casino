@@ -11,7 +11,7 @@ const fetchAuthSignIn = async ({
   twofa_code?: string;
 }) => {
   const data = await api
-    .post('auth/registration', {
+    .post('auth/authorization', {
       json: {
         email,
         password,
