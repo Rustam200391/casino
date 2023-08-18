@@ -25,7 +25,7 @@ const Chat = () => {
   const messagesRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const sub = centrifuge.subscribe('chat', function (message) {
+    const sub = centrifuge.subscribe('chat', (message) => {
       if (message.data != null) {
         const data = message.data.params;
         historyQuery.refetch();

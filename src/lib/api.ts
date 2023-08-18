@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 
 const api = ky.extend({
   prefixUrl: `${config.baseUrl}/`,
+  credentials: 'include',
   hooks: {
     beforeRequest: [
       (request) => {
