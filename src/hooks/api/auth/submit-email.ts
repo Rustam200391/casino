@@ -3,7 +3,7 @@ import api from '@/lib/api';
 
 export const fetchAuthHandle = async (email: string) => {
   const data = await api
-    .post('auth/registration', {
+    .post('auth/handle', {
       json: {
         email,
       },
@@ -29,8 +29,8 @@ export interface AuthEmailSubmitResponse {
 }
 
 export interface AuthEmailSubmitResponseResult {
-  needed_authorisation: boolean;
-  authorisation_data: {
+  needed_authorization: boolean;
+  authorization_data: {
     needed_password: boolean;
     needed_twofa_code: boolean;
   };
