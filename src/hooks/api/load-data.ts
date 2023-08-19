@@ -1,6 +1,6 @@
-import { noRefetch } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import api from '@/lib/api';
+import { noRefetch } from '@/lib/utils';
 import Cookies from 'js-cookie';
 
 export const fetchLoadData = async () => {
@@ -15,7 +15,7 @@ export const fetchLoadData = async () => {
   return data;
 };
 
-export const useLoadData = () => {
+export const useLoadDataQuery = () => {
   return useQuery({
     queryKey: ['load_data'],
     queryFn: fetchLoadData,

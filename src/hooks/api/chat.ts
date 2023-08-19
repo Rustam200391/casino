@@ -1,4 +1,4 @@
-import { useLoadData } from '@/hooks/api/load-data';
+import { useLoadDataQuery } from '@/hooks/api/load-data';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import api from '@/lib/api';
 
@@ -14,7 +14,7 @@ export const chatHistory = async () => {
 };
 
 export const useChatHistory = () => {
-  const data = useLoadData();
+  const data = useLoadDataQuery();
 
   return useQuery({
     queryKey: ['chat_history'],
@@ -24,7 +24,7 @@ export const useChatHistory = () => {
 };
 
 export const useChatSendMessage = () => {
-  const user = useLoadData();
+  const user = useLoadDataQuery();
   const utils = useQueryClient(); // NOTE: avoid destructuring here
 
   return useMutation({

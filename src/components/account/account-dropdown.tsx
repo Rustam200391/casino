@@ -7,11 +7,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useAuthSignOut } from '@/hooks/api/auth/sign-in';
+import { useAuthSignOutMutation } from '@/hooks/api/auth/sign-in';
 import Link from 'next/link';
 
 export const AccountDropdown = ({ trigger }: { trigger: React.ReactNode }) => {
-  const signOut = useAuthSignOut();
+  const signOut = useAuthSignOutMutation();
 
   return (
     <DropdownMenu>
@@ -24,13 +24,12 @@ export const AccountDropdown = ({ trigger }: { trigger: React.ReactNode }) => {
               <span>Профиль</span>
             </DropdownMenuItem>
           </Link>
-            <Link href="/profile/settings">
-
-          <DropdownMenuItem className="rounded-lg">
-            <Settings className="w-4 h-4 mr-2" />
-            <span>Настройки</span>
-          </DropdownMenuItem>
-            </Link>
+          <Link href="/profile/settings">
+            <DropdownMenuItem className="rounded-lg">
+              <Settings className="w-4 h-4 mr-2" />
+              <span>Настройки</span>
+            </DropdownMenuItem>
+          </Link>
           <Link href="/profile/security">
             <DropdownMenuItem className="rounded-lg">
               <FingerprintIcon className="w-4 h-4 mr-2" />

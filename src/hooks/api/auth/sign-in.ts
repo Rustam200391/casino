@@ -27,11 +27,11 @@ const fetchAuthSignIn = async ({
   return data;
 };
 
-export const useAuthSignInSubmit = () => {
+export const useAuthSignInMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: fetchAuthSignIn,
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['load_data'] });
     },
   });
@@ -47,7 +47,7 @@ const fetchAuthSignOut = async () => {
   return data;
 };
 
-export const useAuthSignOut = () => {
+export const useAuthSignOutMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: fetchAuthSignOut,

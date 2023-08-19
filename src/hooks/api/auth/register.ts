@@ -23,7 +23,7 @@ const fetchAuthRegistration = async ({
   return data;
 };
 
-export const useAuthRegistrationSubmit = () => {
+export const useAuthRegistrationMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: fetchAuthRegistration,

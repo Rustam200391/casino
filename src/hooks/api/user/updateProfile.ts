@@ -1,13 +1,10 @@
 import config from '@/lib/config';
 import { useMutation } from '@tanstack/react-query';
-import ky from 'ky-universal';
+import api from '@/lib/api';
 
 export const updateProfileInfo = async (request: UpdateProfileInfoRequest) => {
-  const data = await ky
+  const data = await api
     .post(`${config.baseUrl}/ajax/action/user/update_profile_info`, {
-      headers: {
-        'X-CSRF-TOKEN': 'qwerty',
-      },
       json: request,
     })
     .json<UpdateProfileInfoResponse>();

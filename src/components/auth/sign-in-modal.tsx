@@ -13,11 +13,11 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import {
   AuthEmailSubmitResponseResult,
-  useAuthEmailSubmit,
+  useAuthEmailMutation,
 } from '@/hooks/api/auth/submit-email';
 import { Checkbox } from '@/components/ui/checkbox';
-import { useAuthRegistrationSubmit } from '@/hooks/api/auth/register';
-import { useAuthSignInSubmit } from '@/hooks/api/auth/sign-in';
+import { useAuthRegistrationMutation } from '@/hooks/api/auth/register';
+import { useAuthSignInMutation } from '@/hooks/api/auth/sign-in';
 
 /**
  * Здесь происходит регистрация и вход пользователя.
@@ -71,9 +71,9 @@ const SignInModal = () => {
     }
   }, [open]);
 
-  const submitEmail = useAuthEmailSubmit();
-  const submitRegistration = useAuthRegistrationSubmit();
-  const submitSignIn = useAuthSignInSubmit();
+  const submitEmail = useAuthEmailMutation();
+  const submitRegistration = useAuthRegistrationMutation();
+  const submitSignIn = useAuthSignInMutation();
 
   const step = submitEmail.data ? 2 : 1;
   const type = getAuthType(submitEmail.data?.result);
