@@ -15,7 +15,7 @@ export const fetchAuthHandle = async (email: string) => {
   return data;
 };
 
-export const useAuthEmailSubmit = () => {
+export const useAuthEmailMutation = () => {
   return useMutation({
     mutationFn: fetchAuthHandle,
   });

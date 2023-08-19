@@ -26,7 +26,7 @@ import React, { useEffect } from 'react';
 
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useSignInModal } from '@/components/auth/sign-in-modal';
-import { useLoadData } from '@/hooks/api/load-data';
+import { useLoadDataQuery } from '@/hooks/api/load-data';
 import { useBalanceModalAtom } from '@/components/account/balance-modal';
 import BalanceDropdown from '@/components/account/balance-dropdown';
 import AccountDropdown from '@/components/account/account-dropdown';
@@ -55,7 +55,7 @@ const headerNav = [
 
 function UserProgress({ sheetView }: { sheetView?: boolean }) {
   const { toast } = useToast();
-  const { data, error } = useLoadData();
+  const { data, error } = useLoadDataQuery();
 
   useEffect(() => {
     if (error) {
@@ -80,7 +80,9 @@ function UserProgress({ sheetView }: { sheetView?: boolean }) {
         <div className="p-1.5 border rounded-full border-neutral-500">
           <Avatar className="">
             <AvatarImage src={data?.data.avatar} />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback>
+              {data?.data.name.substring(0, 2).toUpperCase()}
+            </AvatarFallback>
           </Avatar>
         </div>
         <div>
@@ -120,7 +122,7 @@ function UserProgress({ sheetView }: { sheetView?: boolean }) {
 const Header = () => {
   const { route } = useRouter();
   const [, setShowSignIn] = useSignInModal();
-  const { data } = useLoadData();
+  const { data } = useLoadDataQuery();
   const signedIn = data?.auth;
   const [isBalanceModalOpen, setBalanceModalOpen] = useBalanceModalAtom();
 
