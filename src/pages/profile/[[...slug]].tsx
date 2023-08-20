@@ -1,5 +1,5 @@
 import MainLayout from '@/components/layout/main-layout';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TypographyH1, TypographyH3 } from '@/components/ui/typography';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useRouter } from 'next/router';
@@ -48,6 +48,12 @@ const ProfilePage = () => {
   const nextLevelExpNeed =
     Number(loadDataResponse?.levels_experience[String(nextLevel)]) -
     Number(loadData?.experience);
+
+  useEffect(() => {
+    if (!loadDataResponse?.auth) {
+      router.replace('/');
+    }
+  }, [loadData, loadDataResponse?.auth, router]);
 
   return (
     <>
