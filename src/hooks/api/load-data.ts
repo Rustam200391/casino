@@ -41,7 +41,7 @@ export interface LoadDataResponse {
 export interface UserData {
   user_id: number;
   name: string;
-  avatar: string | null;
+  avatar?: string;
   balance: string;
   level: number;
   rank: number;

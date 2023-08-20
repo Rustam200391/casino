@@ -63,7 +63,9 @@ const ProfilePage = () => {
               <Avatar className="h-[87px] w-[87px]">
                 <AvatarImage src={profileData?.avatar} />
                 <AvatarFallback>
-                  {loadData?.name.substring(0, 2).toUpperCase()}
+                  {loadData?.name
+                    ? loadData.name.substring(0, 2).toUpperCase()
+                    : '-'}
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-col justify-between">

@@ -78,10 +78,12 @@ function UserProgress({ sheetView }: { sheetView?: boolean }) {
 
       <div className="flex items-center mr-2 space-x-2 border-none cursor-default">
         <div className="p-1.5 border rounded-full border-neutral-500">
-          <Avatar className="">
+          <Avatar>
             <AvatarImage src={data?.data.avatar} />
             <AvatarFallback>
-              {data?.data.name.substring(0, 2).toUpperCase()}
+              {data?.data?.name
+                ? data.data.name.substring(0, 2).toUpperCase()
+                : '-'}
             </AvatarFallback>
           </Avatar>
         </div>
