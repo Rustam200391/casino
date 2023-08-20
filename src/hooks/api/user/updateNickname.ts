@@ -1,35 +1,33 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import api from '@/lib/api';
 
-export const updateProfileInfo = async (request: UpdateProfileInfoRequest) => {
+export const updateNickname = async (request: UpdateNicknameRequest) => {
   const data = await api
-    .post('ajax/action/user/update_profile_info', {
+    .post('ajax/action/user/update_nickname', {
       json: request,
     })
-    .json<UpdateProfileInfoResponse>();
+    .json<UpdateNicknameResponse>();
 
   if (!data.success) throw new Error('Произошла ошибка при отправке данных');
 
   return data;
 };
 
-export const useUpdateProfileMutation = () => {
+export const useUpdateNicknameMutation = () => {
   const utils = useQueryClient();
 
   return useMutation({
-    mutationFn: updateProfileInfo,
+    mutationFn: updateNickname,
     onSettled: () => {
       utils.invalidateQueries(['load_data', 'load_profile']);
     },
   });
 };
 
-export interface UpdateProfileInfoRequest {
-  first_name: string;
-  last_name: string;
-  sex: 1 | 2 | null;
+export interface UpdateNicknameRequest {
+  nickname: string;
 }
 
-export interface UpdateProfileInfoResponse {
+export interface UpdateNicknameResponse {
   success: boolean;
 }

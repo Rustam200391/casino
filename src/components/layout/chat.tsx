@@ -1,6 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Message, useChatHistory, useChatSendMessage } from '@/hooks/api/chat';
+import {
+  Message,
+  useChatHistoryQuery,
+  useChatSendMessageMutation,
+} from '@/hooks/api/chat';
 import useCentrifuge from '@/lib/ws';
 import { sortBy } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
@@ -15,11 +19,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import { format, fromUnixTime } from 'date-fns';
+import { useLoadDataQuery } from '@/hooks/api/load-data';
 
 const Chat = () => {
   const centrifuge = useCentrifuge();
-  const historyQuery = useChatHistory();
-  const chatMutation = useChatSendMessage();
+  const historyQuery = useChatHistoryQuery();
+  const chatMutation = useChatSendMessageMutation();
+  const { data: loadDataResponse } = useLoadDataQuery();
 
   const [text, setText] = useState('');
   const messagesRef = useRef<HTMLDivElement | null>(null);
@@ -68,7 +74,7 @@ const Chat = () => {
 
           <div className="flex text-sm items-center">
             <Dot size={32} className="text-red-500" />
-            104 200
+            {loadDataResponse?.online || 0}
           </div>
         </div>
         <ScrollArea className="h-[400px]" type="always">

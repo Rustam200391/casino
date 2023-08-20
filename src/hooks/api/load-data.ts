@@ -34,13 +34,14 @@ export interface LoadDataResponse {
   languages: Languages;
   online: number;
   settings: any[];
+  currencies_courses: CurrenciesCourses;
   levels_experience: { [key: string]: number };
 }
 
 export interface UserData {
   user_id: number;
   name: string;
-  avatar: string;
+  avatar: string | null;
   balance: string;
   level: number;
   rank: number;
@@ -57,4 +58,14 @@ export interface LanguageItem {
   id: number;
   lang: string;
   name: string;
+}
+
+export interface CurrenciesCourses {
+  fiat: Fiat;
+  crypto: { [key: string]: number };
+}
+
+export interface Fiat {
+  USD: number;
+  EUR: number;
 }

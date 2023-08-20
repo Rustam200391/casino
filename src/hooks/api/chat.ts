@@ -13,7 +13,7 @@ export const chatHistory = async () => {
     .json<ChatHistoryResponse>();
 };
 
-export const useChatHistory = () => {
+export const useChatHistoryQuery = () => {
   const data = useLoadDataQuery();
 
   return useQuery({
@@ -23,7 +23,7 @@ export const useChatHistory = () => {
   });
 };
 
-export const useChatSendMessage = () => {
+export const useChatSendMessageMutation = () => {
   const user = useLoadDataQuery();
   const utils = useQueryClient(); // NOTE: avoid destructuring here
 

@@ -30,7 +30,7 @@ export interface ProfileData {
   nickname: string;
   fist_name: string;
   last_name: string;
-  sex: number;
+  sex: 1 | 2 | null;
   email: string;
   email_confirmed: number;
   twofa_enabled: number;
