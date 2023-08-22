@@ -1,14 +1,15 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
+  ChatChannel,
   Message,
   useChatHistoryQuery,
   useChatSendMessageMutation,
 } from '@/hooks/api/chat';
 import useCentrifuge from '@/lib/ws';
 import { sortBy } from 'lodash';
-import React, { useEffect, useRef, useState } from 'react';
-import { ArrowRight, Dot } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { ArrowRight, ChevronDownIcon, Dot } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import {
@@ -20,15 +21,19 @@ import {
 
 import { format, fromUnixTime } from 'date-fns';
 import { useLoadDataQuery } from '@/hooks/api/load-data';
+import { atom, useAtom } from 'jotai/index';
+
+const chatChannelAtom = atom<ChatChannel>('ru');
+export const useChatChannel = () => useAtom(chatChannelAtom);
 
 const Chat = () => {
   const centrifuge = useCentrifuge();
   const historyQuery = useChatHistoryQuery();
   const chatMutation = useChatSendMessageMutation();
   const { data: loadDataResponse } = useLoadDataQuery();
+  const [channel, setChannel] = useChatChannel();
 
   const [text, setText] = useState('');
-  const messagesRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const sub = centrifuge.subscribe('chat', (message) => {
@@ -38,8 +43,6 @@ const Chat = () => {
         console.log(data);
       }
     });
-
-    messagesRef.current?.scrollIntoView();
 
     return () => {
       sub.unsubscribe();
@@ -55,13 +58,18 @@ const Chat = () => {
         <div className="flex justify-between items-center p-4">
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <div className="border-white hover:bg-white hover:text-black p-1 border rounded-3xl w-[90px]">
-                Чат
+              <div className="flex border-white hover:bg-white hover:text-black py-1 px-3 border rounded-3xl">
+                <div>{channel === 'ru' ? 'Русский' : 'English'}</div>
+                <ChevronDownIcon className="ml-2 transition" />
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem>Русский</DropdownMenuItem>
-              <DropdownMenuItem>English</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setChannel('ru')}>
+                Русский
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setChannel('en')}>
+                English
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -82,7 +90,6 @@ const Chat = () => {
             {sortBy(historyQuery.data?.result.messages, 'time')?.map(
               (message) => <ChatMessage key={message.id} {...message} />,
             )}
-            <div ref={messagesRef} />
           </div>
         </ScrollArea>
         <hr className="border-neutral-800 mt-2 mb-2" />
@@ -91,7 +98,6 @@ const Chat = () => {
           onSubmit={(e) => {
             e.preventDefault();
             chatMutation.mutate(text);
-            messagesRef.current?.scrollIntoView({ behavior: 'smooth' });
             setText('');
           }}
         >
@@ -101,7 +107,7 @@ const Chat = () => {
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
-          <Button type="submit">
+          <Button type="submit" disabled={!text}>
             <ArrowRight />
           </Button>
         </form>

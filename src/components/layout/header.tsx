@@ -31,6 +31,7 @@ import { useBalanceModalAtom } from '@/components/account/balance-modal';
 import BalanceDropdown from '@/components/account/balance-dropdown';
 import AccountDropdown from '@/components/account/account-dropdown';
 import { useToast } from '@/hooks/use-toast';
+import useNextLevelExp from '@/hooks/use-next-level-exp';
 
 const headerNav = [
   {
@@ -56,6 +57,9 @@ const headerNav = [
 function UserProgress({ sheetView }: { sheetView?: boolean }) {
   const { toast } = useToast();
   const { data, error } = useLoadDataQuery();
+  const nextLevelExp = useNextLevelExp();
+
+  const nextLevelExpNeed = Number(nextLevelExp) - Number(data?.data.experience);
 
   useEffect(() => {
     if (error) {
@@ -97,13 +101,14 @@ function UserProgress({ sheetView }: { sheetView?: boolean }) {
             </div>
           </div>
           <Progress
-            value={60}
+            value={data?.data.experience || 0}
+            max={nextLevelExp}
             className={cn('mt-1.5 w-[150px]', !sheetView && 'hidden 2xl:block')}
           />
         </div>
         <div className="hidden mt-2 text-right 2xl:block">
           {/* TODO: Добавить счет до нового уровня, сейчас текущее количество опыта */}
-          <p className="text-sm font-semibold">{data?.data.experience} XP</p>
+          <p className="text-sm font-semibold">{nextLevelExpNeed} XP</p>
           <p className="text-xs font-light text-neutral-500">
             до нового уровня
           </p>
@@ -113,7 +118,7 @@ function UserProgress({ sheetView }: { sheetView?: boolean }) {
       {!sheetView && (
         <AccountDropdown
           trigger={
-            <ChevronDown className="w-12 h-12 px-2 ml-2 transition cursor-pointer hover:text-neutral-400" />
+            <ChevronDown className="w-12 h-12 px-2 ml-2 transition hover:text-neutral-400" />
           }
         />
       )}

@@ -14,11 +14,13 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import ProfileModal, {
   useProfileModalAtom,
 } from '@/components/account/profile-modal';
+import useNextLevelExp from '@/hooks/use-next-level-exp';
 
 const ProfilePage = () => {
   const router = useRouter();
   const { data: loadDataResponse } = useLoadDataQuery();
   const { data: loadProfileResponse } = useLoadProfileQuery();
+  const nextLevelExp = useNextLevelExp();
 
   const selectedTab = router.query.slug ? router.query.slug[0] : 'profile';
 
@@ -30,24 +32,7 @@ const ProfilePage = () => {
     ? profileData.fist_name + ' ' + profileData.last_name
     : '-';
 
-  const maxLevel = loadDataResponse?.levels_experience
-    ? Math.max.apply(
-        null,
-        Object.keys(loadDataResponse.levels_experience).map(Number),
-      )
-    : 100;
-  const nextLevel =
-    maxLevel === (loadData?.level || 0) + 1
-      ? maxLevel
-      : (loadData?.level || 0) + 1;
-
-  const nextLevelExp = Number(
-    loadDataResponse?.levels_experience[String(nextLevel)],
-  );
-
-  const nextLevelExpNeed =
-    Number(loadDataResponse?.levels_experience[String(nextLevel)]) -
-    Number(loadData?.experience);
+  const nextLevelExpNeed = Number(nextLevelExp) - Number(loadData?.experience);
 
   useEffect(() => {
     if (!loadDataResponse?.auth) {
