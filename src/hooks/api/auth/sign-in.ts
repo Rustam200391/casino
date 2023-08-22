@@ -38,20 +38,16 @@ export const useAuthSignInMutation = () => {
 };
 
 const fetchAuthSignOut = async () => {
-  const data = await api.get('logout').json<{
+  return await api.get('logout').json<{
     success: boolean;
   }>();
-
-  if (!data.success) throw new Error('Данные неверны');
-
-  return data;
 };
 
 export const useAuthSignOutMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: fetchAuthSignOut,
-    onSuccess: () => {
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['load_data'] });
     },
   });
