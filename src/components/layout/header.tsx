@@ -30,8 +30,8 @@ import { useLoadDataQuery } from '@/hooks/api/load-data';
 import { useBalanceModalAtom } from '@/components/account/balance-modal';
 import BalanceDropdown from '@/components/account/balance-dropdown';
 import AccountDropdown from '@/components/account/account-dropdown';
-import { useToast } from '@/hooks/use-toast';
 import useNextLevelExp from '@/hooks/use-next-level-exp';
+import { toast } from 'react-toastify';
 
 const headerNav = [
   {
@@ -55,7 +55,6 @@ const headerNav = [
 ];
 
 function UserProgress({ sheetView }: { sheetView?: boolean }) {
-  const { toast } = useToast();
   const { data, error } = useLoadDataQuery();
   const nextLevelExp = useNextLevelExp();
 
@@ -63,11 +62,9 @@ function UserProgress({ sheetView }: { sheetView?: boolean }) {
 
   useEffect(() => {
     if (error) {
-      toast({
-        title: 'Ошибка',
-        // @ts-expect-error this is fine
-        description: 'Произошла ошибка при загрузке данных: ' + error.message,
-      });
+      toast.error(
+        'Произошла ошибка при загрузке данных: ' + (error as Error).message,
+      );
     }
   }, [error]);
 
@@ -131,7 +128,7 @@ const Header = () => {
   const [, setShowSignIn] = useSignInModal();
   const { data } = useLoadDataQuery();
   const signedIn = data?.auth;
-  const [isBalanceModalOpen, setBalanceModalOpen] = useBalanceModalAtom();
+  const [, setBalanceModalOpen] = useBalanceModalAtom();
 
   return (
     <>
@@ -274,7 +271,7 @@ const Header = () => {
 export default Header;
 
 const MobileSheet = () => {
-  const [open, setOpen] = useBalanceModalAtom();
+  const [, setOpen] = useBalanceModalAtom();
 
   return (
     <Sheet>

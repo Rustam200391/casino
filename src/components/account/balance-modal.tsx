@@ -9,9 +9,13 @@ import {
   Gem,
   RussianRubleIcon,
   SearchIcon,
+  UserIcon,
 } from 'lucide-react';
 import { TypographyH2 } from '@/components/ui/typography';
 import { Input } from '@/components/ui/input';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
 
 const balanceModalAtom = atom(false);
 export const useBalanceModalAtom = () => useAtom(balanceModalAtom);
@@ -285,55 +289,60 @@ const BalanceModal = () => {
                 <Input placeholder="Поиск по нику" className="border-0" />
               </div>
               <hr className="border-neutral-800" />
-              <div>
-                <p className="font-semibold text-neutral-500">Карты</p>
-                <div className="flex flex-col gap-2 mt-1">
-                  <Button
-                    variant="ghost"
-                    className="flex w-full rounded-xl justify-between whitespace-nowrap font-semibold border-neutral-800 hover:bg-neutral-800 px-2"
-                  >
-                    <div className="flex items-center gap-2">
-                      <CreditCardIcon height={30} width={30} />
-                      <div className="font-normal">Банковская карта</div>
-                    </div>
-
-                    <span className="font-light text-neutral-400">3%</span>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="flex w-full rounded-xl justify-between whitespace-nowrap font-semibold border-neutral-800 hover:bg-neutral-800 px-2"
-                  >
-                    <div className="flex items-center gap-2">
-                      <CreditCardIcon height={30} width={30} />
-                      <div className="font-normal">СБП</div>
-                    </div>
-
-                    <span className="font-light text-neutral-400">3%</span>
-                  </Button>
+              <ScrollArea className="h-[300px]" type="always">
+                <div className="flex flex-col gap-2 pr-4">
+                  {new Array(30).fill(
+                    <Button
+                      variant="ghost"
+                      className="flex w-full h-[60px] rounded-2xl justify-start gap-2 whitespace-nowrap font-semibold border-neutral-800 hover:bg-neutral-800 px-2"
+                    >
+                      <Avatar>
+                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarFallback>CN</AvatarFallback>
+                      </Avatar>
+                      Morty Sanchez
+                      <Badge className="bg-teal-900 hover:bg-teal-900 text-teal-300 rounded-sm p-0.5">
+                        13
+                      </Badge>
+                    </Button>,
+                  )}
                 </div>
-              </div>
+              </ScrollArea>
             </div>
-            <div className="flex flex-col justify-between w-[65%]">
+            <div className="flex flex-col justify-between w-[65%] gap-2">
               <div>
                 <TypographyH2>Перевод доната</TypographyH2>
-                <p className="flex items-center gap-2 text-neutral-500 ml-1 font-normal">
-                  <CreditCardIcon height={30} width={30} />
-                  Банковская карта
+                <p className="flex items-center gap-2 text-neutral-500 font-normal text-sm">
+                  Перевод средств ограничен и распространяется только на
+                  зарегистрированных пользователей площадки
                 </p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-2 whitespace-nowrap">
+                  <span className="text-green-500 font-light text-sm">
+                    Шаг 1
+                  </span>
+                  <span className="font-light">Укажите ID игрока</span>
+                </div>
+                <Input
+                  className="rounded-3xl border-neutral-800"
+                  placeholder="ID: 24123"
+                />
+                <div className="flex text-sm items-center text-neutral-500">
+                  <UserIcon className="h-[24px] w-[24px]" />
+                  rick_sanchez
+                </div>
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex items-center gap-2 whitespace-nowrap">
                   <span className="text-green-500 font-light text-sm">
                     Шаг 2
                   </span>
-                  <span className="font-light">Введите сумму пополнения</span>
-                  <span className="text-neutral-500 font-light text-sm">
-                    (минимум 100 ₽)
-                  </span>
+                  <span className="font-light">Введите сумму доната</span>
                 </div>
                 <Input
                   className="rounded-3xl border-neutral-800"
-                  placeholder="100 ₽"
+                  placeholder="100 RUBN"
                 />
                 <p className="text-sm">
                   Комиссия: <span className="text-neutral-500">3%</span>

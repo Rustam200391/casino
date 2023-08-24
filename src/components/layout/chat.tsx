@@ -8,7 +8,7 @@ import {
 } from '@/hooks/api/chat';
 import useCentrifuge from '@/lib/ws';
 import { sortBy } from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { ArrowRight, ChevronDownIcon, Dot } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -49,6 +49,12 @@ const Chat = () => {
     };
   }, [centrifuge, historyQuery]);
 
+  const messages = useMemo(() => {
+    const _messages = historyQuery.data?.result.messages || [];
+
+    return sortBy(_messages, 'time');
+  }, [historyQuery.data?.result.messages]);
+
   return (
     <div className="col-span-2 p-4 border h-fit w-[400px] border-neutral-800 rounded-3xl lg:flex lg:flex-col">
       <div className="flex flex-col text-center rounded-3xl">
@@ -87,8 +93,12 @@ const Chat = () => {
         </div>
         <ScrollArea className="h-[400px]" type="always">
           <div className="flex flex-col pr-4">
-            {sortBy(historyQuery.data?.result.messages, 'time')?.map(
-              (message) => <ChatMessage key={message.id} {...message} />,
+            {messages.length > 0 ? (
+              messages.map((message) => (
+                <ChatMessage key={message.id} {...message} />
+              ))
+            ) : (
+              <div>Нет сообщений</div>
             )}
           </div>
         </ScrollArea>

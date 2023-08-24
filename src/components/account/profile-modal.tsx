@@ -17,7 +17,7 @@ import { useUpdateProfileMutation } from '@/hooks/api/user/updateProfile';
 import { useUpdateNicknameMutation } from '@/hooks/api/user/updateNickname';
 import { useLoadProfileQuery } from '@/hooks/api/user/loadProfile';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from 'react-toastify';
 
 const profileModalAtom = atom(false);
 export const useProfileModalAtom = () => useAtom(profileModalAtom);
@@ -32,7 +32,6 @@ const ProfileModal = () => {
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
 
   const [selectedTab, setSelectedTab] = useState('profile');
-  const { toast } = useToast();
 
   const { data: loadProfileResponse, isLoading: isProfileLoading } =
     useLoadProfileQuery();
@@ -81,7 +80,7 @@ const ProfileModal = () => {
     const err = validateForm();
 
     if (err) {
-      toast({ title: err });
+      toast.error(err);
     }
 
     switch (selectedTab) {

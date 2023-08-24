@@ -37,6 +37,7 @@ export const useChatSendMessageMutation = () => {
       // do optimistic update
       const oldData = utils.getQueryData([
         'chat_history',
+        channel,
       ]) as ChatHistoryResponse;
 
       const newData = {
@@ -59,20 +60,18 @@ export const useChatSendMessageMutation = () => {
         },
       };
 
-      utils.cancelQueries(['chat_history']);
-      utils.setQueryData(['chat_history'], newData);
+      utils.cancelQueries(['chat_history', channel]);
+      utils.setQueryData(['chat_history', channel], newData);
 
       const fd = new FormData();
       fd.append('channel', channel);
       fd.append('text', text);
 
-      const data = await api
+      return await api
         .post('ajax/chat/send_message', {
           body: fd,
         })
         .json<any>();
-
-      return data;
     },
     onSuccess: () => {},
     onSettled: () => {
