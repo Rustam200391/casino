@@ -16,6 +16,9 @@ import ProfileModal, {
   useProfileModalAtom,
 } from '@/components/account/profile-modal';
 import useNextLevelExp from '@/hooks/use-next-level-exp';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import GamesHistoryTable from '@/components/account/games-history-table';
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -202,21 +205,83 @@ const ProfilePage = () => {
               </div>
             </TabsContent>
             <TabsContent value="security">
-              <div className="flex-col bg-neutral-900 rounded-3xl p-6">
+              <div className="flex flex-col bg-neutral-900 rounded-3xl p-6 gap-4">
                 <div className="flex justify-between">
-                  <div>Title</div>
-                  <div>Button</div>
+                  <TypographyH3>Безопасность</TypographyH3>
+                  <Button
+                    variant="ghost"
+                    onClick={() => setProfileModalOpen(true)}
+                  >
+                    <Edit2Icon />
+                  </Button>
                 </div>
                 <div className="flex justify-between">
-                  <div>name</div>
-                  <div>name</div>
-                  <div>name</div>
-                  <div>name</div>
+                  <div className="flex flex-col">
+                    <div className="text-neutral-500">Логин</div>
+                    <div>{profileData?.nickname || '-'}</div>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="text-neutral-500">Пароль</div>
+                    <div className="text-green-500">Защищен</div>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="text-neutral-500">Email</div>
+                    <div>{profileData?.email || '-'}</div>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="text-neutral-500">Телефон</div>
+                    <div>+7 9** *** ** 66</div>
+                  </div>
+                </div>
+                <div className="flex justify-between">
+                  <div className="flex justify-between bg-neutral-950 rounded-2xl px-4 py-8 items-center gap-2 w-[48%]">
+                    <Switch id="private-profile-switch" />
+                    <Label
+                      htmlFor="private-profile-switch"
+                      className="flex flex-col gap-2"
+                    >
+                      <div>Приватность</div>
+                      <div className="text-neutral-500">
+                        Ваши данные и не будут видны для других пользователей
+                      </div>
+                    </Label>
+                  </div>
+                  <div className="flex justify-between bg-neutral-950 rounded-2xl px-4 py-8 items-center w-[48%]">
+                    <div className="text-green-700 w-[50%]">
+                      Аутентификация включена
+                    </div>
+                    <Button variant="link" className="underline text-sm">
+                      Отключить
+                    </Button>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center rounded-2xl bg-neutral-950 px-4 py-6">
+                  <div className="w-[40%] text-neutral-500 text-sm">
+                    Привяжите соц.сети для защиты аккаунта и быстрого доступа к
+                    сайту
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div>
+                      <span className="text-green-500 text-xl">2</span>/4
+                    </div>
+                    <div>
+                      vk: {profileData?.socials.vkontakte ? 'yes' : 'no'}
+                    </div>
+                    <div>
+                      telegram: {profileData?.socials.telegram ? 'yes' : 'no'}
+                    </div>
+                    <div>
+                      google: {profileData?.socials.google ? 'yes' : 'no'}
+                    </div>
+                    <div>
+                      steam: {profileData?.socials.steam ? 'yes' : 'no'}
+                    </div>
+                  </div>
                 </div>
               </div>
             </TabsContent>
             <TabsContent value="games_history">
-              <RecentGamesTable />
+              <GamesHistoryTable />
             </TabsContent>
             <TabsContent value="transactions_history">
               <RecentGamesTable />

@@ -4,8 +4,11 @@ import BetSelector from '@/components/pages/games/mines/bet-selector';
 import MinesCard from '@/components/pages/games/mines/mines-card';
 import RecentGamesTable from '@/components/pages/home/recent-games-table';
 import React from 'react';
+import { useMinesDataQuery } from '@/hooks/api/games/mines/data';
 
-const CrashGame = () => {
+const MinesGame = () => {
+  const { data: minesDataResponse } = useMinesDataQuery();
+
   return (
     <MainLayout>
       <div className="flex items-baseline space-x-2">
@@ -25,4 +28,4 @@ const CrashGame = () => {
   );
 };
 
-export default CrashGame;
+export default MinesGame;
