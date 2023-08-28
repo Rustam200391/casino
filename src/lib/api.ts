@@ -15,6 +15,7 @@ const api = ky.extend({
         }
 
         request.headers.set('X-CSRF-TOKEN', token);
+        request.headers.set('X-XSRF-TOKEN', token);
       },
     ],
     beforeRetry: [
