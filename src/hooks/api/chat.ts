@@ -1,10 +1,11 @@
 import { useLoadDataQuery } from '@/hooks/api/load-data';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import api from '@/lib/api';
+import { useChatChannel } from '@/components/layout/chat';
 
-export const chatHistory = async () => {
+export const chatHistory = async (channel: ChatChannel) => {
   const fd = new FormData();
-  fd.append('channel', 'ru');
+  fd.append('channel', channel);
 
   return await api
     .post('ajax/chat/history', {
@@ -14,11 +15,13 @@ export const chatHistory = async () => {
 };
 
 export const useChatHistoryQuery = () => {
+  const [channel] = useChatChannel();
+
   const data = useLoadDataQuery();
 
   return useQuery({
-    queryKey: ['chat_history'],
-    queryFn: chatHistory,
+    queryKey: ['chat_history', channel],
+    queryFn: () => chatHistory(channel),
     enabled: Boolean(data?.data?.token),
   });
 };
@@ -26,6 +29,7 @@ export const useChatHistoryQuery = () => {
 export const useChatSendMessageMutation = () => {
   const user = useLoadDataQuery();
   const utils = useQueryClient(); // NOTE: avoid destructuring here
+  const [channel] = useChatChannel();
 
   return useMutation({
     mutationKey: ['send_message'],
@@ -33,6 +37,7 @@ export const useChatSendMessageMutation = () => {
       // do optimistic update
       const oldData = utils.getQueryData([
         'chat_history',
+        channel,
       ]) as ChatHistoryResponse;
 
       const newData = {
@@ -55,24 +60,22 @@ export const useChatSendMessageMutation = () => {
         },
       };
 
-      utils.cancelQueries(['chat_history']);
-      utils.setQueryData(['chat_history'], newData);
+      utils.cancelQueries(['chat_history', channel]);
+      utils.setQueryData(['chat_history', channel], newData);
 
       const fd = new FormData();
-      fd.append('channel', 'ru');
+      fd.append('channel', channel);
       fd.append('text', text);
 
-      const data = await api
+      return await api
         .post('ajax/chat/send_message', {
           body: fd,
         })
         .json<any>();
-
-      return data;
     },
     onSuccess: () => {},
     onSettled: () => {
-      utils.invalidateQueries(['load_data', 'chat_history']);
+      utils.invalidateQueries(['chat_history']);
     },
   });
 };
@@ -99,3 +102,5 @@ export interface Message {
   user_is_moderator: number;
   user_is_administrator: number;
 }
+
+export type ChatChannel = 'ru' | 'en';

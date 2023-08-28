@@ -4,6 +4,7 @@ import { TypographyH1, TypographyH3 } from '@/components/ui/typography';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useRouter } from 'next/router';
 import RecentGamesTable from '@/components/pages/home/recent-games-table';
+import Loader from '@/components/ui/loader';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { useLoadProfileQuery } from '@/hooks/api/user/loadProfile';
@@ -14,11 +15,17 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import ProfileModal, {
   useProfileModalAtom,
 } from '@/components/account/profile-modal';
+import useNextLevelExp from '@/hooks/use-next-level-exp';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import GamesHistoryTable from '@/components/account/games-history-table';
 
 const ProfilePage = () => {
   const router = useRouter();
   const { data: loadDataResponse } = useLoadDataQuery();
-  const { data: loadProfileResponse } = useLoadProfileQuery();
+  const { data: loadProfileResponse, isLoading: isProfileLoading } =
+    useLoadProfileQuery();
+  const nextLevelExp = useNextLevelExp();
 
   const selectedTab = router.query.slug ? router.query.slug[0] : 'profile';
 
@@ -30,24 +37,7 @@ const ProfilePage = () => {
     ? profileData.fist_name + ' ' + profileData.last_name
     : '-';
 
-  const maxLevel = loadDataResponse?.levels_experience
-    ? Math.max.apply(
-        null,
-        Object.keys(loadDataResponse.levels_experience).map(Number),
-      )
-    : 100;
-  const nextLevel =
-    maxLevel === (loadData?.level || 0) + 1
-      ? maxLevel
-      : (loadData?.level || 0) + 1;
-
-  const nextLevelExp = Number(
-    loadDataResponse?.levels_experience[String(nextLevel)],
-  );
-
-  const nextLevelExpNeed =
-    Number(loadDataResponse?.levels_experience[String(nextLevel)]) -
-    Number(loadData?.experience);
+  const nextLevelExpNeed = Number(nextLevelExp) - Number(loadData?.experience);
 
   useEffect(() => {
     if (!loadDataResponse?.auth) {
@@ -56,179 +46,251 @@ const ProfilePage = () => {
   }, [loadData, loadDataResponse?.auth, router]);
 
   return (
-    <>
-      <MainLayout>
-        <TypographyH1>Ваш профиль</TypographyH1>
-        <div className="flex flex-col border border-neutral-800 rounded-3xl p-6 mt-4 gap-6">
-          <div className="flex justify-between">
-            <div>Ранг: {profileData?.rank}</div>
-            <div>Достижения</div>
-          </div>
-          <div className="flex justify-between">
-            <div className="flex gap-4">
-              <Avatar className="h-[87px] w-[87px]">
-                <AvatarImage src={profileData?.avatar} />
-                <AvatarFallback>
-                  {loadData?.name
-                    ? loadData.name.substring(0, 2).toUpperCase()
-                    : '-'}
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex flex-col justify-between">
-                <div className="flex flex-col">
-                  <div className="text-neutral-500">{name}</div>
-                  <div className="font-semibold">
-                    {profileData?.nickname || '-'}
+    <MainLayout>
+      {isProfileLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <TypographyH1>Ваш профиль</TypographyH1>
+          <div className="flex flex-col border border-neutral-800 rounded-3xl p-6 mt-4 gap-6">
+            <div className="flex justify-between">
+              <div>Ранг: {profileData?.rank}</div>
+              <div>Достижения</div>
+            </div>
+            <div className="flex justify-between">
+              <div className="flex gap-4">
+                <Avatar className="h-[87px] w-[87px]">
+                  <AvatarImage src={profileData?.avatar} />
+                  <AvatarFallback>
+                    {loadData?.name
+                      ? loadData.name.substring(0, 2).toUpperCase()
+                      : '-'}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col justify-between">
+                  <div className="flex flex-col">
+                    <div className="text-neutral-500">{name}</div>
+                    <div className="font-semibold">
+                      {profileData?.nickname || '-'}
+                    </div>
+                  </div>
+                  <div className="text-xs text-neutral-500 font-light">
+                    В игре с {profileData?.time_reg}
                   </div>
                 </div>
-                <div className="text-xs text-neutral-500 font-light">
-                  В игре с {profileData?.time_reg}
+              </div>
+
+              <div className="flex flex-col justify-between items-end">
+                <Button className="underline p-0" variant="link">
+                  Посмотреть достижения
+                </Button>
+
+                <div className="flex gap-2">
+                  <Button
+                    className="w-[212px] flex justify-between border-neutral-800"
+                    variant="outline"
+                    onClick={() =>
+                      navigator.clipboard.writeText(String(profileData?.id))
+                    }
+                  >
+                    <div className="text-neutral-500 font-normal">
+                      ID: {profileData?.id}
+                    </div>
+                    <CopyIcon />
+                  </Button>
+
+                  <Button
+                    className="w-[212px] border-neutral-800"
+                    variant="outline"
+                    onClick={() => setProfileModalOpen(true)}
+                  >
+                    Редактировать профиль
+                  </Button>
                 </div>
               </div>
             </div>
-
-            <div className="flex flex-col justify-between items-end">
-              <Button className="underline p-0" variant="link">
-                Посмотреть достижения
-              </Button>
-
-              <div className="flex gap-2">
-                <Button
-                  className="w-[212px] flex justify-between border-neutral-800"
-                  variant="outline"
-                  onClick={() =>
-                    navigator.clipboard.writeText(String(profileData?.id))
-                  }
-                >
-                  <div className="text-neutral-500 font-normal">
-                    ID: {profileData?.id}
+          </div>
+          <div className="flex flex-col border border-neutral-800 rounded-3xl p-6 mt-4">
+            <div className="flex justify-between items-center gap-2">
+              <TypographyH3>Уровень</TypographyH3>
+              <Badge className="p-0.5 rounded-sm bg-lime-900 text-lime-300">
+                {loadData?.level}
+              </Badge>
+              <Progress
+                value={profileData?.experience || 0}
+                max={nextLevelExp}
+              />
+              <div className="whitespace-nowrap">
+                {nextLevelExpNeed} XP{' '}
+                <span className="text-sm text-neutral-500">
+                  до нового уровня
+                </span>
+              </div>
+            </div>
+            <div className="flex justify-around text-center mt-4">
+              <div className="flex flex-col items-center">
+                <div className="uppercase text-neutral-500">Игры</div>
+                <div className="text-lg">{profileData?.games_total || 0}</div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="uppercase text-neutral-500">
+                  Поднял в синдикате
+                </div>
+                <div className="text-lg">{profileData?.sum_total || 0}</div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="uppercase text-neutral-500">Топ выигрыш</div>
+                <div className="text-lg">{profileData?.sum_max || 0}</div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="uppercase text-neutral-500">Макс. коэфф.</div>
+                <div className="text-lg">
+                  {profileData?.coefficient_max || 0}
+                </div>
+              </div>
+            </div>
+          </div>
+          <Tabs
+            value={selectedTab}
+            className="w-auto mt-8"
+            onValueChange={(value) =>
+              value === 'profile'
+                ? router.push('/profile')
+                : router.push(`/profile/${value}`)
+            }
+          >
+            <TabsList className="w-[100%] mb-4">
+              <TabsTrigger className="w-[25%] p-4" value="profile">
+                Личные данные
+              </TabsTrigger>
+              <TabsTrigger className="w-[25%] p-4" value="security">
+                Безопасность
+              </TabsTrigger>
+              <TabsTrigger className="w-[25%] p-4" value="games_history">
+                История игр
+              </TabsTrigger>
+              <TabsTrigger className="w-[25%] p-4" value="transactions_history">
+                История транзакций
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="profile">
+              <div className="flex-col bg-neutral-900 rounded-3xl p-6">
+                <div className="flex justify-between">
+                  <TypographyH3>Личные данные</TypographyH3>
+                  <Button
+                    variant="ghost"
+                    onClick={() => setProfileModalOpen(true)}
+                  >
+                    <Edit2Icon />
+                  </Button>
+                </div>
+                <div className="flex justify-between mt-4">
+                  <div className="flex flex-col">
+                    <div className="text-neutral-500">Имя</div>
+                    <div>{profileData?.fist_name || '-'}</div>
                   </div>
-                  <CopyIcon />
-                </Button>
-
-                <Button
-                  className="w-[212px] border-neutral-800"
-                  variant="outline"
-                  onClick={() => setProfileModalOpen(true)}
-                >
-                  Редактировать профиль
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-col border border-neutral-800 rounded-3xl p-6 mt-4">
-          <div className="flex justify-between items-center gap-2">
-            <TypographyH3>Уровень</TypographyH3>
-            <Badge className="p-0.5 rounded-sm bg-lime-900 text-lime-300">
-              {loadData?.level}
-            </Badge>
-            <Progress value={profileData?.experience || 0} max={nextLevelExp} />
-            <div className="whitespace-nowrap">
-              {nextLevelExpNeed} XP{' '}
-              <span className="text-sm text-neutral-500">до нового уровня</span>
-            </div>
-          </div>
-          <div className="flex justify-around text-center mt-4">
-            <div className="flex flex-col items-center">
-              <div className="uppercase text-neutral-500">Игры</div>
-              <div className="text-lg">{profileData?.games_total || 0}</div>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="uppercase text-neutral-500">
-                Поднял в синдикате
-              </div>
-              <div className="text-lg">{profileData?.sum_total || 0}</div>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="uppercase text-neutral-500">Топ выигрыш</div>
-              <div className="text-lg">{profileData?.sum_max || 0}</div>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="uppercase text-neutral-500">Макс. коэфф.</div>
-              <div className="text-lg">{profileData?.coefficient_max || 0}</div>
-            </div>
-          </div>
-        </div>
-        <Tabs
-          value={selectedTab}
-          className="w-auto mt-8"
-          onValueChange={(value) =>
-            value === 'profile'
-              ? router.push('/profile')
-              : router.push(`/profile/${value}`)
-          }
-        >
-          <TabsList className="w-[100%] mb-4">
-            <TabsTrigger className="w-[25%] p-4" value="profile">
-              Личные данные
-            </TabsTrigger>
-            <TabsTrigger className="w-[25%] p-4" value="security">
-              Безопасность
-            </TabsTrigger>
-            <TabsTrigger className="w-[25%] p-4" value="games_history">
-              История игр
-            </TabsTrigger>
-            <TabsTrigger className="w-[25%] p-4" value="transactions_history">
-              История транзакций
-            </TabsTrigger>
-          </TabsList>
-          <TabsContent value="profile">
-            <div className="flex-col bg-neutral-900 rounded-3xl p-6">
-              <div className="flex justify-between">
-                <TypographyH3>Личные данные</TypographyH3>
-                <Button
-                  variant="ghost"
-                  onClick={() => setProfileModalOpen(true)}
-                >
-                  <Edit2Icon />
-                </Button>
-              </div>
-              <div className="flex justify-between mt-4">
-                <div className="flex flex-col">
-                  <div className="text-neutral-500">Имя</div>
-                  <div>{profileData?.fist_name || '-'}</div>
-                </div>
-                <div className="flex flex-col">
-                  <div className="text-neutral-500">Фамилия</div>
-                  <div>{profileData?.last_name || '-'}</div>
-                </div>
-                <div className="flex flex-col">
-                  <div className="text-neutral-500">Пол</div>
-                  <div>{profileData?.sex === 2 ? 'Женский' : 'Мужской'}</div>
-                </div>
-                <div className="flex flex-col">
-                  <div className="text-neutral-500">Адрес профиля</div>
-                  <div>{profileData?.nickname || '-'}</div>
+                  <div className="flex flex-col">
+                    <div className="text-neutral-500">Фамилия</div>
+                    <div>{profileData?.last_name || '-'}</div>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="text-neutral-500">Пол</div>
+                    <div>{profileData?.sex === 2 ? 'Женский' : 'Мужской'}</div>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="text-neutral-500">Адрес профиля</div>
+                    <div>{profileData?.nickname || '-'}</div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </TabsContent>
-          <TabsContent value="security">
-            <div className="flex-col bg-neutral-900 rounded-3xl p-6">
-              <div className="flex justify-between">
-                <div>Title</div>
-                <div>Button</div>
+            </TabsContent>
+            <TabsContent value="security">
+              <div className="flex flex-col bg-neutral-900 rounded-3xl p-6 gap-4">
+                <div className="flex justify-between">
+                  <TypographyH3>Безопасность</TypographyH3>
+                  <Button
+                    variant="ghost"
+                    onClick={() => setProfileModalOpen(true)}
+                  >
+                    <Edit2Icon />
+                  </Button>
+                </div>
+                <div className="flex justify-between">
+                  <div className="flex flex-col">
+                    <div className="text-neutral-500">Логин</div>
+                    <div>{profileData?.nickname || '-'}</div>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="text-neutral-500">Пароль</div>
+                    <div className="text-green-500">Защищен</div>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="text-neutral-500">Email</div>
+                    <div>{profileData?.email || '-'}</div>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="text-neutral-500">Телефон</div>
+                    <div>+7 9** *** ** 66</div>
+                  </div>
+                </div>
+                <div className="flex justify-between">
+                  <div className="flex justify-between bg-neutral-950 rounded-2xl px-4 py-8 items-center gap-2 w-[48%]">
+                    <Switch id="private-profile-switch" />
+                    <Label
+                      htmlFor="private-profile-switch"
+                      className="flex flex-col gap-2"
+                    >
+                      <div>Приватность</div>
+                      <div className="text-neutral-500">
+                        Ваши данные и не будут видны для других пользователей
+                      </div>
+                    </Label>
+                  </div>
+                  <div className="flex justify-between bg-neutral-950 rounded-2xl px-4 py-8 items-center w-[48%]">
+                    <div className="text-green-700 w-[50%]">
+                      Аутентификация включена
+                    </div>
+                    <Button variant="link" className="underline text-sm">
+                      Отключить
+                    </Button>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center rounded-2xl bg-neutral-950 px-4 py-6">
+                  <div className="w-[40%] text-neutral-500 text-sm">
+                    Привяжите соц.сети для защиты аккаунта и быстрого доступа к
+                    сайту
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div>
+                      <span className="text-green-500 text-xl">2</span>/4
+                    </div>
+                    <div>
+                      vk: {profileData?.socials.vkontakte ? 'yes' : 'no'}
+                    </div>
+                    <div>
+                      telegram: {profileData?.socials.telegram ? 'yes' : 'no'}
+                    </div>
+                    <div>
+                      google: {profileData?.socials.google ? 'yes' : 'no'}
+                    </div>
+                    <div>
+                      steam: {profileData?.socials.steam ? 'yes' : 'no'}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <div>name</div>
-                <div>name</div>
-                <div>name</div>
-                <div>name</div>
-              </div>
-            </div>
-          </TabsContent>
-          <TabsContent value="games_history">
-            <RecentGamesTable />
-          </TabsContent>
-          <TabsContent value="transactions_history">
-            <RecentGamesTable />
-          </TabsContent>
-        </Tabs>
-      </MainLayout>
-
-      <ProfileModal />
-    </>
+            </TabsContent>
+            <TabsContent value="games_history">
+              <GamesHistoryTable />
+            </TabsContent>
+            <TabsContent value="transactions_history">
+              <RecentGamesTable />
+            </TabsContent>
+          </Tabs>
+          <ProfileModal />
+        </>
+      )}
+    </MainLayout>
   );
 };
 

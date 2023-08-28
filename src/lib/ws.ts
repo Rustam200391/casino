@@ -1,15 +1,13 @@
 import config from '@/lib/config';
 import Centrifuge from 'centrifuge';
 import { useEffect } from 'react';
-
-const csrfToken = () =>
-  typeof window !== 'undefined' && window.sessionStorage.getItem('csrf');
+import Cookies from 'js-cookie';
 
 const centrifuge = new Centrifuge(`${config.wsUrl}/websocket`, {
   refreshEndpoint: `${config.baseUrl}/ajax/wss/refresh`,
   subscribeEndpoint: `${config.baseUrl}/ajax/wss/subscribe`,
-  subscribeHeaders: { 'X-CSRF-TOKEN': csrfToken() },
-  refreshHeaders: { 'X-CSRF-TOKEN': csrfToken() },
+  subscribeHeaders: { 'X-CSRF-TOKEN': Cookies.get('XSRF-TOKEN') },
+  refreshHeaders: { 'X-CSRF-TOKEN': Cookies.get('XSRF-TOKEN') },
   maxRetry: 0,
 });
 
