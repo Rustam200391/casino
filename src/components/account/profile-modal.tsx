@@ -18,6 +18,9 @@ import { useUpdateNicknameMutation } from '@/hooks/api/user/updateNickname';
 import { useLoadProfileQuery } from '@/hooks/api/user/loadProfile';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { toast } from 'react-toastify';
+import { useProfileTabAtom } from '@/pages/profile/[[...slug]]';
+import { useUpdateEmailMutation } from '@/hooks/api/user/updateEmail';
+import { useChangePasswordMutation } from '@/hooks/api/user/changePassword';
 
 const profileModalAtom = atom(false);
 export const useProfileModalAtom = () => useAtom(profileModalAtom);
@@ -29,9 +32,10 @@ const ProfileModal = () => {
   const [nickname, setNickname] = useState('');
   const [sex, setSex] = useState<1 | 2 | null>(1);
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
 
-  const [selectedTab, setSelectedTab] = useState('profile');
+  const [profileTab, setProfileTab] = useProfileTabAtom();
 
   const { data: loadProfileResponse, isLoading: isProfileLoading } =
     useLoadProfileQuery();
@@ -42,14 +46,17 @@ const ProfileModal = () => {
       setLastName(loadProfileResponse?.result.data.last_name || '');
       setNickname(loadProfileResponse?.result.data.nickname || '');
       setSex(loadProfileResponse?.result.data.sex || 1);
+      setEmail(loadProfileResponse?.result.data.email || '');
     }
   }, [open, isProfileLoading]);
 
   const updateProfileMutation = useUpdateProfileMutation();
   const updateNicknameMutation = useUpdateNicknameMutation();
+  const changePasswordMutation = useChangePasswordMutation();
+  const updateEmailMutation = useUpdateEmailMutation();
 
   const validateForm = () => {
-    switch (selectedTab) {
+    switch (profileTab) {
       case 'person':
         return false;
       case 'profile':
@@ -63,18 +70,29 @@ const ProfileModal = () => {
   };
 
   useEffect(() => {
-    switch (selectedTab) {
+    switch (profileTab) {
       case 'person':
         return;
       case 'profile':
         if (updateProfileMutation.data?.success) setOpen(false);
         break;
       case 'security':
-        return;
+        if (
+          changePasswordMutation.data?.success ||
+          updateEmailMutation.data?.success
+        )
+          setOpen(false);
+        break;
       default:
         return;
     }
-  }, [updateProfileMutation, updateNicknameMutation, setOpen, selectedTab]);
+  }, [
+    updateProfileMutation,
+    updateNicknameMutation,
+    setOpen,
+    profileTab,
+    updateEmailMutation,
+  ]);
 
   const handleSubmit = () => {
     const err = validateForm();
@@ -83,7 +101,7 @@ const ProfileModal = () => {
       toast.error(err);
     }
 
-    switch (selectedTab) {
+    switch (profileTab) {
       case 'personal':
         break;
       case 'profile':
@@ -101,6 +119,11 @@ const ProfileModal = () => {
         }
         break;
       case 'security':
+        changePasswordMutation.mutate({ password });
+
+        if (loadProfileResponse?.result.data.email !== email) {
+          updateEmailMutation.mutate({ email });
+        }
         break;
       default:
         break;
@@ -114,9 +137,9 @@ const ProfileModal = () => {
           <DialogHeader>Настройки профиля</DialogHeader>
 
           <Tabs
-            defaultValue={selectedTab}
+            defaultValue={profileTab}
             className="w-auto"
-            onValueChange={(value) => setSelectedTab(value)}
+            onValueChange={(value) => setProfileTab(value)}
           >
             <TabsList className="w-[100%]">
               <TabsTrigger className="w-[33%]" value="person">
@@ -210,10 +233,10 @@ const ProfileModal = () => {
             </TabsContent>
             <TabsContent value="security">
               <TypographyH3>Настройки безопасности</TypographyH3>
-              <div className="flex flex-col mt-8">
+              <div className="flex flex-col mt-8 gap-2">
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="firstName" className="font-normal">
-                    Введите пароль чтобы редактировать
+                  <Label htmlFor="password" className="font-normal">
+                    Введите новый пароль
                   </Label>
                   <div className="flex border-neutral-800 rounded-3xl w-full border items-center px-4 py-1">
                     <Input
@@ -230,6 +253,25 @@ const ProfileModal = () => {
                       {isVisiblePassword ? <EyeIcon /> : <EyeOffIcon />}
                     </div>
                   </div>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Label htmlFor="email" className="font-normal">
+                    Email
+                  </Label>
+                  <div className="flex border-neutral-800 rounded-3xl w-full border items-center px-4 py-1">
+                    <Input
+                      id="email"
+                      value={email}
+                      className="border-0"
+                      placeholder="Не менее 6 символов"
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  {!loadProfileResponse?.result.data.email_confirmed && (
+                    <div className="text-sm text-yellow-500">
+                      Подтвердите почту перейдя по ссылке в письме
+                    </div>
+                  )}
                 </div>
               </div>
             </TabsContent>
