@@ -11,38 +11,60 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
+import { useLoadDataQuery } from '@/hooks/api/load-data';
+import React, { useMemo } from 'react';
 
 export const BalanceDropdown = ({ trigger }: { trigger: React.ReactNode }) => {
+  const { data: loadDataResponse } = useLoadDataQuery();
+  const balance = Number(loadDataResponse?.data.balance);
+
+  const balanceItems = useMemo(() => {
+    const result: { currency: string; amount: number }[] = [];
+
+    const fiatCurrencies = Object.entries(
+      loadDataResponse?.currencies_courses.fiat || {},
+    );
+    const cryptoCurrencies = Object.entries(
+      loadDataResponse?.currencies_courses.crypto || {},
+    );
+
+    fiatCurrencies.forEach((value) => {
+      result.push({
+        currency: value[0],
+        amount: balance / Number(value[1]),
+      });
+    });
+
+    cryptoCurrencies.forEach((value) => {
+      result.push({
+        currency: value[0],
+        amount: balance / Number(value[1]),
+      });
+    });
+
+    return result;
+  }, [balance, loadDataResponse]);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-0">{trigger}</DropdownMenuTrigger>
       <DropdownMenuContent className="w-[217px] border-neutral-800 bg-zinc-950 rounded-2xl">
         <DropdownMenuLabel className="text-center font-normal">
           <p className="font-light text-xs text-gray-400">Общий счёт активов</p>
-          <p className="text-green-500 text-xl">128 095,412 ₽</p>
+          <p className="text-green-500 text-xl">{balance} ₽</p>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+
         <DropdownMenuGroup>
-          <DropdownMenuItem className="rounded-lg">
-            <BitcoinIcon className="mr-2 h-4 w-4" />
-            <span>0.00000000</span>
-            <DropdownMenuShortcut>BTC</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem className="rounded-lg">
-            <BitcoinIcon className="mr-2 h-4 w-4" />
-            <span>0.00000000</span>
-            <DropdownMenuShortcut>BTC</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem className="rounded-lg">
-            <BitcoinIcon className="mr-2 h-4 w-4" />
-            <span>0.00000000</span>
-            <DropdownMenuShortcut>BTC</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem className="rounded-lg">
-            <BitcoinIcon className="mr-2 h-4 w-4" />
-            <span>0.00000000</span>
-            <DropdownMenuShortcut>BTC</DropdownMenuShortcut>
-          </DropdownMenuItem>
+          {balanceItems.map((balanceItem) => (
+            <DropdownMenuItem key={balanceItem.currency} className="rounded-lg">
+              <BitcoinIcon className="mr-2 h-4 w-4" />
+              <span>{balanceItem.amount.toFixed(5)}</span>
+              <DropdownMenuShortcut>
+                {balanceItem.currency}
+              </DropdownMenuShortcut>
+            </DropdownMenuItem>
+          ))}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <div>

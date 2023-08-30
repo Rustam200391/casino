@@ -58,9 +58,12 @@ const Chat = () => {
   return (
     <div className="col-span-2 p-4 border h-fit w-[400px] border-neutral-800 rounded-3xl lg:flex lg:flex-col">
       <div className="flex flex-col text-center rounded-3xl">
-        <p>В банке</p>
-        <p className="text-2xl font-bold text-green-500">100 800 000 ₽</p>
-        <p className="text-xs">Розыгрыш через: 20 ч : 02 мин</p>
+        <div className="flex flex-col rounded-3xl bg-neutral-900/50 p-4">
+          <p className="italic font-bold">В банке</p>
+          <p className="text-3xl font-bold italic">100 800 000 ₽</p>
+          <p className="text-xs">Розыгрыш через: 20 ч : 02 мин</p>
+        </div>
+
         <div className="flex justify-between items-center p-4">
           <DropdownMenu>
             <DropdownMenuTrigger>

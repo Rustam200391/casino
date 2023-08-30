@@ -35,7 +35,6 @@ export interface LoadDataResponse {
   online: number;
   settings: any[];
   currencies_courses: CurrenciesCourses;
-  levels_experience: { [key: string]: number };
 }
 
 export interface UserData {
@@ -46,6 +45,7 @@ export interface UserData {
   level: number;
   rank: number;
   experience: number;
+  experience_next_level: number;
   accepted_agreement: number;
 }
 

@@ -1,10 +1,9 @@
 import MainLayout from '@/components/layout/main-layout';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TypographyH1, TypographyH3 } from '@/components/ui/typography';
 import { useRouter } from 'next/router';
 import RecentGamesTable from '@/components/pages/home/recent-games-table';
 import Loader from '@/components/ui/loader';
-import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { CopyIcon, GiftIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -18,11 +17,11 @@ const ProfilePage = () => {
 
   const profileData = loadProfileResponse?.result.data;
 
-  useEffect(() => {
-    if (!loadProfileResponse?.success) {
-      router.replace('/');
-    }
-  }, [loadProfileResponse, router]);
+  const name = profileData?.fist_name
+    ? profileData.fist_name + ' ' + profileData.last_name
+    : '-';
+
+  console.log(profileData);
 
   return (
     <MainLayout>
@@ -33,13 +32,13 @@ const ProfilePage = () => {
           <TypographyH1>Профиль игрока</TypographyH1>
           <div className="flex flex-col border border-neutral-800 rounded-3xl p-6 mt-4 gap-6">
             <div className="flex justify-between">
-              <div>Ранг: нет данных</div>
+              <div>Ранг: {profileData?.rank || 0}</div>
               <div>Достижения</div>
             </div>
             <div className="flex justify-between">
               <div className="flex gap-4">
                 <Avatar className="h-[87px] w-[87px]">
-                  <AvatarImage src={profileData?.avatar} />
+                  <AvatarImage src={profileData?.avatar || ''} />
                   <AvatarFallback>
                     {profileData?.nickname
                       ? profileData.nickname.substring(0, 2).toUpperCase()
@@ -48,13 +47,13 @@ const ProfilePage = () => {
                 </Avatar>
                 <div className="flex flex-col justify-between">
                   <div className="flex flex-col">
-                    <div className="text-neutral-500">Name Lastname</div>
+                    <div className="text-neutral-500">{name}</div>
                     <div className="font-semibold">
                       {profileData?.nickname || '-'}
                     </div>
                   </div>
                   <div className="text-xs text-neutral-500 font-light">
-                    В игре с DateReg
+                    В игре с {profileData?.time_reg}
                   </div>
                 </div>
               </div>
@@ -87,18 +86,11 @@ const ProfilePage = () => {
             </div>
           </div>
           <div className="flex flex-col border border-neutral-800 rounded-3xl p-6 mt-4">
-            <div className="flex justify-between items-center gap-2">
+            <div className="flex items-center gap-2">
               <TypographyH3>Уровень</TypographyH3>
               <Badge className="p-0.5 rounded-sm bg-lime-900 text-lime-300">
-                Level
+                {profileData?.level || 0}
               </Badge>
-              <Progress value={profileData?.experience || 0} max={1000} />
-              <div className="whitespace-nowrap">
-                ExpNeed XP{' '}
-                <span className="text-sm text-neutral-500">
-                  до нового уровня
-                </span>
-              </div>
             </div>
             <div className="flex justify-around text-center mt-4">
               <div className="flex flex-col items-center">
@@ -123,22 +115,22 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
-          <div className="flex-col bg-neutral-900 rounded-3xl p-6">
+          <div className="flex-col bg-neutral-900 rounded-3xl p-6 mt-4">
             <div className="flex justify-between">
               <TypographyH3>Личные данные</TypographyH3>
             </div>
             <div className="flex justify-between mt-4">
               <div className="flex flex-col">
                 <div className="text-neutral-500">Имя</div>
-                <div>Name</div>
+                <div>{profileData?.fist_name || '-'}</div>
               </div>
               <div className="flex flex-col">
                 <div className="text-neutral-500">Фамилия</div>
-                <div>Lastname</div>
+                <div>{profileData?.last_name || '-'}</div>
               </div>
               <div className="flex flex-col">
                 <div className="text-neutral-500">Пол</div>
-                <div>Sex</div>
+                <div>{profileData?.sex === 2 ? 'Женский' : 'Мужской'}</div>
               </div>
               <div className="flex flex-col">
                 <div className="text-neutral-500">Адрес профиля</div>
