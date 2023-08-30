@@ -20,6 +20,10 @@ import { Label } from '@/components/ui/label';
 import GamesHistoryTable from '@/components/account/games-history-table';
 import { useChangeProfilePrivacyMutation } from '@/hooks/api/user/changeProfilePrivacy';
 import { toast } from 'react-toastify';
+import { atom, useAtom } from 'jotai';
+
+const profileTabAtom = atom('profile');
+export const useProfileTabAtom = () => useAtom(profileTabAtom);
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -27,8 +31,7 @@ const ProfilePage = () => {
   const { data: loadProfileResponse, isLoading: isProfileLoading } =
     useLoadProfileQuery();
   const changeProfilePrivacyMutation = useChangeProfilePrivacyMutation();
-
-  const selectedTab = router.query.slug ? router.query.slug[0] : 'profile';
+  const [profileTab, setProfileTab] = useProfileTabAtom();
 
   const loadData = loadDataResponse?.data;
   const profileData = loadProfileResponse?.result.data;
@@ -42,10 +45,8 @@ const ProfilePage = () => {
     Number(loadData?.experience_next_level) - Number(loadData?.experience);
 
   useEffect(() => {
-    if (!loadDataResponse?.auth) {
-      router.replace('/');
-    }
-  }, [loadData, loadDataResponse?.auth, router]);
+    setProfileTab(router.query.slug ? router.query.slug[0] : 'profile');
+  }, [router.query.slug, setProfileTab]);
 
   return (
     <MainLayout>
@@ -154,7 +155,7 @@ const ProfilePage = () => {
             </div>
           </div>
           <Tabs
-            value={selectedTab}
+            value={profileTab}
             className="w-auto mt-8"
             onValueChange={(value) =>
               value === 'profile'
