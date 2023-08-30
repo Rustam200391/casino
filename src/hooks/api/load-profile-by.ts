@@ -13,6 +13,7 @@ export const useLoadProfileByQuery = (userIdOrNickname: number | string) => {
     queryKey: ['load_profile', userIdOrNickname],
     queryFn: () => fetchLoadProfileBy(userIdOrNickname),
     ...noRefetch,
+    enabled: Boolean(userIdOrNickname),
   });
 };
 export interface LoadProfileResponse {
