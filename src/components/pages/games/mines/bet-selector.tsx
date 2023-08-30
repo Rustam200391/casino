@@ -4,11 +4,15 @@ import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import { Gem } from 'lucide-react';
-import React, { ComponentProps, PropsWithChildren, useState } from 'react';
+import React, { ComponentProps, PropsWithChildren } from 'react';
+import {
+  useMinesGameBetAtom,
+  useMinesGameMinesAtom,
+} from '@/components/pages/games/mines/state';
 
 const BetSelector = () => {
-  const [betAmount, setBetAmount] = useState<string | number | undefined>();
-  const [mines, setMines] = useState(14);
+  const [betAmount, setBetAmount] = useMinesGameBetAtom();
+  const [mines, setMines] = useMinesGameMinesAtom();
 
   return (
     <div className="flex flex-col justify-between col-span-5 p-5 md:col-span-2 bg-white/5 rounded-2xl">
@@ -17,9 +21,9 @@ const BetSelector = () => {
         <div className="relative">
           <Input
             value={betAmount}
-            onChange={e => {
+            onChange={(e) => {
               const v = e.target.value;
-              setBetAmount(v);
+              setBetAmount(Number(v));
             }}
             // @ts-expect-error thats fine
             onBlur={() => setBetAmount(isNaN(+betAmount) ? 0 : +betAmount)}
@@ -32,7 +36,7 @@ const BetSelector = () => {
           </div>
         </div>
         <div className="grid py-1 grid-flow-col overflow-auto no-scrollbar grid-rows-1 gap-1.5 mt-2">
-          {[0.1, 0.5, 1, 5, 20, 100, 500].map(i => (
+          {[0.1, 0.5, 1, 5, 20, 100, 500].map((i) => (
             <BetButton key={i} onClick={() => setBetAmount(i)}>
               {i}
             </BetButton>
@@ -48,19 +52,19 @@ const BetSelector = () => {
           <div className="flex items-center justify-center w-full">
             <Slider
               // className="border rounded-full border-neutral-800"
-              onValueChange={e => {
+              onValueChange={(e) => {
                 setMines(e[0]);
               }}
               value={[mines]}
               step={1}
-              max={20}
-              min={1}
+              max={24}
+              min={2}
             />
           </div>
         </div>
 
         <div className="grid grid-flow-col overflow-auto no-scrollbar grid-rows-1 gap-1.5 mt-2 py-1">
-          {['Мин', 2, 5, 10, 15, 20, 'Макс'].map(i => (
+          {['Мин', 2, 5, 10, 15, 20, 'Макс'].map((i) => (
             <BetButton
               key={i}
               onClick={() => {
@@ -77,11 +81,19 @@ const BetSelector = () => {
 
       <div>
         <div className="flex items-center justify-center mt-8 space-x-2">
-          <Switch id="airplane-mode" className="data-[state=checked]:bg-green-500" />
+          <Switch
+            id="airplane-mode"
+            className="data-[state=checked]:bg-green-500"
+          />
           <Label htmlFor="airplane-mode">Авто-игра</Label>
         </div>
 
-        <Button glow="accent" variant="accent" size="lg" className="w-full mt-6">
+        <Button
+          glow="accent"
+          variant="accent"
+          size="lg"
+          className="w-full mt-6"
+        >
           Играть
         </Button>
       </div>
@@ -95,7 +107,10 @@ interface BetButtonProps extends ComponentProps<'button'>, PropsWithChildren {}
 
 const BetButton = (props: BetButtonProps) => {
   return (
-    <button {...props} className="px-2 py-1 text-sm transition rounded-lg cursor-pointer hover:bg-white/20 bg-white/10">
+    <button
+      {...props}
+      className="px-2 py-1 text-sm transition rounded-lg cursor-pointer hover:bg-white/20 bg-white/10"
+    >
       {props.children}
     </button>
   );
