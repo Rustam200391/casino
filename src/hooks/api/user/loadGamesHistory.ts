@@ -30,7 +30,8 @@ export interface LoadGamesResponse {
 export interface Round {
   game: string;
   data: {
-    bet: string;
+    round_id: number;
+    amount: string;
     coefficient: number;
     profit: string;
   };

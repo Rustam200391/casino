@@ -30,7 +30,6 @@ import { useLoadDataQuery } from '@/hooks/api/load-data';
 import { useBalanceModalAtom } from '@/components/account/balance-modal';
 import BalanceDropdown from '@/components/account/balance-dropdown';
 import AccountDropdown from '@/components/account/account-dropdown';
-import useNextLevelExp from '@/hooks/use-next-level-exp';
 import { toast } from 'react-toastify';
 
 const headerNav = [
@@ -56,9 +55,9 @@ const headerNav = [
 
 function UserProgress({ sheetView }: { sheetView?: boolean }) {
   const { data, error } = useLoadDataQuery();
-  const nextLevelExp = useNextLevelExp();
 
-  const nextLevelExpNeed = Number(nextLevelExp) - Number(data?.data.experience);
+  const nextLevelExpNeed =
+    Number(data?.data.experience_next_level) - Number(data?.data.experience);
 
   useEffect(() => {
     if (error) {
@@ -99,7 +98,7 @@ function UserProgress({ sheetView }: { sheetView?: boolean }) {
           </div>
           <Progress
             value={data?.data.experience || 0}
-            max={nextLevelExp}
+            max={data?.data.experience_next_level || 0}
             className={cn('mt-1.5 w-[150px]', !sheetView && 'hidden 2xl:block')}
           />
         </div>

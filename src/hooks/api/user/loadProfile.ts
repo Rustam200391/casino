@@ -35,8 +35,9 @@ export interface ProfileData {
   email_confirmed: number;
   twofa_enabled: number;
   avatar: string;
-  partner_code: string;
   revshare_level: number;
+  revshare_code: string;
+  profile_privacy: number;
   experience: number;
   rank: number;
   games_total: number;

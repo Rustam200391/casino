@@ -1,7 +1,6 @@
 import api from '@/lib/api';
 import { useQuery } from '@tanstack/react-query';
 import { noRefetch } from '@/lib/utils';
-import { useLoadDataQuery } from '@/hooks/api/load-data';
 
 export const fetchLoadProfileBy = async (userIdOrNickname: number | string) => {
   return await api
@@ -10,13 +9,10 @@ export const fetchLoadProfileBy = async (userIdOrNickname: number | string) => {
 };
 
 export const useLoadProfileByQuery = (userIdOrNickname: number | string) => {
-  const loadData = useLoadDataQuery();
-
   return useQuery({
     queryKey: ['load_profile', userIdOrNickname],
     queryFn: () => fetchLoadProfileBy(userIdOrNickname),
     ...noRefetch,
-    enabled: Boolean(loadData.data?.auth),
   });
 };
 export interface LoadProfileResponse {
@@ -28,12 +24,32 @@ export interface LoadProfileResponse {
 
 export interface ProfileData {
   id: number;
-  nickname?: string;
-  avatar?: string;
-  partner_code?: string;
+  nickname: string;
+  fist_name: string;
+  last_name: string;
+  sex: number;
+  avatar: null;
+  email: string;
+  group: number;
+  twofa_enabled: number;
+  revshare_level: number;
+  revshare_code?: string;
+  profile_privacy: number;
   experience: number;
+  level: number;
+  rank: number;
   games_total: number;
   coefficient_max: number;
-  sum_total: number;
-  sum_max: number;
+  email_confirmed: number;
+  time_reg: string;
+  socials: Socials;
+  sum_total: string;
+  sum_max?: number;
+}
+
+export interface Socials {
+  telegram: boolean;
+  google: boolean;
+  steam: boolean;
+  vkontakte: boolean;
 }

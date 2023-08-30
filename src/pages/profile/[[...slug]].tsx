@@ -15,17 +15,18 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import ProfileModal, {
   useProfileModalAtom,
 } from '@/components/account/profile-modal';
-import useNextLevelExp from '@/hooks/use-next-level-exp';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import GamesHistoryTable from '@/components/account/games-history-table';
+import { useChangeProfilePrivacyMutation } from '@/hooks/api/user/changeProfilePrivacy';
+import { toast } from 'react-toastify';
 
 const ProfilePage = () => {
   const router = useRouter();
   const { data: loadDataResponse } = useLoadDataQuery();
   const { data: loadProfileResponse, isLoading: isProfileLoading } =
     useLoadProfileQuery();
-  const nextLevelExp = useNextLevelExp();
+  const changeProfilePrivacyMutation = useChangeProfilePrivacyMutation();
 
   const selectedTab = router.query.slug ? router.query.slug[0] : 'profile';
 
@@ -37,7 +38,8 @@ const ProfilePage = () => {
     ? profileData.fist_name + ' ' + profileData.last_name
     : '-';
 
-  const nextLevelExpNeed = Number(nextLevelExp) - Number(loadData?.experience);
+  const nextLevelExpNeed =
+    Number(loadData?.experience_next_level) - Number(loadData?.experience);
 
   useEffect(() => {
     if (!loadDataResponse?.auth) {
@@ -89,9 +91,10 @@ const ProfilePage = () => {
                   <Button
                     className="w-[212px] flex justify-between border-neutral-800"
                     variant="outline"
-                    onClick={() =>
-                      navigator.clipboard.writeText(String(profileData?.id))
-                    }
+                    onClick={() => {
+                      navigator.clipboard.writeText(String(profileData?.id));
+                      toast.info('ID скопирован в буфер обмена');
+                    }}
                   >
                     <div className="text-neutral-500 font-normal">
                       ID: {profileData?.id}
@@ -118,7 +121,7 @@ const ProfilePage = () => {
               </Badge>
               <Progress
                 value={profileData?.experience || 0}
-                max={nextLevelExp}
+                max={loadData?.experience_next_level || 0}
               />
               <div className="whitespace-nowrap">
                 {nextLevelExpNeed} XP{' '}
@@ -228,14 +231,14 @@ const ProfilePage = () => {
                     <div className="text-neutral-500">Email</div>
                     <div>{profileData?.email || '-'}</div>
                   </div>
-                  <div className="flex flex-col">
-                    <div className="text-neutral-500">Телефон</div>
-                    <div>+7 9** *** ** 66</div>
-                  </div>
                 </div>
                 <div className="flex justify-between">
                   <div className="flex justify-between bg-neutral-950 rounded-2xl px-4 py-8 items-center gap-2 w-[48%]">
-                    <Switch id="private-profile-switch" />
+                    <Switch
+                      id="private-profile-switch"
+                      onClick={() => changeProfilePrivacyMutation.mutate()}
+                      checked={Boolean(profileData?.profile_privacy)}
+                    />
                     <Label
                       htmlFor="private-profile-switch"
                       className="flex flex-col gap-2"
@@ -247,12 +250,25 @@ const ProfilePage = () => {
                     </Label>
                   </div>
                   <div className="flex justify-between bg-neutral-950 rounded-2xl px-4 py-8 items-center w-[48%]">
-                    <div className="text-green-700 w-[50%]">
-                      Аутентификация включена
-                    </div>
-                    <Button variant="link" className="underline text-sm">
-                      Отключить
-                    </Button>
+                    {Boolean(profileData?.twofa_enabled) ? (
+                      <>
+                        <div className="text-green-700 w-[50%]">
+                          Аутентификация включена
+                        </div>
+                        <Button variant="link" className="underline text-sm">
+                          Отключить
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <div className="text-red-700 w-[50%]">
+                          Аутентификация отключена
+                        </div>
+                        <Button variant="link" className="underline text-sm">
+                          Включить
+                        </Button>
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className="flex justify-between items-center rounded-2xl bg-neutral-950 px-4 py-6">

@@ -12,12 +12,7 @@ export const columns = [
   columnHelper.accessor('game', {
     id: 'game',
     header: 'Игра',
-    cell: (info) => (
-      <div className="flex">
-        GameIcon
-        {info.getValue()}
-      </div>
-    ),
+    cell: (info) => <div className="flex">{info.getValue()}</div>,
   }),
   columnHelper.accessor('time', {
     id: 'time',
@@ -25,19 +20,16 @@ export const columns = [
     cell: (info) => (
       <div className="flex flex-col">
         <div>{info.getValue()}</div>
-        <div>{format(fromUnixTime(info.getValue()), 'DD/MM HH:mm')}</div>
+        <div className="text-xs text-neutral-500">
+          {format(fromUnixTime(info.getValue()), 'dd/mm HH:mm')}
+        </div>
       </div>
     ),
   }),
-  columnHelper.accessor((originalRow) => originalRow.data.bet, {
+  columnHelper.accessor((originalRow) => originalRow.data.amount, {
     id: 'bet',
     header: 'Ставка',
-    cell: (info) => (
-      <div className="flex">
-        WalletIcon
-        {info.getValue()}
-      </div>
-    ),
+    cell: (info) => <div className="flex">{info.getValue()}</div>,
   }),
   columnHelper.accessor((originalRow) => originalRow.data.coefficient, {
     id: 'coefficient',
