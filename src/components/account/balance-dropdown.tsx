@@ -21,11 +21,15 @@ export const BalanceDropdown = ({ trigger }: { trigger: React.ReactNode }) => {
   const balanceItems = useMemo(() => {
     const result: { currency: string; amount: number }[] = [];
 
+    if (!loadDataResponse?.currencies_courses) {
+      return result;
+    }
+
     const fiatCurrencies = Object.entries(
-      loadDataResponse?.currencies_courses.fiat || {},
+      loadDataResponse.currencies_courses.fiat,
     );
     const cryptoCurrencies = Object.entries(
-      loadDataResponse?.currencies_courses.crypto || {},
+      loadDataResponse.currencies_courses.crypto,
     );
 
     fiatCurrencies.forEach((value) => {

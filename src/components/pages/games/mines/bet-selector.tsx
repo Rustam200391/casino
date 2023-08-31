@@ -20,7 +20,7 @@ const BetSelector = () => {
         <p className="text-xl font-semibold">Сумма ставки</p>
         <div className="relative">
           <Input
-            value={betAmount}
+            value={betAmount || undefined}
             onChange={(e) => {
               const v = e.target.value;
               setBetAmount(Number(v));

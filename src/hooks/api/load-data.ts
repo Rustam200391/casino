@@ -34,7 +34,7 @@ export interface LoadDataResponse {
   languages: Languages;
   online: number;
   settings: any[];
-  currencies_courses: CurrenciesCourses;
+  currencies_courses?: CurrenciesCourses;
 }
 
 export interface UserData {
