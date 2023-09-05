@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { Icons } from '@/components/ui/icons';
 import {
   SettingsIcon,
   Volume2Icon,
@@ -42,9 +43,18 @@ const Sidebar = () => {
           </div>
         </Link>
       </div>
-      <div className="flex justify-between">
-        <Button variant="ghost">
-          <LanguagesIcon />
+      <p>Прокачка уровня</p>
+      <div className="flex flex-col mt-1">
+        <Link href="/games/clicker/">
+          <div className="btn p-4 text-left text-neutral-500 w-full rounded-2xl hover:bg-neutral-900">
+            Кликер XP
+          </div>
+        </Link>
+      </div>
+       
+      <div className="flex justify-around grow  h-14 m-2">
+        <Button className='flex flex-wrap justify-start	 px-50 pr-6 pl-12' variant="ghost">
+          <Icons.flag />
         </Button>
         <Button variant="ghost">
           <Volume2Icon />
@@ -54,7 +64,22 @@ const Sidebar = () => {
         </Button>
         <Button variant="ghost">
           <BellIcon />
-        </Button>
+          </Button>
+        </div>
+    
+      <div className="flex justify-between ">
+          <Button className='flex-1 bg-clip-padding p-2 bg-blue-800 border-1 h-8' variant="ghost">
+            <Icons.vk />
+          </Button>
+          <Button className='flex-1 bg-clip-padding p-1 border-1 h-8 m-1 ' variant="ghost">
+            <Icons.tg />
+          </Button>
+          <Button className='flex-1 bg-clip-padding border-1 ' variant="ghost">
+            <Icons.group />
+          </Button>
+          <Button className=' flex-1 bg-clip-padding border-1' variant="ghost">
+            <Icons.youtube />
+          </Button>
       </div>
     </div>
   );
