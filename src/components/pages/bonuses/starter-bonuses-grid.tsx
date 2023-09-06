@@ -10,7 +10,7 @@ const StarterBonusesGrid = () => {
       <div className="grid grid-cols-1 gap-4 mt-10 md:grid-cols-2 xl:grid-cols-3">
           <BonusCard
               title="Бонус"
-              description="за реферальную ссылку"
+              description="за подписку на Телеграм канал"
               className="xl:col-span-3"
               contentNode={
                   <>
@@ -23,7 +23,7 @@ const StarterBonusesGrid = () => {
           />
           <BonusCard
               title="Бонус"
-              description="за реферальную ссылку"
+              description="за сообщение в чат поддержки"
               className="xl:col-span-3"
               contentNode={
                   <>
@@ -36,7 +36,7 @@ const StarterBonusesGrid = () => {
           />
           <BonusCard
               title="Бонус"
-              description="за реферальную ссылку"
+              description="за заполнение профиля"
               className="xl:col-span-3"
               contentNode={
                   <>

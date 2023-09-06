@@ -10,7 +10,7 @@ const ActivityBonusesGrid = () => {
       <div className="grid grid-cols-1 gap-4 mt-10 md:grid-cols-2 xl:grid-cols-3">
         <BonusCard
           title="Бонус"
-          description="за реферальную ссылку"
+          description="за рубины из чата"
           className="xl:col-span-3"
           contentNode={
             <>
@@ -23,11 +23,11 @@ const ActivityBonusesGrid = () => {
         />
         <BonusCard
           title="Бонус"
-          description="за реферальную ссылку"
+          description="за активность в чате"
           className="xl:col-span-3"
           contentNode={
             <>
-                В любой момент в чате может появиться ценный рубин. Кто первый нажмет на него, тому и достанется Бонус!
+               Каждые 6 часов в чате начинается раздача рубинов случайный пользователям. Чтобы повысить шанс, будьте активнее и общайтесь!
             </>
           }
           actionNode={
@@ -36,12 +36,14 @@ const ActivityBonusesGrid = () => {
         />
         <BonusCard
           title="Бонус"
-          description="за реферальную ссылку"
+          description="за реферальную карту"
           className="xl:col-span-3"
           contentNode={
-            <>
-                В любой момент в чате может появиться ценный рубин. Кто первый нажмет на него, тому и достанется Бонус!
-            </>
+            <ol>
+                <li className="before:content-['1'] space-y-4">Ознакомьтесь с реферальной системой</li>
+                <li>Пригласите игрока по промокоду</li>
+                <li>Активируйте реферальную карту и получай бонусы</li>
+            </ol>
           }
           actionNode={
               <Button className="w-full">Получить</Button>
