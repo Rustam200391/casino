@@ -125,7 +125,7 @@ export const Icons = {
       xmlns="http://www.w3.org/2000/svg"
       width="80"
       height="83"
-      viewBox="0 0 93 93"
+      viewBox="0 0 90 90"
       fill="none"
       {...props}
     >
@@ -299,7 +299,7 @@ export const Icons = {
       >
         <path d="M10.5 7C7.46244 7 5 9.46245 5 12.5C5 18 11.5 23 15 24.1631C18.5 23 25 18 25 12.5C25 9.46245 22.5375 7 19.5 7C17.6399 7 15.9954 7.92345 15 9. 3369C14.0046 7.92345 12.3601 7 10.5 7Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-    ),
+  ),
     twitter: Twitter,
     check: Check,
     loading: ({ ...props }: LucideProps) => (

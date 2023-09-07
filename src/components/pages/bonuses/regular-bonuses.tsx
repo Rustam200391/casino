@@ -52,11 +52,11 @@ const RegularBonuses = () => {
 
     return (
       <div className="flex  flex-wrap justify-between">
-          <Card className="w-full mt-10 border-0 bg-transparent">
-              <p className="text-2xl font-bold ">Регулярные бонусы</p>
+          <Card className="w-full mt-10 border-0 bg-transparent mb-8">
+              <p className="text-2xl font-bold "> Регулярные бонусы</p>
           </Card>   
             
-          <Card className="w-full md:w-1/2  rounded-3xl bg-transparent border-neutral-600">
+          <Card className="w-full md:w-1/3  rounded-3xl bg-transparent border-neutral-600">
                 <CardHeader>
                     <CardTitle>Введите промокод и получите бонус</CardTitle>
                     <CardDescription>Вы можете активировать помокод раз в неделю</CardDescription>
@@ -75,7 +75,7 @@ const RegularBonuses = () => {
                 </CardFooter>
             </Card>
 
-            <Card className="w-full md:w-1/2 rounded-3xl flex flex-col bg-transparent border-neutral-600 justify-between">
+            <Card className="w-full md:w-2/3 ml-2px rounded-3xl flex flex-col bg-transparent border-neutral-600 justify-between">
                 <CardHeader>
                     <CardTitle className="flex text-[#ffffff]">Крутите рулетку и получайте рубины</CardTitle>
                     <CardDescription className="flex">Раз в 24 часа крути рулетку и получай до 20 рубинов на баланс</CardDescription>
@@ -84,20 +84,22 @@ const RegularBonuses = () => {
                   
 
                 </CardContent>
-                <CardFooter className="flex justify-between flex-wrap">
-                    <div>
+                <CardFooter className="flex">
+                    <div className="flex-col mb-[-105px]">
                         <div className="text-[#cbd5e1]">Каждый день доступно 1 кручение</div>   
-                        <div className="pt-6">
+                        <div className="pt-6 ">
                             <Button variant="outline" className="w-full border-green-500 hover:bg-green-500 ">Крутить</Button>
                         </div>
                     </div>
-                    <div className="">
-                        <GameCard
+                    <div className="ml-[25px] mb-[20px]">
+                        <div>
+                          <GameCard
                           title=""
                           href="/src/components/pages/bonuses/regular-bonuses.tsx"
-                          background={<Image src="/public/img/wheell.png" alt="background" fill className="object-cover" />}
-                          className="xl:col-span-3"
-                        />
+                          background={<Image src="/img/wheell1.png" alt="background" fill className="object-cover"   />}
+                           className="xl:col-span-5 xl:row-span-2"
+                          />
+                        </div>
                     </div>
                 </CardFooter>
             </Card>

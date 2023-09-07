@@ -16,6 +16,7 @@ const Sidebar = () => {
       <div className="flex flex-col mt-1">
         <Link href="/games/jackpot/">
           <div className="btn p-4 text-left text-neutral-500 w-full rounded-2xl hover:bg-neutral-900">
+         
             Jackpot
           </div>
         </Link>
@@ -52,34 +53,35 @@ const Sidebar = () => {
         </Link>
       </div>
        
-      <div className="flex justify-around grow  h-14 m-2">
-        <Button className='flex flex-wrap justify-start	 px-50 pr-6 pl-12' variant="ghost">
+      <div className="flex ">
+        <Button className='flex-grow p-2' variant="ghost">
           <Icons.flag />
         </Button>
-        <Button variant="ghost">
+        <Button className='flex-grow p-2' variant="ghost">
           <Volume2Icon />
         </Button>
-        <Button variant="ghost">
+        <Button className='flex-grow p-2' variant="ghost">
           <SettingsIcon />
         </Button>
-        <Button variant="ghost">
+        <Button className='flex-grow p-2' variant="ghost">
           <BellIcon />
           </Button>
         </div>
     
-      <div className="flex justify-between ">
-          <Button className='flex-1 bg-clip-padding p-2 bg-blue-800 border-1 h-8' variant="ghost">
-            <Icons.vk />
-          </Button>
-          <Button className='flex-1 bg-clip-padding p-1 border-1 h-8 m-1 ' variant="ghost">
-            <Icons.tg />
-          </Button>
-          <Button className='flex-1 bg-clip-padding border-1 ' variant="ghost">
-            <Icons.group />
-          </Button>
-          <Button className=' flex-1 bg-clip-padding border-1' variant="ghost">
-            <Icons.youtube />
-          </Button>
+      <div className="flex mb-4 pt-1 bg-center border-4 gray rounded-full w-auto	">
+        
+           <Button className='w-1/4 p-1 bg-blue-800 border-1 h-11' variant="ghost">
+             <Icons.vk />
+           </Button>
+           <Button className='w-1/4 p-2 bg-clip-padding border-1 h-11 ' variant="ghost">
+             <Icons.tg />
+           </Button>
+           <Button className='w-1/4 p-1 bg-clip-padding border-1 h-11 m-10px' variant="ghost">
+             <Icons.group />
+           </Button>
+           <Button className=' w-1/4 p-1 bg-clip-padding border-1 h-11' variant="ghost">
+             <Icons.youtube />
+         </Button>
       </div>
     </div>
   );
