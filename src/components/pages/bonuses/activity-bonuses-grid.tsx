@@ -55,7 +55,7 @@ const ActivityBonusesGrid = () => {
             </ul>
           }
           actionNode={
-              <Button className="w-full">Реферальная система</Button>
+              <Button className="w-full bg-green-400 text-white">Реферальная система</Button>
           }
         />
       </div>
