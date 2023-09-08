@@ -1,5 +1,5 @@
 import MainLayout from '@/components/layout/main-layout';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TypographyH1, TypographyH3 } from '@/components/ui/typography';
 import { useRouter } from 'next/router';
 import RecentGamesTable from '@/components/pages/home/recent-games-table';
@@ -21,7 +21,11 @@ const ProfilePage = () => {
     ? profileData.fist_name + ' ' + profileData.last_name
     : '-';
 
-  console.log(profileData);
+  useEffect(() => {
+    if (!loadProfileResponse?.success) {
+      router.replace('/');
+    }
+  }, [loadProfileResponse, router]);
 
   return (
     <MainLayout>

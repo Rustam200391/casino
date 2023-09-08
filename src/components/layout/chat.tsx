@@ -8,8 +8,8 @@ import {
 } from '@/hooks/api/chat';
 import useCentrifuge from '@/lib/ws';
 import { sortBy } from 'lodash';
-import React, { useEffect, useMemo, useState } from 'react';
-import { ArrowRight, ChevronDownIcon, Dot } from 'lucide-react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { ArrowRight, ChevronDownIcon, Dot, GiftIcon } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import {
@@ -21,7 +21,15 @@ import {
 
 import { format, fromUnixTime } from 'date-fns';
 import { useLoadDataQuery } from '@/hooks/api/load-data';
-import { atom, useAtom } from 'jotai/index';
+import { atom, useAtom } from 'jotai';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+
+import { Badge } from '@/components/ui/badge';
+import { CloseIcon } from 'next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon';
 
 const chatChannelAtom = atom<ChatChannel>('ru');
 export const useChatChannel = () => useAtom(chatChannelAtom);
@@ -34,13 +42,14 @@ const Chat = () => {
   const [channel, setChannel] = useChatChannel();
 
   const [text, setText] = useState('');
+  const messagesRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const sub = centrifuge.subscribe('chat', (message) => {
       if (message.data != null) {
         const data = message.data.params;
         historyQuery.refetch();
-        console.log(data);
+        console.log('chat', data);
       }
     });
 
@@ -91,10 +100,10 @@ const Chat = () => {
 
           <div className="flex text-sm items-center">
             <Dot size={32} className="text-red-500" />
-            {loadDataResponse?.online || 0}
+            {loadDataResponse?.result.online || 0}
           </div>
         </div>
-        <ScrollArea className="h-[400px]" type="always">
+        <ScrollArea ref={messagesRef} className="h-[400px]" type="always">
           <div className="flex flex-col pr-4">
             {messages.length > 0 ? (
               messages.map((message) => (
@@ -132,22 +141,57 @@ const Chat = () => {
 export default Chat;
 
 const ChatMessage = ({ user_nickname, text, user_avatar, time }: Message) => (
-  <div className="flex h-[72px] p-3 hover:bg-neutral-800 gap-2 rounded-3xl">
-    <Avatar>
-      <AvatarImage src={user_avatar} />
-      <AvatarFallback>
-        {user_nickname.substring(0, 2).toUpperCase()}
-      </AvatarFallback>
-    </Avatar>
+  <Tooltip>
+    <TooltipTrigger>
+      <div className="flex h-[72px] p-3 hover:bg-neutral-800 gap-2 rounded-3xl">
+        <Avatar>
+          <AvatarImage src={user_avatar} />
+          <AvatarFallback>
+            {user_nickname.substring(0, 2).toUpperCase()}
+          </AvatarFallback>
+        </Avatar>
 
-    <div className="flex flex-col w-full">
-      <div className="flex justify-between">
-        <div className="text-sm font-semibold">{user_nickname}</div>
-        <div className="text-xs text-neutral-500">
-          {format(fromUnixTime(time), 'HH:mm')}
+        <div className="flex flex-col w-full">
+          <div className="flex justify-between">
+            <div className="text-sm font-semibold">{user_nickname}</div>
+            <div className="text-xs text-neutral-500">
+              {format(fromUnixTime(time), 'HH:mm')}
+            </div>
+          </div>
+          <div className="text-left text-sm">{text}</div>
         </div>
       </div>
-      <div className="text-left text-sm">{text}</div>
-    </div>
-  </div>
+    </TooltipTrigger>
+    <TooltipContent
+      side="left"
+      className="flex flex-col justify-between gap-2 border border-neutral-800 rounded-3xl bg-neutral-950"
+    >
+      <div className="flex justify-between">
+        <div className="flex gap-2">
+          <Avatar>
+            <AvatarImage src={user_avatar} />
+            <AvatarFallback>
+              {user_nickname.substring(0, 2).toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col">
+            <div className="flex">
+              <Badge className="bg-yellow-950 text-yellow-500 rounded-md p-0.5">
+                130
+              </Badge>
+              <div className="ml-0.5">Уровень</div>
+            </div>
+            <div className="font-bold text-md">{user_nickname}</div>
+          </div>
+        </div>
+
+        <CloseIcon />
+      </div>
+      <Button className="bg-yellow-500 hover:bg-yellow-600 text-white">
+        <GiftIcon />
+        Перевести донат
+      </Button>
+      <Button variant="outline">Перейти в профиль</Button>
+    </TooltipContent>
+  </Tooltip>
 );

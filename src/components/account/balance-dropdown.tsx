@@ -16,20 +16,20 @@ import React, { useMemo } from 'react';
 
 export const BalanceDropdown = ({ trigger }: { trigger: React.ReactNode }) => {
   const { data: loadDataResponse } = useLoadDataQuery();
-  const balance = Number(loadDataResponse?.data.balance);
+  const balance = Number(loadDataResponse?.result.data.balance);
 
   const balanceItems = useMemo(() => {
     const result: { currency: string; amount: number }[] = [];
 
-    if (!loadDataResponse?.currencies_courses) {
+    if (!loadDataResponse?.result.currencies_courses) {
       return result;
     }
 
     const fiatCurrencies = Object.entries(
-      loadDataResponse.currencies_courses.fiat,
+      loadDataResponse.result.currencies_courses.fiat,
     );
     const cryptoCurrencies = Object.entries(
-      loadDataResponse.currencies_courses.crypto,
+      loadDataResponse.result.currencies_courses.crypto,
     );
 
     fiatCurrencies.forEach((value) => {

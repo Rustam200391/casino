@@ -7,6 +7,7 @@ import { Hydrate, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useGlobalQueryClient } from '@/hooks/use-global-query-client';
 import { ToastContainer } from 'react-toastify';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -14,19 +15,21 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <Component {...pageProps} />
-        <Toaster />
-        <TailwindIndicator />
-        <ToastContainer
-          theme="dark"
-          position="bottom-right"
-          hideProgressBar
-          autoClose={2000}
-        />
-      </Hydrate>
+      <TooltipProvider>
+        <Hydrate state={pageProps.dehydratedState}>
+          <Component {...pageProps} />
+          <Toaster />
+          <TailwindIndicator />
+          <ToastContainer
+            theme="dark"
+            position="bottom-right"
+            hideProgressBar
+            autoClose={2000}
+          />
+        </Hydrate>
 
-      <ReactQueryDevtools />
+        <ReactQueryDevtools />
+      </TooltipProvider>
     </QueryClientProvider>
   );
 }

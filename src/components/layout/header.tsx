@@ -54,10 +54,11 @@ const headerNav = [
 ];
 
 function UserProgress({ sheetView }: { sheetView?: boolean }) {
-  const { data, error } = useLoadDataQuery();
+  const { data: loadDataResponse, error } = useLoadDataQuery();
 
   const nextLevelExpNeed =
-    Number(data?.data.experience_next_level) - Number(data?.data.experience);
+    Number(loadDataResponse?.result.data.experience_next_level) -
+    Number(loadDataResponse?.result.data.experience);
 
   useEffect(() => {
     if (error) {
@@ -79,26 +80,28 @@ function UserProgress({ sheetView }: { sheetView?: boolean }) {
       <div className="flex items-center mr-2 space-x-2 border-none cursor-default">
         <div className="p-1.5 border rounded-full border-neutral-500">
           <Avatar>
-            <AvatarImage src={data?.data.avatar} />
+            <AvatarImage src={loadDataResponse?.result.data.avatar || ''} />
             <AvatarFallback>
-              {data?.data?.name
-                ? data.data.name.substring(0, 2).toUpperCase()
+              {loadDataResponse?.result.data?.name
+                ? loadDataResponse?.result.data.name
+                    .substring(0, 2)
+                    .toUpperCase()
                 : '-'}
             </AvatarFallback>
           </Avatar>
         </div>
         <div>
           <div className="flex items-center space-x-2">
-            <p className="font-bold">{data?.data.name}</p>
+            <p className="font-bold">{loadDataResponse?.result.data.name}</p>
             <div className="flex">
               <p className="flex rounded-lg bg-lime-900 text-[16px] font-bold text-lime-300 px-1.5">
-                {data?.data.level}
+                {loadDataResponse?.result.data.level}
               </p>
             </div>
           </div>
           <Progress
-            value={data?.data.experience || 0}
-            max={data?.data.experience_next_level || 0}
+            value={loadDataResponse?.result.data.experience || 0}
+            max={loadDataResponse?.result.data.experience_next_level || 0}
             className={cn('mt-1.5 w-[150px]', !sheetView && 'hidden 2xl:block')}
           />
         </div>
@@ -125,8 +128,8 @@ function UserProgress({ sheetView }: { sheetView?: boolean }) {
 const Header = () => {
   const { route } = useRouter();
   const [, setShowSignIn] = useSignInModal();
-  const { data } = useLoadDataQuery();
-  const signedIn = data?.auth;
+  const { data: loadDataResponse } = useLoadDataQuery();
+  const signedIn = loadDataResponse?.result.auth;
   const [, setBalanceModalOpen] = useBalanceModalAtom();
 
   return (
@@ -190,7 +193,7 @@ const Header = () => {
                   trigger={
                     <div className="relative flex items-center h-10 px-4 leading-none transition bg-black border rounded-full group-hover:bg-neutral-900/70 border-neutral-800 focus:outline-0">
                       <Gem className="w-5 h-5 mr-2 text-green-600" />
-                      {data?.data.balance}
+                      {loadDataResponse?.result.data.balance}
                       <p className="mx-2 text-neutral-500">RUBN</p>
                       <ChevronDown className="w-5 h-5" />
                     </div>
@@ -203,30 +206,27 @@ const Header = () => {
           </div>
         )}
 
-        <div
-          className={cn(
-            'flex items-center space-x-2 md:space-x-4',
-            signedIn && 'hidden',
-          )}
-        >
-          <Button
-            variant="accent"
-            size="lg"
-            glow="accent"
-            onClick={() => setShowSignIn(true)}
-          >
-            <Globe className="w-5 h-5 mr-2" />
-            Регистрация
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={() => setShowSignIn(true)}
-          >
-            <User className="w-5 h-5 mr-2" />
-            Вход
-          </Button>
-        </div>
+        {!signedIn && (
+          <div className="flex items-center space-x-2 md:space-x-4">
+            <Button
+              variant="accent"
+              size="lg"
+              glow="accent"
+              onClick={() => setShowSignIn(true)}
+            >
+              <Globe className="w-5 h-5 mr-2" />
+              Регистрация
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => setShowSignIn(true)}
+            >
+              <User className="w-5 h-5 mr-2" />
+              Вход
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* Bottom nav */}

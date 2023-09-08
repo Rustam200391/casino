@@ -10,13 +10,14 @@ export const fetchLoadProfile = async (userId: number) => {
 };
 
 export const useLoadProfileQuery = () => {
-  const loadData = useLoadDataQuery();
+  const { data: loadDataResponse } = useLoadDataQuery();
 
   return useQuery({
-    queryKey: ['load_profile', loadData.data?.data.user_id],
-    queryFn: () => fetchLoadProfile(loadData.data?.data.user_id as number),
+    queryKey: ['load_profile', loadDataResponse?.result.data.user_id],
+    queryFn: () =>
+      fetchLoadProfile(loadDataResponse?.result.data.user_id as number),
     ...noRefetch,
-    enabled: Boolean(loadData.data?.data.user_id),
+    enabled: Boolean(loadDataResponse?.result.data.user_id),
   });
 };
 export interface LoadProfileResponse {

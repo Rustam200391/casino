@@ -16,7 +16,7 @@ export const useLoadInvoicesHistoryQuery = () => {
     queryKey: ['load_invoices_history'],
     queryFn: fetchLoadInvoicesHistory,
     ...noRefetch,
-    enabled: Boolean(loadData.data?.auth),
+    enabled: Boolean(loadData.data?.result.auth),
   });
 };
 

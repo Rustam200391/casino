@@ -10,13 +10,13 @@ export const fetchLoadWithdrawalsHistory = async () => {
 };
 
 export const useLoadWithdrawalsHistoryQuery = () => {
-  const loadData = useLoadDataQuery();
+  const { data: loadDataResponse } = useLoadDataQuery();
 
   return useQuery({
     queryKey: ['load_withdrawals_history'],
     queryFn: fetchLoadWithdrawalsHistory,
     ...noRefetch,
-    enabled: Boolean(loadData.data?.auth),
+    enabled: Boolean(loadDataResponse?.result.auth),
   });
 };
 

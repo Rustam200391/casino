@@ -17,17 +17,17 @@ export const chatHistory = async (channel: ChatChannel) => {
 export const useChatHistoryQuery = () => {
   const [channel] = useChatChannel();
 
-  const data = useLoadDataQuery();
+  const { data: loadDataResponse } = useLoadDataQuery();
 
   return useQuery({
     queryKey: ['chat_history', channel],
     queryFn: () => chatHistory(channel),
-    enabled: Boolean(data?.data?.token),
+    enabled: Boolean(loadDataResponse?.result.auth),
   });
 };
 
 export const useChatSendMessageMutation = () => {
-  const user = useLoadDataQuery();
+  const { data: loadDataResponse } = useLoadDataQuery();
   const utils = useQueryClient(); // NOTE: avoid destructuring here
   const [channel] = useChatChannel();
 
@@ -50,9 +50,9 @@ export const useChatSendMessageMutation = () => {
               id: 0,
               text,
               time: Date.now(),
-              user_id: user.data?.data.user_id || 0,
-              user_nickname: user.data?.data.name || '',
-              user_avatar: user.data?.data.avatar || '',
+              user_id: loadDataResponse?.result.data.user_id || 0,
+              user_nickname: loadDataResponse?.result.data.name || '',
+              user_avatar: loadDataResponse?.result.data.avatar || '',
               user_is_moderator: 0,
               user_is_administrator: 0,
             },
