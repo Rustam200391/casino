@@ -52,21 +52,31 @@ const StarterBonusesGrid = () => {
               title="Бонус"
               description="за заполнение профиля"
               className="xl:col-span-3"
-              contentNode={
-                  <ul>
-                      <li className="flex items-center">
-                          <div className="bg-gray-500 h-7 w-8 text-white rounded-full flex items-center justify-center mr-2 ">1</div>
-                          <span className='text-white underline'>Подключите двухфакторную аутентификацию </span>
-                      </li>
-                      <li className="flex items-center">
-                           <div className="bg-gray-500 h-7 w-9 text-white rounded-full flex items-center justify-center mr-2">2</div>
-                           <span className='text-white underline'>Укажите Имя и Фамилию</span>
-                      </li>
-                      <li className="flex items-center">
-                           <div className="bg-gray-500 h-7 w-9 text-white rounded-full flex items-center justify-center mr-2">3</div>
-                           <span className='text-white underline'>Подтвердите почту</span>
-                     </li>
-                  </ul>
+                  contentNode={
+                    <ul className="list-decimal">
+                          <li className='flex items-center space-x-2'>
+                              <div className=" w-6 h-6 rounded-full bg-gray-400 flex items-start justify-normal ">
+                                  <span className='text-white flex items-center justify-center'>1</span>
+                                  <span>Подключите двухфакторную аутентификацию</span>
+                            </div>
+                          </li>      
+                          
+                    </ul>
+                  
+                //   <ul>
+                //       <li className="flex items-center">
+                //           <div className="bg-gray-500 h-7 w-8 text-white rounded-full flex items-center justify-center mr-2 ">1</div>
+                //           <span className='text-white underline'>Подключите двухфакторную аутентификацию </span>
+                //       </li>
+                //       <li className="flex items-center">
+                //            <div className="bg-gray-500 h-7 w-9 text-white rounded-full flex items-center justify-center mr-2">2</div>
+                //            <span className='text-white underline'>Укажите Имя и Фамилию</span>
+                //       </li>
+                //       <li className="flex items-center">
+                //            <div className="bg-gray-500 h-7 w-9 text-white rounded-full flex items-center justify-center mr-2">3</div>
+                //            <span className='text-white underline'>Подтвердите почту</span>
+                //      </li>
+                //   </ul>
               }
               actionNode={
                   <Button className="w-full bg-orange-400 text-white">Получить</Button>
