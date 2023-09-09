@@ -19,7 +19,7 @@ const Sidebar = () => {
         <Link href="/games/jackpot-dice/">
           <div className="btn py-2 text-left text-neutral-500 w-full rounded-2xl hover:bg-neutral-900 flex items-center gap-2">
             <Image
-              src="/img/game.png"
+              src="/img/game1.png"
               alt="Jackpot Dice"
               height={56}
               width={56}
@@ -32,19 +32,19 @@ const Sidebar = () => {
       <div className="flex flex-col mt-1">
         <Link href="/games/crash/">
           <div className="btn py-2 text-left text-neutral-500 w-full rounded-2xl hover:bg-neutral-900 flex items-center gap-2">
-            <Image src="/img/game.png" alt="Crash" height={56} width={56} />
+            <Image src="/img/game2.png" alt="Crash" height={56} width={56} />
             Crash
           </div>
         </Link>
         <Link href="/games/mines/">
           <div className="btn py-2 text-left text-neutral-500 w-full rounded-2xl hover:bg-neutral-900 flex items-center gap-2">
-            <Image src="/img/game.png" alt="Mines" height={56} width={56} />
+            <Image src="/img/game3.png" alt="Mines" height={56} width={56} />
             Mines
           </div>
         </Link>
         <Link href="/games/dice/">
           <div className="btn py-2 text-left text-neutral-500 w-full rounded-2xl hover:bg-neutral-900 flex items-center gap-2">
-            <Image src="/img/game.png" alt="Dice" height={56} width={56} />
+            <Image src="/img/game4.png" alt="Dice" height={56} width={56} />
             Dice
           </div>
         </Link>
@@ -53,7 +53,7 @@ const Sidebar = () => {
       <div className="flex flex-col mt-1">
         <Link href="/games/clicker/">
           <div className="btn py-2 text-left text-neutral-500 w-full rounded-2xl hover:bg-neutral-900 flex items-center gap-2">
-            <Image src="/img/game.png" alt="Кликер XP" height={56} width={56} />
+            <Image src="/img/game5.png" alt="Кликер XP" height={56} width={56} />
             Кликер XP
           </div>
         </Link>
@@ -69,9 +69,13 @@ const Sidebar = () => {
         <Button className="flex-grow p-2" variant="ghost">
           <SettingsIcon />
         </Button>
+       
         <Button className="flex-grow p-2" variant="ghost">
-          <BellIcon />
+          <BellIcon className='ml-2 mt-1' />
         </Button>
+         <div className='flex items-center justify-center w-8 h-7 rounded-full bg-green-500' >
+            <span className='text-while text-lg'>+99</span>
+          </div>
       </div>
 
       <div className="flex mb-4 px-1 py-2 bg-center border gray rounded-3xl w-auto">
