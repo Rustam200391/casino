@@ -30,6 +30,9 @@ import {
 
 import { Badge } from '@/components/ui/badge';
 import { CloseIcon } from 'next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon';
+import { Icons } from '@/components/ui/icons';
+ import Image from 'next/image';
+
 
 const chatChannelAtom = atom<ChatChannel>('ru');
 export const useChatChannel = () => useAtom(chatChannelAtom);
@@ -77,17 +80,21 @@ const Chat = () => {
           <DropdownMenu>
             <DropdownMenuTrigger>
               <div className="flex border-white hover:bg-white hover:text-black py-1 px-3 border rounded-3xl">
-                <div>{channel === 'ru' ? 'Русский' : 'English'}</div>
+                <Icons.flag className='inline mr-2' />
+                <div>{channel === 'ru' ? 'Чат' : 'English'}
+                </div>
+
                 <ChevronDownIcon className="ml-2 transition" />
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem onClick={() => setChannel('ru')}>
-                Русский
+              <div className='relative'>
+              <DropdownMenuItem className="py-2 pr-10 border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300" onClick={() => setChannel('ru')}>
+                <div className='absolute inset-y-0 right-0 pr-5 flex items-center pointer-events-none'>
+                    Чат 
+                </div>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setChannel('en')}>
-                English
-              </DropdownMenuItem>
+              </div>
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -112,6 +119,22 @@ const Chat = () => {
             ) : (
               <div>Нет сообщений</div>
             )}
+            <div>
+              <div className='bg-transparent bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-lg'>
+                  <div>
+                    <div></div>
+                    {/* знак синдикат */}
+                    <div></div>
+                    {/* морератор, админ, закрепленное сообщение */}
+                    <div></div>
+                    {/* закрепленное сообщение */}
+                    <div></div>
+                    {/* промокод из 4 букв */}
+                  </div>
+              </div>
+              {/* серое окно из чата поддержки */}
+              
+            </div>
           </div>
         </ScrollArea>
         <hr className="border-neutral-800 mt-2 mb-2" />
