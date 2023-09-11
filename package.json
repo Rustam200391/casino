@@ -32,6 +32,7 @@
     "autoprefixer": "10.4.14",
     "centrifuge": "^2.8.5",
     "class-variance-authority": "^0.6.1",
+    "classnames": "^2.3.2",
     "clsx": "^1.2.1",
     "date-fns": "^2.30.0",
     "eslint": "8.44.0",

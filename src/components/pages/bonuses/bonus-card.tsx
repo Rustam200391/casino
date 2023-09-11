@@ -20,10 +20,10 @@ const BonusCard = ({
     actionNode: React.ReactNode
 }) => {
     return (
-        <Card className="flex flex-col justify-between rounded-3xl bg-zinc-950 border-none min-h-[400px]">
+        <Card className={cn(className, "flex flex-col justify-between rounded-3xl  border-none min-h-[400px] ")}>
             <CardHeader>
                 <CardTitle className="text-center">{title}</CardTitle>
-                <CardDescription className="text-center">{description}</CardDescription>
+                <CardDescription className="text-center text-gray-50">{description}</CardDescription>
             </CardHeader>
             <CardContent className="min-h-[200px]">
                 {contentNode}
