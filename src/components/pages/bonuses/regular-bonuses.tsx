@@ -51,12 +51,13 @@ const GameCard = ({
 const RegularBonuses = () => {
 
     return (
-      <div className="flex  flex-wrap justify-between">
+      <div className="flex  flex-wrap justify-between ">
           <Card className="w-full mt-10 border-0 bg-transparent mb-8">
               <p className="text-2xl font-bold "> Регулярные бонусы</p>
           </Card>   
             
-          <Card className="w-full md:w-1/3  rounded-3xl bg-transparent border-neutral-600">
+        <div className="flex gap-4">
+          <Card className="w-full md:w-1/3  rounded-3xl bg-transparent border-neutral-600 ">
                 <CardHeader>
                     <CardTitle>Введите промокод и получите бонус</CardTitle>
                     <CardDescription>Вы можете активировать помокод раз в неделю</CardDescription>
@@ -74,14 +75,14 @@ const RegularBonuses = () => {
                     <Button className="w-full border-neutral-600 ">Активировать</Button>
                 </CardFooter>
             </Card>
-
-            <Card className="w-full md:w-2/3 ml-2px rounded-3xl flex flex-col bg-transparent border-neutral-600 justify-between">
+       
+            <Card className="w-full md:w-2/3 ml-2px rounded-3xl flex flex-col bg-transparent border-neutral-600 justify-between space-x-2">
                 <CardHeader>
                     <CardTitle className="flex text-[#ffffff]">Крутите рулетку и получайте рубины</CardTitle>
                     <CardDescription className="flex">Раз в 24 часа крути рулетку и получай до 20 рубинов на баланс</CardDescription>
                 </CardHeader>
                 <CardContent className="float-right">
-                  
+              
 
                 </CardContent>
                 <CardFooter className="flex">
@@ -102,7 +103,8 @@ const RegularBonuses = () => {
                         </div>
                     </div>
                 </CardFooter>
-            </Card>
+          </Card>
+          </div>
         </div>
     )
 }
