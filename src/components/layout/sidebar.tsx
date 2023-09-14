@@ -92,13 +92,13 @@ const Sidebar = () => {
           <Icons.tg />
         </Button>
         <Button
-          className="w-1/4 p-1 bg-clip-padding border-1 h-11 m-10px"
+          className="w-1/4 p-1 bg-clip-padding border-1 h-11 "
           variant="ghost"
         >
           <Icons.group />
         </Button>
         <Button
-          className=" w-1/4 p-1 bg-clip-padding border-1 h-11"
+          className=" w-1/4 p-1 bg-clip-padding border-1 h-11 "
           variant="ghost"
         >
           <Icons.youtube />

@@ -140,7 +140,7 @@ export const Icons = {
       xmlns="http://www.w3.org/2000/svg"
       width="80"
       height="83"
-      viewBox="0 0 90 90"
+      viewBox="30 1 30 90"
       fill="none"
       {...props}
     >
@@ -246,7 +246,7 @@ export const Icons = {
       xmlns="http://www.w3.org/2000/svg"
       width="80"
       height="80"
-      viewBox="0 0 90 90"
+      viewBox="30 -2 30 90"
       fill="none"
       {...props}
     >
