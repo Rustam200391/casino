@@ -76,7 +76,7 @@ const RegularBonuses = () => {
                 </CardFooter>
             </Card>
        
-            <Card className="w-full md:w-2/3 ml-2px rounded-3xl flex flex-col bg-transparent border-neutral-600 justify-between space-x-2">
+            <Card className="w-full md:w-2/3 ml-2px rounded-3xl flex flex-col bg-transparent bg-[url('/img/wheell1.png')] bg-cover border-neutral-600 justify-between space-x-2">
                 <CardHeader>
                     <CardTitle className="flex text-[#ffffff]">Крутите рулетку и получайте рубины</CardTitle>
                     <CardDescription className="flex">Раз в 24 часа крути рулетку и получай до 20 рубинов на баланс</CardDescription>
@@ -86,20 +86,20 @@ const RegularBonuses = () => {
 
                 </CardContent>
                 <CardFooter className="flex">
-                    <div className="flex-col mb-[-105px]">
-                        <div className="text-[#cbd5e1]">Каждый день доступно 1 кручение</div>   
-                        <div className="pt-6 ">
-                            <Button variant="outline" className="w-full border-green-500 hover:bg-green-500 ">Крутить</Button>
+                    <div className="flex-col mb-[-20px]">
+                        <div className="text-[#cbd5e1] pl-0">Каждый день доступно 1 кручение</div>   
+                        <div className="pt-3 ">
+                            <Button variant="outline" className="w-8/12 border-green-500 hover:bg-green-500 pt-1">Крутить</Button>
                         </div>
                     </div>
                     <div className="ml-[25px] mb-[20px]">
                         <div>
-                          <GameCard
+                          {/* <GameCard
                           title=""
                           href="/src/components/pages/bonuses/regular-bonuses.tsx"
                           background={<Image src="/img/wheell1.png" alt="background" fill className="object-cover"   />}
                            className="xl:col-span-5 xl:row-span-2"
-                          />
+                          /> */}
                         </div>
                     </div>
                 </CardFooter>
