@@ -94,12 +94,7 @@ const RegularBonuses = () => {
                     </div>
                     <div className="ml-[25px] mb-[20px]">
                         <div>
-                          {/* <GameCard
-                          title=""
-                          href="/src/components/pages/bonuses/regular-bonuses.tsx"
-                          background={<Image src="/img/wheell1.png" alt="background" fill className="object-cover"   />}
-                           className="xl:col-span-5 xl:row-span-2"
-                          /> */}
+                    
                         </div>
                     </div>
                 </CardFooter>
