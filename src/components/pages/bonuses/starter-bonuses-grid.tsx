@@ -24,9 +24,7 @@ const StarterBonusesGrid = () => {
                                  <span className='text-green-300'>Привяжите телеграм аккаунт к профилю</span>
                            </li>
                           </ul>
-                          <div className='relative '>
-                            <Image src="/img/4.png" alt="цифра" height={56} width={56} className='float-right pt-10' />
-                          </div>
+                        
                           <div className='flex pt-16'>
                                <div className='pl-20 pt-11'>
                                   <Image src="/img/emerald-mini.png" alt="emerald" height={36} width={36} /> 
@@ -57,9 +55,7 @@ const StarterBonusesGrid = () => {
                               </li>
                         
                     </ul>
-                    <div className='relative '>
-                        <Image src="/img/5.png" alt="цифра" height={56} width={56} className='float-right pt-10' />
-                          </div>
+                    
                           <div className='flex pt-16'>
                             <div className='pt-8 pl-20'>
                                 <Image src="/img/emerald-mini.png" alt="emerald" height={36} width={36} /> 

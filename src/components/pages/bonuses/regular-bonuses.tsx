@@ -76,10 +76,10 @@ const RegularBonuses = () => {
                 </CardFooter>
             </Card>
        
-            <Card className="w-full md:w-2/3 ml-2px rounded-3xl flex flex-col bg-transparent bg-[url('/img/wheell1.png')] bg-cover border-neutral-600 justify-between space-x-2">
+          <Card className="w-full md:w-2/3 ml-2px rounded-3xl flex flex-col bg-transparent bg-[url('/img/wheell1.png')] bg-cover border-neutral-600 justify-between space-x-2">
                 <CardHeader>
                     <CardTitle className="flex text-[#ffffff]">Крутите рулетку и получайте рубины</CardTitle>
-                    <CardDescription className="flex">Раз в 24 часа крути рулетку и получай до 20 рубинов на баланс</CardDescription>
+                    <CardDescription >Раз в 24 часа крути рулетку и получай до <span className="text-green-700">20 рубинов </span>на баланс</CardDescription>
                 </CardHeader>
                 <CardContent className="float-right">
               

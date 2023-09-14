@@ -29,9 +29,7 @@ const ActivityBonusesGrid = () => {
               </div>
               <div className=' flex justify-center '><Image src="/img/emerald.png" alt="Dice" height={56} width={56}/></div>
               
-              <div className='relative mr-10'>
-                <Image src="/img/1.png" alt="один" height={36} width={36} className='float-right'  />
-                </div>
+       
             </div>
           }
           actionNode={
@@ -54,9 +52,7 @@ const ActivityBonusesGrid = () => {
                   <p className='relative'></p>
                   <p className='relative'></p>
               </div>
-              <div className='relative  '>
-                <Image src="/img/2.png" alt="цифра" height={56} width={56} className='float-right' />
-                </div>
+           
             </>
           }
           actionNode={
@@ -83,9 +79,7 @@ const ActivityBonusesGrid = () => {
                       <span>Активируйте реферальную карту и получай бонусы</span>
                   </li>
               </ul>
-              <div className='relative'>
-                <Image src="/img/3.png" alt="цифра" height={56} width={56} className='float-right' />
-                </div>
+            
               </>
           }
           actionNode={
