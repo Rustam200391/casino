@@ -22,12 +22,15 @@ const ActivityBonusesGrid = () => {
                 <div className="flex absolute inset-0 bg-gray-500 filter blur">
                 
                 </div>
-                <div className='relative flex column float-none rounded-full'>
+                <div className='relative flex flex-wrap rounded-full'>
+                  <div className='flex justify-center pr-2 w-1/4'> <Image src="/img/Syndicat_logo.png" alt="syndicat" height={56} width={56}/></div>
+                  <p className='relative pr-2 pl-2'>Модератор</p>
+                  <p className='relative text-red-400'>Админ</p>
+                  <div className=' flex'><Image src="/img/emerald.png" alt="Dice" height={56} width={56} className='flex justify-center'/></div>
                 </div>
-                <p className='relative'>Модератор</p>
-                <p className='relative'>Админ</p>
+                  
               </div>
-              <div className=' flex justify-center '><Image src="/img/emerald.png" alt="Dice" height={56} width={56}/></div>
+              
               
        
             </div>
@@ -67,16 +70,16 @@ const ActivityBonusesGrid = () => {
               <>
                 <ul>
                   <li className="flex items-around">
-                      <div className="bg-gray-500 h-8 w-8 text-white rounded-full flex items-center justify-center mr-2">1</div>
+                      <div className="bg-gray-500 h-8 w-9 text-white rounded-full flex items-center justify-center mr-2">1</div>
                       <span>Ознакомьтесь с реферальной системой</span>
                   </li>
                   <li className="flex items-around">
-                      <div className="bg-gray-500 h-8 w-8 text-white rounded-full flex items-center justify-center mr-2">2</div>
+                      <div className="bg-gray-500 h-9 w-9 text-white rounded-full flex items-center justify-center mr-2">2</div>
                       <span>Пригласите игрока по промокоду</span>
                   </li>
                   <li className='flex items-around'>
-                      <div className="bg-gray-500 h-8 w-8 text-white rounded-full flex items-center justify-center mr-2">3</div>
-                      <span>Активируйте реферальную карту и получай бонусы</span>
+                      <div className="bg-gray-500 h-9 w-14 text-white rounded-full flex items-center justify-center mr-2">3</div>
+                      <span className='' >Активируйте реферальную карту и получай бонусы</span>
                   </li>
               </ul>
             

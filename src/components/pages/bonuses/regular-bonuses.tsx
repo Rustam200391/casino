@@ -87,7 +87,7 @@ const RegularBonuses = () => {
                 </CardContent>
                 <CardFooter className="flex">
                     <div className="flex-col mb-[-20px]">
-                        <div className="text-[#cbd5e1] pl-0">Каждый день доступно 1 кручение</div>   
+                        <div className="text-[#cbd5e1] pl-0 ">Каждый день доступно 1 кручение</div>   
                         <div className="pt-3 ">
                             <Button variant="outline" className="w-8/12 border-green-500 hover:bg-green-500 pt-1">Крутить</Button>
                         </div>
