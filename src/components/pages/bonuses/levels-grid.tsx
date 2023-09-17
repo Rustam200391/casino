@@ -6,7 +6,7 @@ const LevelsGrid = () => {
     <div className="mt-10">
       <p className="text-3xl font-bold">Информация про уровни</p>
       <div className="grid grid-cols-1 grid-rows-2 gap-4 mt-10 md:grid-cols-2 xl:grid-cols-3 w-full">
-        <Card className="w-[250px] rounded-3xl bg-zinc-950 border-none">
+        <Card className="rounded-3xl bg-zinc-950 border-none  bg-gradient-to-b from-black to-[#990066]">
           <CardHeader>
             <CardTitle>Повышение уровня</CardTitle>
           </CardHeader>
@@ -21,7 +21,7 @@ const LevelsGrid = () => {
             </ol>
           </CardContent>
         </Card>
-        <Card className="w-[250px] rounded-3xl bg-zinc-950 border-none">
+        <Card className="rounded-3xl bg-zinc-950 border-none  bg-gradient-to-b from-black to-[#30D5C8]">
           <CardHeader>
             <CardTitle>Повышение уровня</CardTitle>
           </CardHeader>
@@ -30,7 +30,7 @@ const LevelsGrid = () => {
             ценнее приз
           </CardContent>
         </Card>
-        <Card className="w-[250px] rounded-3xl bg-zinc-950 border-none">
+        <Card className="rounded-3xl bg-zinc-950 border-none  bg-gradient-to-b from-black to-[#F34723]">
           <CardHeader>
             <CardTitle>Повышение уровня</CardTitle>
           </CardHeader>
