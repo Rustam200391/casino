@@ -8,8 +8,13 @@ const RankRewardsGrid = () => {
       <p className="text-2xl font-bold text-center">
         Награды за активацию ранга
       </p>
-      <p className="text-sm text-center text-green-500">Получено</p>
-      <div className="grid grid-cols-1 grid-rows-2 gap-4 mt-10 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-3 w-full">
+     
+      <div className="flex items-around justify-center pt-1">
+          <div className=" bg-green-500 text-black h-7 w-8 rounded-full flex items-center justify-center mr-2 ">v</div>
+        <span className="text-sm text-center text-green-500 pt-1">Получено</span>
+      </div>
+      {/* <p className="text-sm text-center text-green-500">Получено</p> */}
+      <div className="grid grid-cols-1 grid-rows-2 gap-4 mt-10  md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-3 w-full">
         <RankRewardCard
           heading="Денежный кейс"
           icon={<Image src="/img/case.svg" alt="rank" width={67} height={55} />}
