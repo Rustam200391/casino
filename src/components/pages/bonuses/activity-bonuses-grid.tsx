@@ -18,21 +18,35 @@ const ActivityBonusesGrid = () => {
           contentNode={
             <div className='mt-11'>
               В любой момент в чате может появиться ценный рубин. Кто первый нажмет на него, тому и достанется Бонус!
-              <div className='relative'>
-                <div className="flex absolute inset-0 bg-gray-500 filter blur">
-                
+              <div className="relative">
+                <div className="flex absolute inset-0 bg-gray-500 filter blur"></div>
+                <div className="relative flex flex-wrap rounded-full">
+                  <div className="flex justify-center pr-2 w-1/4">
+                    {' '}
+                    <Image
+                      src="/img/Syndicat_logo.png"
+                      alt="syndicat"
+                      height={56}
+                      width={56}
+                    />
+                  </div>
+                  <div className="relative pr-2 pl-2 pt-1 w-2/4">Модератор</div>
+                  <div className=" inline-flex p-2 justify-start gap-10 h-8 bg-[#3E0C0C] w-1/4">
+                    <p className='text-[#FC3232] text-center font-manro text-xs not-italic
+                    font-bold leading-4 tracking-tight '>Админ</p></div>
+                  <div className='mr-4  w-3/4'>
+                    <div className="flex justify-center ml-4">
+                      <Image
+                        src="/img/emerald.png"
+                        alt="Dice"
+                        height={66}
+                        width={66}
+                        className="flex justify-center"
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className='relative flex flex-wrap rounded-full'>
-                  <div className='flex justify-center pr-2 w-1/4'> <Image src="/img/Syndicat_logo.png" alt="syndicat" height={56} width={56}/></div>
-                  <p className='relative pr-2 pl-2'>Модератор</p>
-                  <p className='relative text-red-400'>Админ</p>
-                  <div className=' flex'><Image src="/img/emerald.png" alt="Dice" height={56} width={56} className='flex justify-center'/></div>
-                </div>
-                  
               </div>
-              
-              
-       
             </div>
           }
           actionNode={
@@ -67,23 +81,29 @@ const ActivityBonusesGrid = () => {
           description="за реферальную карту"
           className="bg-gradient-to-b from-black to-green-500 "
           contentNode={
-              <>
-                <ul>
-                  <li className="flex items-around">
-                      <div className="bg-gray-500 h-8 w-9 text-white rounded-full flex items-center justify-center mr-2">1</div>
-                      <span>Ознакомьтесь с реферальной системой</span>
-                  </li>
-                  <li className="flex items-around">
-                      <div className="bg-gray-500 h-9 w-9 text-white rounded-full flex items-center justify-center mr-2">2</div>
-                      <span>Пригласите игрока по промокоду</span>
-                  </li>
-                  <li className='flex items-around'>
-                      <div className="bg-gray-500 h-9 w-14 text-white rounded-full flex items-center justify-center mr-2">3</div>
-                      <span className='' >Активируйте реферальную карту и получай бонусы</span>
-                  </li>
+               <ul>
+                <li className="flex items-around">
+                  <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3">
+                    1
+                  </div>
+                  <span>Ознакомьтесь с реферальной системой</span>
+                </li>
+                <li className="flex items-around">
+                  <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3">
+                    2
+                  </div>
+                  <span>Пригласите игрока по промокоду</span>
+                </li>
+                <li className="flex items-around">
+                  <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3">
+                    3
+                  </div>
+                  <span className="">
+                    Активируйте реферальную карту и получай бонусы
+                  </span>
+                </li>
               </ul>
-            
-              </>
+  
           }
           actionNode={
               <Button className="w-full bg-green-700 text-white border-2 border-white">Реферальная система</Button>
