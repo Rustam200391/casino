@@ -8,7 +8,7 @@ const RankInfoGrid = () => {
     <div className="mt-10">
       <p className="text-2xl font-bold">Информация про ранги</p>
       <div className="grid grid-cols-1 grid-rows-2 gap-4 mt-10 md:grid-cols-2 xl:grid-cols-3 w-full">
-        <Card className=" w-[250px] rounded-3xl bg-zinc-950 border-none bg-gradient-to-b from-black to-[#44944A]">
+        <Card className=" w-[250px] rounded-3xl bg-zinc-950 border-none bg-gradient-to-b from-black to-[#0b410a]">
           <CardHeader>
             <CardTitle >Повышение ранга</CardTitle>
           </CardHeader>
@@ -17,7 +17,7 @@ const RankInfoGrid = () => {
             <div className='absolute z-20'><Image src="/img/earth.png" alt="emerald" height={156} width={156} /> </div>
           </CardContent>
         </Card>
-        <Card className="rounded-3xl bg-zinc-950 border-none bg-gradient-to-b from-black to-[#939496]">
+        <Card className="rounded-3xl bg-zinc-950 border-none bg-gradient-to-b from-black to-[#3a3a3a]">
           <CardHeader>
             <CardTitle>Активация ранга</CardTitle>
           </CardHeader>
@@ -26,7 +26,7 @@ const RankInfoGrid = () => {
             <div className='absolute top-30 z-20'><Image src="/img/mountain.png" alt="" height={156} width={256} /></div>
           </CardContent>
         </Card>
-        <Card className="rounded-3xl bg-zinc-950 border-none  bg-gradient-to-b from-black to-[#A5260A]">
+        <Card className="rounded-3xl bg-zinc-950 border-none  bg-gradient-to-b from-black to-[#4b0707]">
           <CardHeader>
             <CardTitle>Возможности и бонусы</CardTitle>
           </CardHeader>

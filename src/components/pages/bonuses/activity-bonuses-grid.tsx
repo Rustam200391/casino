@@ -14,7 +14,7 @@ const ActivityBonusesGrid = () => {
         <BonusCard
           title="Бонус"
           description="за рубины из чата"
-          className=" bg-gradient-to-b from-black to-blue-900"
+          className=" bg-gradient-to-b from-black to-[#0a1573]"
           contentNode={
             <div className='mt-11'>
               В любой момент в чате может появиться ценный рубин. Кто первый нажмет на него, тому и достанется Бонус!
@@ -56,7 +56,7 @@ const ActivityBonusesGrid = () => {
         <BonusCard
           title="Бонус"
           description="за активность в чате"
-          className="bg-gradient-to-b from-black to-red-700"
+          className="bg-gradient-to-b from-black to-[#740a1d]"
           contentNode={
             <>
 
@@ -79,7 +79,7 @@ const ActivityBonusesGrid = () => {
         <BonusCard
           title="Бонус"
           description="за реферальную карту"
-          className="bg-gradient-to-b from-black to-green-500 "
+          className="bg-gradient-to-b from-black to-[#2f5e18]"
           contentNode={
                <ul>
                 <li className="flex items-around">

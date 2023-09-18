@@ -11,7 +11,7 @@ const StarterBonusesGrid = () => {
           <BonusCard
               title="Бонус"
               description="за подписку на Телеграм канал"
-              className="bg-gradient-to-b from-black to-green-600"
+              className="bg-gradient-to-b from-black to-[#0a6469]"
                   contentNode={
                       <>
                         <ul className='pt-8'>
@@ -35,13 +35,13 @@ const StarterBonusesGrid = () => {
                       </>  
               }
               actionNode={
-                  <Button className="w-full bg-green-900 text-green-500 border-2 border-white">Получено</Button>
+                  <Button className="w-full bg-[#042123] text-green-500 border-2 border-white">Получено</Button>
               }
           />
           <BonusCard
               title="Бонус"
               description="за сообщение в чат поддержки"
-              className="bg-gradient-to-b from-black to-violet-900"
+              className="bg-gradient-to-b from-black to-[#2a0a35]"
                   contentNode={
                  <>
                     <ul className="pt-12">
@@ -80,7 +80,7 @@ const StarterBonusesGrid = () => {
                 </>
               }
               actionNode={
-                  <Button className="w-full bg-purple-900 text-white border-2 border-white">Чат поддержки</Button>
+                  <Button className="w-full bg-[#3d164c] text-white border-2 border-white">Чат поддержки</Button>
               }
           />
           <BonusCard
@@ -132,7 +132,7 @@ const StarterBonusesGrid = () => {
                     </>
               }
               actionNode={
-                  <Button className="w-full bg-gold text-white border-2 border-white">Получить</Button>
+                  <Button className="w-full bg-[#604716] text-white border-2 border-white">Получить</Button>
               }
           />
       </div>
