@@ -1,5 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
+
 
 const LevelsGrid = () => {
   return (
@@ -12,7 +14,9 @@ const LevelsGrid = () => {
           </CardHeader>
           <CardContent className="ml-4">
             <ol className="list-decimal">
-              <li>Участвуйте в активностях</li>
+              <li className='relative'>
+                Участвуйте в активностях
+              </li>
               <li>Играйте в PVP и PVE игры</li>
               <li>
                 Количество получаемого опыта зависит от режима игры и размера
