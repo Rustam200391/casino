@@ -32,22 +32,75 @@ const RankProgress = () => {
 
       <div className="relative flex px-1 py-2 space-x-4 overflow-x-auto snap-x snap-mandatory no-scrollbar" ref={container}>
         <ProgressCard
-          heading="Ранг 1"
-          description="текст"
+          heading="Roll"
+          description="Эмоция для чата"
           icon={<Image src="/img/dice.svg" alt="rank" width={40} height={40} />}
         />
         <ProgressCard
-          heading="Ранг 2"
-          description="текст"
-          icon={<Image src="/img/dice.svg" alt="rank" width={40} height={40} />}
+          heading=""
+          description=""
+          icon={<Image src="" alt="" width={0} height={0} />}
         />
         <ProgressCard
-          heading="Ранг 3"
-          description="текст"
+          heading="Roll"
+          description="Эмоция для чата"
           icon={<Image src="/img/dice.svg" alt="rank" width={40} height={40} />}
+        />
+         <ProgressCard
+          heading=""
+          description=""
+          icon={<Image src="" alt="" width={0} height={0} />}
+        />
+        <ProgressCard
+          heading="Полыхаю"
+          description="эмоции для чата"
+          icon={<Image src="/img/полыхаю.png" alt="rank" width={40} height={40} />}
+        />
+        <ProgressCard
+          heading="Воин"
+          description="Достижения"
+          icon={<Image src="/img/warrior.png" alt="rank" width={40} height={40} />}
         />
       </div>
+      <div className=' flex flex-wrap  pl-1'>
+        <div className=' w-1/4 p-4'>
+          <Image src="/img/green_level.png" alt="level" width={30} height={30} />
+          7 уровень
+        </div>
+      
+        <div className='w-1/4 p-4'>
+          <Image src="/img/green_level.png" alt="level" width={30} height={30} />
+          8 уровень
+        </div>
+   
+        <div className='w-1/4 p-4'>
+          <Image src="/img/green_level.png" alt="level" width={30} height={30} />
+          9 уровень
+        </div>
+  
+        <div className='w-1/4 p-4'>
+          <Image src="/img/green_level.png" alt="level" width={30} height={30} />
+          10 уровень
+        </div>
+ 
+        <div className='w-1/4 p-4'>
+          <Image src="/img/green_level.png" alt="level" width={30} height={30} />
+          11 уровень
+        </div>
+   
+        <div className='w-1/4 p-4'>
+          <Image src="/img/green_level.png" alt="level" width={30} height={30} />
+          12 уровень
+        </div>
+
+        <div className='w-1/4 p-4'>
+          <Image src="/img/green_level.png" alt="level" width={30} height={30} />
+          13 уровень
+        </div>
+      </div>
     </div>
+
+    
   );
 };
 
