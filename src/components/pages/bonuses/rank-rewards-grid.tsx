@@ -10,7 +10,13 @@ const RankRewardsGrid = () => {
       </p>
      
       <div className="flex items-around justify-center pt-1">
-          <div className=" bg-green-500 text-black h-7 w-8 rounded-full flex items-center justify-center mr-2 ">v</div>
+         <div className=" mr-2 ">
+            <Image src="/img/mark.png"
+              alt="mark"
+              height={27}
+              width={27}
+            />
+      </div>
         <span className="text-sm text-center text-green-500 pt-1">Получено</span>
       </div>
       {/* <p className="text-sm text-center text-green-500">Получено</p> */}

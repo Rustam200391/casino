@@ -27,7 +27,7 @@ const LevelsGrid = () => {
         </Card>
         <Card className="rounded-3xl bg-zinc-950 border-none  bg-gradient-to-b from-black to-[#30D5C8]">
           <CardHeader>
-            <CardTitle>Повышение уровня</CardTitle>
+            <CardTitle>Награды за уровень</CardTitle>
           </CardHeader>
           <CardContent>
             За уровни вы получаете различные награды, чем выше уровень, тем
@@ -36,7 +36,7 @@ const LevelsGrid = () => {
         </Card>
         <Card className="rounded-3xl bg-zinc-950 border-none  bg-gradient-to-b from-black to-[#F34723]">
           <CardHeader>
-            <CardTitle>Повышение уровня</CardTitle>
+            <CardTitle>Ранги за уровень</CardTitle>
           </CardHeader>
           <CardContent>
             Каждые 10 уровней вы разблокируете ранг. При активации ранга вам

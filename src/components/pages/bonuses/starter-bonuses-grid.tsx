@@ -14,15 +14,27 @@ const StarterBonusesGrid = () => {
               className="bg-gradient-to-b from-black to-[#0a6469]"
                   contentNode={
                       <>
-                        <ul className='pt-8'>
-                            <li className="flex items-around">
-                                <div className="bg-[#04c95b] h-7 w-8 text-black rounded-full flex items-center justify-center mr-2 ">v</div>
+                        <ul className='pt-9'>
+                          <li className="flex items-around">
+                            <div className=" mt-1 mr-2">
+                              <Image src="/img/mark.png"
+                                alt="mark"
+                                height={27}
+                                width={27}
+                              />
+                            </div>
                                 <span className='text-green-300'>Подпишитесь на телеграм канал</span>
-                            </li>
-                            <li className="flex items-around">
-                                 <div className="bg-green-500 h-7 w-10 text-black rounded-full flex items-center justify-center mr-2">v</div>
+                          </li>
+                          <li className="flex items-around">
+                            <div className="mt-1 mr-2 ">
+                              <Image src="/img/mark.png"
+                                alt="mark"
+                                height={27}
+                                width={33}
+                              />
+                            </div>
                                  <span className='text-green-300'>Привяжите телеграм аккаунт к профилю</span>
-                           </li>
+                          </li>
                           </ul>
                         
                           <div className='flex pt-16'>
@@ -46,10 +58,10 @@ const StarterBonusesGrid = () => {
                  <>
                     <ul className="pt-9">
                       <li className="flex items-around">
-                        <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3">
+                        <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3 mr-2">
                          1
                         </div>
-                        <span className="text-white">
+                        <span className="text-white ">
                           Напишите в чат поддержки слово{' '}
                           <div className="bg-gray-600 rounded-full container">
                           ПРОМОКОД
@@ -57,7 +69,7 @@ const StarterBonusesGrid = () => {
                         </span>
                       </li>
                       <li className="flex items-around">
-                        <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3">
+                        <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3 mr-2">
                          2
                         </div>
                         <span className="text-white">
@@ -86,12 +98,12 @@ const StarterBonusesGrid = () => {
           <BonusCard
               title="Бонус"
               description="за заполнение профиля"
-              className="bg-gradient-to-b from-black to-gold pt-6 "
+              className="bg-gradient-to-b from-black to-gold pt-0 "
                   contentNode={
                   <>
-                        <ul className="pt-8">
+                        <ul className="pt-10">
                           <li className="flex items-around ">
-                            <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3">
+                            <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3 mr-2">
                                1
                              </div>
                             <span className="text-white underline ">
@@ -99,7 +111,7 @@ const StarterBonusesGrid = () => {
                              </span>
                           </li>
                             <li className="flex items-around">
-                              <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3">
+                              <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3 mr-2">
                                 2
                               </div>
                               <span className="text-white underline ">
@@ -107,7 +119,7 @@ const StarterBonusesGrid = () => {
                               </span>
                             </li>
                             <li className="flex items-around">
-                              <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3">
+                              <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3 mr-2">
                                 3
                               </div>
                               <span className="text-white underline ml-0">

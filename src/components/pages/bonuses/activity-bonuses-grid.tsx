@@ -16,10 +16,10 @@ const ActivityBonusesGrid = () => {
           description="за рубины из чата"
           className=" bg-gradient-to-b from-black to-[#0a1573] relative"
           contentNode={
-            <div className='mt-11 relative'>
+            <div className='mt-11 relative '>
               В любой момент в чате может появиться ценный рубин. Кто первый нажмет на него, тому и достанется Бонус!
               <div className="relative">
-                <div className="flex absolute inset-0 bg-[#16192e] filter blur"></div>
+                <div className="flex absolute inset-0 bg-[#171930] opacity-75 blur-xl"></div>
                 <div className="relative flex flex-wrap rounded-full">
                   <div className="flex justify-center pr-2 w-1/4">
                     {' '}
@@ -57,21 +57,11 @@ const ActivityBonusesGrid = () => {
         <BonusCard
           title="Бонус"
           description="за активность в чате"
-          className="bg-gradient-to-b from-black to-[#740a1d]"
+          className="bg-gradient-to-b from-black to-[#740a1d] relative"
           contentNode={
-            <>
-
+            <div className="-mt-1 relative m-3">
               Каждые 6 часов в чате начинается раздача рубинов случайный пользователям. Чтобы повысить шанс, будьте активнее и общайтесь!
-              <div className='relative pt-8'>
-                <div className="flex absolute inset-0">
-                
-                </div>
-                <div className='relative flex column float-none'><div></div></div>
-                  <p className='relative'></p>
-                  <p className='relative'></p>
-              </div>
-           
-            </>
+            </div>
           }
           actionNode={
               <Button className="w-full border-2 border-white text-white bg-red-900 ">Написать сообщение в чат</Button>
@@ -80,23 +70,23 @@ const ActivityBonusesGrid = () => {
         <BonusCard
           title="Бонус"
           description="за реферальную карту"
-          className="bg-gradient-to-b from-black to-[#2f5e18] pt-2"
+          className="bg-gradient-to-b from-black to-[#2f5e18] pt-0"
           contentNode={
-               <ul>
+               <ul className='pt-2'>
                 <li className="flex items-around">
-                  <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3">
+                  <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3 mr-2">
                     1
                   </div>
                   <span>Ознакомьтесь с реферальной системой</span>
                 </li>
                 <li className="flex items-around">
-                  <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3">
+                  <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3 mr-2">
                     2
                   </div>
                   <span>Пригласите игрока по промокоду</span>
                 </li>
                 <li className="flex items-around">
-                  <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3">
+                  <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3 mr-2">
                     3
                   </div>
                   <span className="">

@@ -22,8 +22,8 @@ const BonusCard = ({
     return (
         <Card className={cn(className, "flex flex-col justify-between rounded-3xl  border-none min-h-[400px] ")}>
             <CardHeader>
-                <CardTitle className="text-center">{title}</CardTitle>
-                <CardDescription className="text-center text-gray-50">{description}</CardDescription>
+                <CardTitle className="text-center ">{title}</CardTitle>
+                <CardDescription className="text-center text-gray-50 whitespace-nowrap">{description}</CardDescription>
             </CardHeader>
             <CardContent className="min-h-[200px]">
                 {contentNode}
