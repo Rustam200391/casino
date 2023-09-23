@@ -62,41 +62,38 @@ const RankProgress = () => {
           icon={<Image src="/img/warrior.png" alt="rank" width={40} height={40} />}
         />
       </div>
-      <div className=' flex flex-wrap  pl-1'>
-        <div className=' w-1/4 p-4'>
-          <Image src="/img/green_level.png" alt="level" width={30} height={30} />
-          7 уровень
+      <div className=' flex flex-wrap pl-6 '>
+        < div className=' w-1/9 p-2 items-center '>
+          <Image src="/img/green_level.png" alt="level" width={10} height={10} className="w-1/3 mx-auto"/>
+          <p className="text-center">7 уровень</p>
         </div>
       
-        <div className='w-1/4 p-4'>
-          <Image src="/img/green_level.png" alt="level" width={30} height={30} />
-          8 уровень
+        <div className='w-1/9 p-2'>
+          <Image src="/img/green_level.png" alt="level" width={10} height={10} className="w-1/3 mx-auto" />
+          <p className="text-center">8 уровень</p>
         </div>
    
-        <div className='w-1/4 p-4'>
-          <Image src="/img/green_level.png" alt="level" width={30} height={30} />
-          9 уровень
+        <div className='w-1/8 p-2'>
+          <Image src="/img/green_level.png" alt="level" width={30} height={30} className="w-1/3 mx-auto"/>
+          <p className="text-center">9 уровень</p>
         </div>
-  
-        <div className='w-1/4 p-4'>
-          <Image src="/img/green_level.png" alt="level" width={30} height={30} />
-          10 уровень
+        <div className='w-1/8 p-2'>
+          <Image src="/img/level_10.png" alt="level" width={30} height={30} className="w-1/4 mx-auto mt-2"/>
+          <p className="text-center">10 уровень</p>
         </div>
- 
-        <div className='w-1/4 p-4'>
-          <Image src="/img/green_level.png" alt="level" width={30} height={30} />
-          11 уровень
+        <div className='w-1/8 p-2'>
+          <Image src="/img/level_11.png" alt="level" width={10} height={10} className="w-1/3 mx-auto"/>
+          <p className="text-center">11 уровень</p>
         </div>
-   
-        <div className='w-1/4 p-4'>
-          <Image src="/img/green_level.png" alt="level" width={30} height={30} />
-          12 уровень
+        <div className='w-1/8 p-2'>
+          <Image src="/img/level_11.png" alt="level" width={30} height={30} className="w-1/3 mx-auto"/>
+          <p className="text-center">12 уровень</p>
+        </div>
+         <div className='w-1/8 p-2'>
+          <Image src="/img/level_11.png" alt="level" width={30} height={30} className="w-1/3 mx-auto"/>
+          <p className="text-center">13 уровень</p>
         </div>
 
-        <div className='w-1/4 p-4'>
-          <Image src="/img/green_level.png" alt="level" width={30} height={30} />
-          13 уровень
-        </div>
       </div>
     </div>
 

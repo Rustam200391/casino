@@ -4,38 +4,36 @@ import Image from 'next/image';
 
 const RankRewardsGrid = () => {
   return (
-    <div className="mt-10 p-6">
+    <div className="mt-10 p-3">
       <p className="text-2xl font-bold text-center">
         Награды за активацию ранга
       </p>
-     
-      <div className="flex items-around justify-center pt-1">
-         <div className=" mr-2 ">
-            <Image src="/img/mark.png"
-              alt="mark"
-              height={27}
-              width={27}
-            />
-      </div>
-        <span className="text-sm text-center text-green-500 pt-1">Получено</span>
+
+      <div className="flex items-around justify-center pt-2">
+        <div className=" mr-2 ">
+          <Image src="/img/mark.png" alt="mark" height={27} width={27} />
+        </div>
+        <span className="text-sm text-center text-green-500 pt-1">
+          Получено
+        </span>
       </div>
       {/* <p className="text-sm text-center text-green-500">Получено</p> */}
-      <div className="grid grid-cols-1 grid-rows-2 gap-4 mt-10  md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-3 w-full">
+      <div className="grid grid-cols-5 grid-rows-2 gap-2 mt-10  md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-3 w-full">
         <RankRewardCard
           heading="Денежный кейс"
-          icon={<Image src="/img/case.svg" alt="rank" width={67} height={55} />}
+          icon={<Image src="/img/case.svg" alt="rank" width={57} height={45} />}
         />
         <RankRewardCard
           heading="Денежный кейс"
-          icon={<Image src="/img/case.svg" alt="rank" width={67} height={55} />}
+          icon={<Image src="/img/case.svg" alt="rank" width={57} height={45} />}
         />
         <RankRewardCard
           heading="Денежный кейс"
-          icon={<Image src="/img/case.svg" alt="rank" width={67} height={55} />}
+          icon={<Image src="/img/case.svg" alt="rank" width={57} height={45} />}
         />
         <RankRewardCard
           heading="Денежный кейс"
-          icon={<Image src="/img/case.svg" alt="rank" width={67} height={55} />}
+          icon={<Image src="/img/case.svg" alt="rank" width={57} height={45} />}
         />
       </div>
     </div>

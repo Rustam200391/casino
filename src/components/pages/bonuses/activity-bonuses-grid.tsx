@@ -64,7 +64,7 @@ const ActivityBonusesGrid = () => {
             </div>
           }
           actionNode={
-              <Button className="w-full border-2 border-white text-white bg-red-900 ">Написать сообщение в чат</Button>
+              <Button className="w-full border-2 border-white text-white bg-red-900 whitespace nowrap ">Написать сообщение в чат</Button>
         }
         />
         <BonusCard
