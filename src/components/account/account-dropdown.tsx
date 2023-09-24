@@ -39,7 +39,7 @@ export const AccountDropdown = ({ trigger }: { trigger: React.ReactNode }) => {
           <Link href="/profile/transactions_history">
             <DropdownMenuItem className="rounded-lg">
               <AreaChartIcon className="w-4 h-4 mr-2" />
-              <span>История транзакций</span>
+              <span>История </span>
             </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>
