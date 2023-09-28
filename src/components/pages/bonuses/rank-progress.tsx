@@ -62,7 +62,7 @@ const RankProgress = () => {
           icon={<Image src="/img/warrior.png" alt="rank" width={40} height={40} />}
         />
       </div>
-      <div className=' flex flex-wrap pl-6 '>
+      <div className=' flex flex-wrap pl-8 '>
         < div className=' w-1/9 p-2 items-center '>
           <Image src="/img/green_level.png" alt="level" width={10} height={10} className="w-1/3 mx-auto"/>
           <p className="text-center">7 уровень</p>
