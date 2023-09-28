@@ -60,7 +60,7 @@ const ActivityBonusesGrid = () => {
           description="за активность в чате"
           className="bg-gradient-to-b from-black to-[#740a1d] relative"
           contentNode={
-            <div className="-mt-1 relative m-3 pt-6">
+            <div className="-mt-1 relative m-3 pt-1">
               Каждые 6 часов в чате начинается раздача рубинов случайный пользователям. Чтобы повысить шанс, будьте активнее и общайтесь!
             </div>
           }
@@ -73,7 +73,7 @@ const ActivityBonusesGrid = () => {
           description="за реферальную карту"
           className="bg-gradient-to-b from-black to-[#2f5e18] pt-0"
           contentNode={
-               <ul className='pt-6'>
+               <ul className='pt-3'>
                 <li className="flex items-around">
                   <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3 mr-2 ">
                     1
