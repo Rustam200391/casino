@@ -7,7 +7,7 @@ const StarterBonusesGrid = () => {
   return (
     <div className="mt-10">
       <p className="text-2xl font-bold">Стартовые бонусы</p>
-      <div className="grid grid-cols-1 gap-4 mt-10 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 mt-10 md:grid-cols-2 xl:grid-cols-3 p-0">
           <BonusCard
               title="Бонус"
               description="за подписку на Телеграм канал"
@@ -101,7 +101,7 @@ const StarterBonusesGrid = () => {
               className="bg-gradient-to-b from-black to-gold pt-0 "
                   contentNode={
                   <>
-                        <ul className="pt-10">
+                        <ul className="pt-9">
                           <li className="flex items-around ">
                             <div className="bg-neutral-800 font-bold italic text-white text-center rounded-full w-[27px] h-[27px] flex items-center justify-center p-3 mr-2">
                                1

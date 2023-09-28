@@ -38,7 +38,7 @@ const LevelsGrid = () => {
           <CardHeader>
             <CardTitle>Ранги за уровень</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className='pt-6'>
             Каждые 10 уровней вы разблокируете ранг. При активации ранга вам
             откроются новые возможности и бонусы
           </CardContent>
