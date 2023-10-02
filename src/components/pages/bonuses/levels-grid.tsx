@@ -8,11 +8,11 @@ const LevelsGrid = () => {
     <div className="mt-10">
       <p className="text-2xl font-bold">Информация про уровни</p>
       <div className="grid grid-cols-1 grid-rows-2 gap-4 mt-10 md:grid-cols-2 xl:grid-cols-3 w-full">
-        <Card className="rounded-3xl bg-zinc-950 border-none  bg-gradient-to-b from-black to-[#990066]">
+        <Card className="rounded-3xl bg-zinc-950 border-none  bg-gradient-to-b from-black to-[#990066] ">
           <CardHeader>
-            <CardTitle>Повышение уровня</CardTitle>
+            <CardTitle >Повышение уровня</CardTitle>
           </CardHeader>
-          <CardContent className="ml-4">
+          <CardContent className="ml-4 ">
             <ol className="list-decimal">
               <li className='relative'>
                 Участвуйте в активностях
