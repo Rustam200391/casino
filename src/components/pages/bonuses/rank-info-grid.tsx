@@ -12,8 +12,9 @@ const RankInfoGrid = () => {
           <CardHeader>
             <CardTitle className='flex justify-center items-center ' >Повышение ранга</CardTitle>
           </CardHeader>
-          <CardContent className='flex justify-center items-center pt-7'>
+          <CardContent className='flex justify-center items-center pt-7 '>
             <div className='whitespace nowrap ' >Ранги выдаются за уровни</div>
+            <div className='bg-hero-pattern'></div>
           </CardContent> 
         </Card>
         <Card className="rounded-3xl bg-zinc-950 border-none bg-gradient-to-b from-black to-[#3a3a3a] h-content whitespace nowrap ">

@@ -19,10 +19,9 @@ module.exports = {
       // bg-gradient-to-b from-black to-blue-900
       // bg-[linear-gradient(to_bottom,rgba(6,0,0,1),rgba(6,0,220,0.8)),url('/img/1 (1).png')]
 
-      // backgroundImage: {
-      //   'hero-pattern':
-      //     "linear-gradient(to bottom, rgba('#000',0.8), rgba('#1D00FF',0.8)), url('.img/1 (1).png')",
-      // },
+      backgroundImage: {
+        'hero-pattern': "url('/public/img/1.level_up.png')",
+      },
       backgroundSize: {
         'size-200': '200% 200%',
       },
